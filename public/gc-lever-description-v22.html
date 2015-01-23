@@ -1,0 +1,697 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Global Calculator | Lever ... </title>
+
+
+<link rel="stylesheet" href="levers/css/levers.css" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script src="./js/highcharts.js"></script>
+<script src="./js/highcharts-more.js"></script>
+<script src="./js/modules/exporting.js"></script>
+
+<script type="text/javascript" src="js-v22/gc-setup.js"></script>
+<script type="text/javascript" src="js-v22/gc-lever-charts.js"></script>
+<script type="text/javascript" src="js-v22/gc-lever-setup.js"></script>
+
+
+<style type="text/css">
+
+.mybox { width:360px; height:350px }
+
+</style>
+
+
+<script type='text/javascript'>
+
+
+// -----------------------------------------------------
+// update all data points in the series at index
+// 'seriesIndex' in chart 'chart'
+// by the values in 'dataset'
+// -----------------------------------------------------
+function setDataPoints (chart, seriesIndex, dataset) {
+  $.each(chart.series[seriesIndex].data, function (i, point) {
+    point.update(dataset[i], false);
+  });
+}
+
+
+// -----------------------------------------------------
+// global handles to fetched data
+// -----------------------------------------------------
+var leverDescriptions;
+var leverGraphData;
+
+$(document).ready(function() {
+
+  var leverID = getIdFromUrl();
+
+
+  // -----------------------------------------------------
+  // assemble dummy param string
+  // (result is independent of leevr settings)
+  // -----------------------------------------------------
+  var paramString = "";
+  for (var i=0; i<NUM_LEVERS; i++)
+    paramString += "1";
+
+  var url = DATA_SERVICE_PLUS_SETUP + paramString;
+
+  // -----------------------------------------------------
+  // send params to server and fetch the model output
+  // -----------------------------------------------------
+  $.getJSON(url, function(data) {
+
+    // -----------------------------------------------------
+    // store fetched data globally
+    // -----------------------------------------------------
+    leverDescriptions = data[0]["one_pager_desc"];
+    leverGraphData    = data[0]["lever_graph_data"];
+
+    //alert (leverDescriptions);
+
+
+
+    // alert (leverGraphData["g_1pager_passenger_distance_automobilecity"]);
+
+
+    // -----------------------------------------------------
+    // init the one pager for the given lever id
+    // -----------------------------------------------------
+    init (leverID)
+
+  }); // end $.getJSON()
+
+
+ });
+
+function getOnePagerDescriptions (leverID) {
+  // alert ("getOnePagerDescriptions (" + leverID + ")")
+  for ( var i=0; i<leverDescriptions.length; i++) 
+    if (leverDescriptions[i][0] == leverID) return leverDescriptions[i];
+  return "DESCRIPTION NOT FOUND";
+}
+
+
+function init (leverID) {
+
+
+    var tts = getOnePagerDescriptions (leverID);
+
+     //  alert (tts);
+
+    if (tts != "DESCRIPTION NOT FOUND") {
+
+       // [id, levername, "Lever controls", "One-pager context", "Things to consider", "1-pager Level 1", "1-pager Level 2", "1-pager Level 3", "1-pager Level 4",   "References", "Extra text"]
+
+
+      document.title = "Global Calculator | Lever " + tts[1];
+      document.getElementById('title').innerHTML = "<h1>" + tts[1] + "</h1>";
+      document.getElementById('lever-controls').innerHTML = tts[2];
+      document.getElementById('context').innerHTML = tts[3];
+      document.getElementById('things-to-consider').innerHTML = tts[4];
+      document.getElementById('level-1').innerHTML = tts[5];
+      document.getElementById('level-2').innerHTML = tts[6];
+      document.getElementById('level-3').innerHTML = tts[7];
+      document.getElementById('level-4').innerHTML = tts[8];
+      if (tts[9] != null) document.getElementById('references').innerHTML = tts[9].replace(/\r/g, "<br>"); 
+
+
+
+
+
+      createGraphs(leverID);
+    }
+}
+
+function getIdFromUrl () {
+  try {
+    var href= window.location.href.split("?id=");
+    if (href[1] == null) return "1";
+    var id  = href[1];
+    return id;
+  }
+  catch (e) { return "1"; }
+}
+
+
+
+///////////////////////////////////////////////////////////////
+
+function createContainer (divIDs) {
+  deleteRows();
+  appendRow(divIDs);
+}
+function appendRow(divIDs) {
+  var tbl = document.getElementById('lever-graph-table'); // table reference
+  var row = tbl.insertRow(tbl.rows.length);      	     // append table row
+  for (var i = 0; i < divIDs.length; i++) {
+    createDivCell(row.insertCell(i), divIDs[i]);
+  }
+}
+function createDivCell(cell, divID) {
+  var div = document.createElement('div'); // create DIV element
+  div.setAttribute("id", divID);
+  div.setAttribute ("class", 	 "mybox");
+  div.setAttribute ("className", "mybox");
+
+  var txt = document.createTextNode(divID); // create text node
+  div.appendChild(txt);                    // append text node to the DIV
+  cell.appendChild(div);                   // append DIV to the table cell
+}
+// delete all table rows
+function deleteRows() {
+  var tbl = document.getElementById('lever-graph-table'); // table reference
+  var lastRow = tbl.rows.length - 1;             // set the last row index
+  for (var i = lastRow; i >= 0; i--) {
+    tbl.deleteRow(i);
+  }
+}
+
+///////////////////////////////////////////////////////////////
+
+
+
+// ----------------------------------------------------------------------------------------
+// NOTE - this needs to be adjusted whenever lever ids change during development time !
+// ----------------------------------------------------------------------------------------
+function createGraphs (leverID) {
+
+  // ----------------------------------------------------------------------------------------
+  // Global population
+  // ----------------------------------------------------------------------------------------
+  if (leverID == 1) {
+    createContainer(['container_1']);
+    initLineGraphHistoricPop ('container_1', 'Global population', 'number', 0, 10050000000, 1000000000, leverGraphData["g_1pager_population"], 1);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Urbanisation
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 2) {
+    createContainer(['container_1']);
+    initLineGraphHistoricPop ('container_1', 'Urbanisation', '%', 0, 80, 10, leverGraphData["g_1pager_urbanisation"], 100);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Passenger distance
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 3) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initLineGraph ('container_1', 'Passenger distance - automobile city', 'Passenger km / person / year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_automobilecity"], 1);
+    initLineGraph ('container_2', 'Passenger distance - booming city',    'Passenger km / person / year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_boomingcity"], 1);
+    initLineGraph ('container_3', 'Passenger distance - transit city',    'Passenger km / person / year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_transitcity"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Freight distance
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 4) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Freight distance domestic', 	   'Tonne - kms', 0,    50000,  5000, leverGraphData["g_1pager_freight_distance_domestic"], 1);
+   initLineGraph ('container_2', 'Freight distance international', 'Tonne - kms', 0,   200000, 25000, leverGraphData["g_1pager_freight_distance_international"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Mode
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 5) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initStackedColumnChart ('container_1', 'Automobile city (modal share 2011 and 2050)', '%', 0, 100, 10, leverGraphData["g_1pager_modeshares_automobilecity"], 100);
+    initStackedColumnChart ('container_2', 'Booming city (modal share 2011 and 2050)',    '%', 0, 100, 10, leverGraphData["g_1pager_modeshares_boomingcity"], 100);
+    initStackedColumnChart ('container_3', 'Transitcity (modal share 2011 and 2050)',     '%', 0, 100, 10, leverGraphData["g_1pager_modeshares_transitcity"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Occupancy & freight load
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 6) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initLineGraph ('container_1', 'Car occupanciy urban - passenger car', 'Passengers / vehicle',      0, 2.5, 0.25, leverGraphData["g_1pager_occupancies_urbanpassengercar"], 1);
+    initLineGraph ('container_2', 'Load factor for freight - domestic light truck', 'Tonne / vehicle', 0, 0.35, 0.05, leverGraphData["g_1pager_loadfactor_freight_domestic_light_truck"], 1);
+    initLineGraph ('container_3', 'Load factor for freight - international ship', 'Tonne / vehicle',   0, 25000, 2500, leverGraphData["g_1pager_loadfactor_freight_international_ship"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Vehicle ownership
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 7) {
+    deleteRows(); // new lever, graphs not defined yet
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Transport Efficiency --> TO BE CHECKED
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 8) {
+   createContainer(['container_2']);
+   // initLineGraph ('container_1', 'Freight efficiency domestic', 	        'lge per 100 km', 0, 10, 1, leverGraphData["g_1pager_freight_efficiencies_domestic"], 1);
+   initLineGraph ('container_2', 'Freight efficiency domestic light truck ice', 'lge per 100 km', 0, 10, 1, leverGraphData["g_1pager_freight_efficiency_domestic_light_truck_ice_liquid"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Electric and hydrogen
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 9) {
+    deleteRows();
+    appendRow(['container_1','container_2']);
+    appendRow(['container_3','container_4']);
+    initStackedColumnChart ('container_1', 'Electric and hydrogen: % of urban passenger cars',      '%', 0, 100, 10, leverGraphData["g_1pager_tech_shares_urban_passenger_car"], 100);
+    initStackedColumnChart ('container_2', 'Electric and hydrogen: % of urban passenger buses',     '%', 0, 100, 10, leverGraphData["g_1pager_tech_shares_urban_passenger_bus"], 100);
+    initStackedColumnChart ('container_3', 'Electric and hydrogen: % of urban passenger trains',    '%', 0, 100, 10, leverGraphData["g_1pager_tech_shares_urban_passenger_train"], 100);
+    initStackedColumnChart ('container_4', 'Electric and hydrogen: % of longhaul passenger planes', '%', 0, 100, 10, leverGraphData["g_1pager_tech_shares_urban_passenger_plane_longhaul"], 100);
+  }
+
+
+
+
+  // ----------------------------------------------------------------------------------------
+  // Building size
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 10) {
+   createContainer(['container_1','container_2']);
+   initLineGraphForCompareValues ('container_1', 'Residential building size - urban', 'meters squared', 0, 110, 10, leverGraphData["g_1pager_building_size_urban"]);
+   initLineGraphForCompareValues ('container_2', 'Residential building size - rural', 'meters squared', 0, 110, 10, leverGraphData["g_1pager_building_size_rural"]);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Temperature & hot water use
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 11) {
+    deleteRows();
+    appendRow(['container_1','container_2', 'container_3']);
+    appendRow(['container_4','container_5', 'container_6']);
+    initLineGraph ('container_1', 'House temperature cooling season - rural', 'C', 0, 30, 2.5,    leverGraphData["g_1pager_house_temperature_cooling_rural"], 1);
+    initLineGraph ('container_2', 'House temperature heating season - rural', 'C', 0, 30, 2.5,    leverGraphData["g_1pager_house_temperature_heating_rural"], 1);
+    initLineGraph ('container_3', 'Hot water demand - rural', 'l / y / person', 0, 22000, 2500, leverGraphData["g_1pager_hotwater_demand_rural"], 1);
+    initLineGraph ('container_4', 'House temperature cooling season - urban', 'C', 0, 30, 2.5,    leverGraphData["g_1pager_house_temperature_cooling_urban"], 1);
+    initLineGraph ('container_5', 'House temperature heating season - urban', 'C', 0, 30, 2.5,    leverGraphData["g_1pager_house_temperature_heating_urban"], 1);
+    initLineGraph ('container_6', 'Hot water demand - urban', 'l / y / person', 0, 22000, 2500, leverGraphData["g_1pager_hotwater_demand_urban"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Lighting & appliance use
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 12) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initStackedColumnChart ('container_1', 'Appliance ownership', 'Units per household', 0, 10, 1, 	  leverGraphData["g_1pager_appliances_ownership_urban"], 1);
+    initLineGraph ('container_2', 'Average cooking demand urban', 'Mj per household',    0, 5500, 500, leverGraphData["g_1pager_cooking_demand_urban"], 1);
+    initLineGraph ('container_3', 'Average lighting demand urban', 'Bulbs per household', 0, 40, 5, 	  leverGraphData["g_1pager_lighting_demand_urban"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Building insulation
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 13) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Building insulation urban', 'GW / M ha * °C', 0, 18, 2, leverGraphData["g_1pager_house_insulation_urban"], 1);
+   initLineGraph ('container_2', 'Building insulation rural', 'GW / M ha * °C', 0, 18, 2, leverGraphData["g_1pager_house_insulation_rural"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Temperature, cooking & lighting technology
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 14) {
+    createContainer(['container_1','container_2']);
+    initStackedColumnChart ('container_1', 'Technology used for urban lighting', '%', 0, 100, 10, leverGraphData["g_1pager_lighting_technology_urban"], 100);
+    initStackedColumnChart ('container_2', 'Technology used for urban cooking',  '%', 0, 100, 10, leverGraphData["g_1pager_cooking_technology_urban"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Appliance efficiency
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 15) {
+    createContainer(['container_1']);
+    initColumnChart ('container_1', 'Appliances efficiency', 'Watt', 0, 1500, 250, leverGraphData["g_1pager_appliances_efficiency_urban"], 1);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Product lifespan & demand
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 16) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Lifespan urban ice car (liquid fossil fuels)', 'Years', 0, 18, 2, leverGraphData["g_1pager_g30_lifespan_urbancarice"], 1);
+   initLineGraph ('container_2', 'Lifespan urban TV',                            'Years', 0, 18, 2, leverGraphData["g_1pager_g30_lifespan_urbantv"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Design, material switch & recycling
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 17) {
+    deleteRows();
+    appendRow(['container_1','container_2', 'container_3']);
+    appendRow(['container_4','container_5', 'container_6']);
+    initColumnChart ('container_1', 'Design for products', '% of baseline year', 0, 100, 10, 	leverGraphData["g_1pager_g30_demandperproductdesign"], 100);
+    initColumnChart ('container_2', 'Material switch to timber',            '%', 0, 16, 2, 	leverGraphData["g_1pager_g30_materialswitchtotimber"], 100);
+    initColumnChart ('container_3', 'Material switch to plastics',          '%', 0, 16, 2, 	leverGraphData["g_1pager_g30_materialswitchtoplastics"], 100);
+    initColumnChart ('container_4', 'Material switch to aluminium',         '%', 0, 16, 2, 	leverGraphData["g_1pager_g30_materialswitchtoaluminium"], 100);
+    initColumnChart ('container_5', 'Recycling - steel, chemicals, paper',  '%', 0, 100, 10, 	leverGraphData["g_1pager_g30_demandperproductrecycling"], 100);
+    initColumnChart ('container_6', 'Recycling - aluminium',                '%', -100, 0, 10, 	leverGraphData["g_1pager_g30_demandperproductrecycling_aluminium"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Iron, steel & aluminium
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 18) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Energy efficiency avg:<br>oxygen steel and aluminium', '%',     -5, 20, 2.5, leverGraphData["g_1pager_g30_energyefficiency_steel"], 100);
+   initLineGraph ('container_2', 'Energy efficiency gain by new processes:<br>oxygen steel', '%', -5, 20, 2.5, leverGraphData["g_1pager_g30_processimprovementsasee_steel"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Chemicals
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 19) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Energy efficiency:<br>high value chemicals',                       '%', 0, 20, 2, leverGraphData["g_1pager_g30_energyefficiency_highvaluechemicals"], 100);
+   initLineGraph ('container_2', 'Energy efficiency gain by new processes:<br>high value chemicals', '%', 0, 20, 2, leverGraphData["g_1pager_g30_processimprovementsasee_highvaluechemicals"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Paper and other
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 20) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Energy efficiency:<br>pulp technology', 			'%', 0, 40, 5, leverGraphData["g_1pager_g30_energyefficiency_pulp"], 100);
+   initLineGraph ('container_2', 'Energy efficiency gain by new processes:<br>pulp technology', '%', 0, 40, 5, leverGraphData["g_1pager_g30_processimprovementsasee_pulp"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Cement
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 21) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Design for cement materials demand per product', 		'%',0,  100, 10, leverGraphData["g_1pager_g30_demandperproductdesign_cement"], 100);
+   initLineGraph ('container_2', 'Energy efficiency gain by new processes:<br>pulp technology', '%', 0, 100, 10, leverGraphData["g_1pager_g30_processimprovementsasee_cement"], 100);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Carbon capture and storage (ind.)
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 22) {
+   createContainer(['container_1','container_2']);
+   initColumnChart ('container_1', 'CSS - key technologies: emissions captured, process and combustion', '% emissions captured', 0, 100, 10, leverGraphData["g_1pager_ccs_industry_summary"], 100);
+   initLineGraph ('container_2', 'CCS - oxygen steel: emissions captured, process and combustion',       '% emissions captured', 0, 100, 10, leverGraphData["g_1pager_ccs_industry_steel_oxygen"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Coal (incl. biomass) / oil / gas --> OIL PRICES ALWAYS 0 FOR LEVERS 1-4 !!!
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 23) {
+    createContainer(['container_1']);
+    initStackedColumnChart ('container_1', 'Split of hydrocarbon plants', '%', 0, 100, 10, leverGraphData["g_1pager_hydrocarbon_proportion_slg"], 100);
+    // initLineGraphHistoric  ('container_2', 'Oil price', '$ 2011 per barrel',   0, 200, 20, leverGraphData["g_1pager_oil_prices"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Fossil fuel efficiency
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 24) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initStackedColumnChart ('container_1', 'Split of solid fuel power plants', 'Units per household',  0, 100, 10, leverGraphData["g_1pager_solid_split"], 100);
+    initStackedColumnChart ('container_2', 'Split of liquid fuel power plants', 'Units per household', 0, 100, 10, leverGraphData["g_1pager_liquid_split"], 100);
+    initStackedColumnChart ('container_3', 'Split of gas fuel power plants', 'Units per household',    0, 100, 10, leverGraphData["g_1pager_gas_split"], 100);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Carbon capture and storage (power)
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 25) {
+   createContainer(['container_1']);
+   initLineGraph ('container_1', 'CCS: power', 'GW', 0, 4000, 500, leverGraphData["g_1pager_capacity_ccs"], 1);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Nuclear
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 26) {
+   createContainer(['container_1']);
+   initLineGraph ('container_1', 'Nuclear', 'GW', 0, 2000, 250, leverGraphData["g_1pager_capacity_nuclear"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Wind
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 27) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Onshore wind',  'GW', 0, 5500, 500, leverGraphData["g_1pager_capacity_onshore_wind"],  1);
+   initLineGraph ('container_2', 'Offshore wind', 'GW', 0, 5500, 500, leverGraphData["g_1pager_capacity_offshore_wind"], 1);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Hydroelectric
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 28) {
+   createContainer(['container_1']);
+   initLineGraph ('container_1', 'Hydroelectric',  'GW', 0, 2500, 250, leverGraphData["g_1pager_capacity_hydroelectric"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Marine
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 29) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Wave',  'GW', 0, 300, 25, leverGraphData["g_1pager_capacity_marine_wave"],  1);
+   initLineGraph ('container_2', 'Tidal', 'GW', 0, 300, 25, leverGraphData["g_1pager_capacity_marine_tidal"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Solar
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 30) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Solar - concentrated solar',  'GW', 0, 2500, 250, leverGraphData["g_1pager_capacity_concentrated_solar"], 1);
+   initLineGraph ('container_2', 'Solar PV',                    'GW', 0, 22000, 2000, leverGraphData["g_1pager_capacity_solar_pv"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Geothermal
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 31) {
+   createContainer(['container_1']);
+   initLineGraph ('container_1', 'Geothermal', 'GW', 0, 450, 50, leverGraphData["g_1pager_capacity_geothermal"], 1);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Storage and demand shifting
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 32) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Storage',                                  'GW',    0, 1400, 200, leverGraphData["g_1pager_capacity_storage"], 1);
+   initLineGraph ('container_2', 'Peak demand (relative to yearly average)', 'index', 0, 2, 0.2,    leverGraphData["g_1pager_peak"], 1);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Calories consumed
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 33) {
+   createContainer(['container_1']);
+   initLineGraphForCompareValues ('container_1', 'Average calories per person per day', 'calories', 0, 2800, 400, leverGraphData["g_1pager_calories"]);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Meat consumed
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 34) {
+   createContainer(['container_1']);
+   initLineGraphForCompareValues ('container_1', 'Meat consumed per person per day', 'calories', 0, 400, 50, leverGraphData["g_1pager_meat_consumption"]);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Type of meat
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 35) {
+    deleteRows(); // new lever, graphs not defined yet
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Crop yields --> CHECK: UNITS STRANGE IN EXCEL
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 36) {
+   createContainer(['container_1','container_2']);
+   initLineGraph ('container_1', 'Crop yields',         '%', 0,    7,  0.5, leverGraphData["g_1pager_crop_yields"], 100);
+   initLineGraph ('container_2', 'Land use efficiency', '%', 0, 120, 10, leverGraphData["g_1pager_land_synergies"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Land-use efficiency
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 37) {
+    deleteRows(); // no graphs
+  }
+  // ----------------------------------------------------------------------------------------
+  // Livestock (grains/residues fed)
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 38) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initLineGraph ('container_1', 'Intensification of animals',                     '%', 0, 15, 1, leverGraphData["g_1pager_animals_intensification_cows"], 100);
+    initLineGraph ('container_2', 'Feed conversion ratio: cows and other bovines',  '%', 0, 10, 0.5, leverGraphData["g_1pager_feed_conversion_cows"], 100);
+    initLineGraph ('container_3', 'Feed conversion ratio: milk products',           '%', 0, 10, 0.5, leverGraphData["g_1pager_feed_conversion_milk"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Livestock (pasture fed)
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 39) {
+    createContainer(['container_1']);
+    initLineGraph ('container_1', 'Increase in non intensive animal yields',        '%', 0, 100, 10, leverGraphData["g_1pager_animals_non_intensive_yields_cows"], 100);
+  }
+
+
+  // ----------------------------------------------------------------------------------------
+  // Bioenergy yields
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 40) {
+   createContainer(['container_1']);
+   initLineGraph ('container_1', 'Increase in energy crop yields and change in crop mix from base year', '%', 0, 250, 25, leverGraphData["g_1pager_bioenergy_yield"], 100);
+  }
+  // ----------------------------------------------------------------------------------------
+  // Type of biocrop
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 41) {
+    deleteRows(); // no graphs (yet?)
+  }
+  // ----------------------------------------------------------------------------------------
+  // Surplus land (forest & bioenergy)
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 42) {
+    createContainer(['container_1','container_2']);
+    initLineGraph ('container_1', 'Use of surplus land - forest', '% of remaining land',       0, 100, 10, leverGraphData["g_1pager_landuse_forest"], 100);
+    initStackedColumnChart ('container_2', 'Use of surplus land - all', 'Units per household', 0, 100, 10, leverGraphData["g_1pager_landuse_all"], 100);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Wastes and residues
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 48) {
+    createContainer(['container_1','container_2', 'container_3']);
+    initLineGraph ('container_1', 'Percentage of on farm waste collected',                 '%', 0, 50, 5,   leverGraphData["g_1pager_percent_on_farm_waste"], 100);
+    initColumnChart ('container_2', 'Amount of meat and food production wasted post farm', '%', 0, 30, 2.5, leverGraphData["g_1pager_food_waste_post_farm"], 100);
+    initColumnChart ('container_3', 'Amount of post farm waste collected',                 '%', 0, 30, 2.5, leverGraphData["g_1pager_percent_post_farm_waste"], 100);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Emissions trajectory
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 49) {
+    createContainer(['container_1']);
+    initStackedColumnChartWithout2011 ('container_1', 'Trajectory for emissions increase every year after 2050', '%', 0, 120, 10, leverGraphData["g_1pager_post2050_emissions"], 100);
+  }
+
+  // ----------------------------------------------------------------------------------------
+  // Atmospheric CO2 fraction
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 50) {
+    deleteRows(); // no graphs (yet?)
+  }
+  // ----------------------------------------------------------------------------------------
+  // Confidence in climate models
+  // ----------------------------------------------------------------------------------------
+  else if (leverID == 51) {
+    deleteRows(); // no graphs (yet?)
+  }
+
+
+
+} // end createGraphs ()
+
+
+
+
+
+
+</script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48107201-1', 'pik-potsdam.de');
+  ga('send', 'pageview');
+</script>
+
+</head>
+
+<body>
+
+<table border="0" align="center" style="margin-top:40px">
+
+
+<tr>
+<td colspan="3" align="right"><small>The Global Calculator - lever description one pager</small>
+
+<tr>
+<td colspan="3">
+<hr size="1" color="lightgray" noshade="noshade">
+
+<div id="title"><h1>Lever ...</h1></div>
+
+<hr size="1" color="lightgray" noshade="noshade">
+
+
+<tr>
+<td colspan="3" valign="top">
+
+<div id="lever-controls">...</div>
+<tr>
+<td colspan="3">
+<hr size="1" color="lightgray" noshade="noshade">
+<tr>
+<td colspan="3" align="center" valign="center">
+
+  <table border=0 id = "lever-graph-table" align="center">
+  <tr><td align="center" valign="center">... graph and table will go here ...
+  </table>
+
+<tr>
+<td colspan="3">
+<hr size="1" color="lightgray" noshade="noshade">
+
+<h2>Context</h2>
+<div id="context">...</div>
+<br><br>
+<tr>
+<td colspan="3">
+
+<h2>Things to consider</h2>
+<div id="things-to-consider">...</div>
+
+<tr>
+<td colspan="3">
+<hr size="1" color="lightgray" noshade="noshade">
+<tr>
+<td colspan="3" align="center" valign="center">
+
+  <table border=0 id = "lever-graph-table-2" align="center">
+  <tr><td align="center" valign="center">... additional graphs will go here ...
+  </table>
+
+<tr>
+<td colspan="3">
+<hr size="1" color="lightgray" noshade="noshade">
+
+
+<tr>
+<td width=400 valign="top">
+
+<h2>Level 1</h2>
+<div id="level-1">...</div>
+
+<br><br>
+
+<h2>Level 2</h2>
+<div id="level-2">...</div>
+
+
+<td width=20>
+
+<td width=400 valign="top">
+
+<h2>Level 3</h2>
+<div id="level-3">...</div>
+
+<br><br>
+
+<h2>Level 4</h2>
+<div id="level-4">...</div>
+
+
+<tr>
+<td colspan="3" valign="top" height="20px">
+<tr>
+<td colspan="3" valign="top">
+
+<h2>References</h2>
+<div id="references">...</div>
+<tr>
+<td colspan="3">
+<hr size="1" color="lightgray" noshade="noshade">
+
+</table>
+
+</body>
+
+</html>
+
+

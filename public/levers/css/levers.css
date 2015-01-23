@@ -1,0 +1,44 @@
+  body  {
+
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+	    line-height: 18px;
+	    color: rgb(51, 51, 51);
+
+  }
+
+  h1  {
+  }
+
+
+td {
+
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+	    line-height: 18px;
+	    color: rgb(51, 51, 51);
+
+  }
+
+
+
+  .navlink  {
+    color: orange;
+	text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left:10px;
+  }
+
+  a  {
+    color: orange;
+    text-decoration: none;
+  }
+  a:focus {
+    outline: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: orange;
+  }
+

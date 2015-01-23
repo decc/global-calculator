@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Global Calculator | Lever XXX </title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type='text/javascript'>
+
+$(document).ready(function() {
+  var leverID = getIdFromUrl();
+  document.getElementById("anim").src 	= "gc-anim/" + leverID;
+ });
+
+
+function getIdFromUrl () {
+  try {
+    var href= window.location.href.split("?id=");
+    if (href[1] == null) return "1";
+    var id  = href[1];
+    return id;
+  }
+  catch (e) { return "1"; }
+}
+
+</script>
+
+</head>
+
+<body bgcolor="#202020" padding="0" margin="0" bgcolor=white>
+
+<!--
+<img id= "anim" src="imgs/map-test/Final_version.png" >
+<img id= "anim" src="imgs/map-test/axis_squashed.png" >
+<img id= "anim" src="imgs/map-test/smaller_text.png" >
+<img id= "anim" src="imgs/map-test/smaller_edges.png" >
+<img id= "anim" src="imgs/map-test/bigger_text.png" >
+<img id= "anim" src="imgs/map-test/masked_change_bcc-csm1-1_rcp45_2100-2119_r1i1p1.nc.png" >
+<img id= "anim" src="gc-maps/Frames_25-62.csv.gif">
+-->
+
+<img id= "anim" src="gc-maps/Frames_25-62.csv.gif">
+
+<!--
+<img id= "anim" src="gc-maps/map-empty.png">
+<img id= "anim" src="gc-maps/map-empty.png" width="342" height="228">
+-->
+</body>
+
+</html>
+
+

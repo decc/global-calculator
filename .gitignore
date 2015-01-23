@@ -1,0 +1,6 @@
+*.swp
+*.dylib
+.powder
+public/gc-anim/pr_nonotes/
+public/gc-anim/tas_nonotes/
+
