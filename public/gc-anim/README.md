@@ -6,7 +6,10 @@ You can download them here by running:
 
 wget -nH --cut-dirs=1 --no-parent -r http://d2ow8032j7094s.cloudfront.net/20150123/index.html
 
+They were uploaded by:
 
+1. ruby generate-index.html
+2. aws s3 sync --recursive . s3://global-calculator-tool-images/20150123 --acl=public-read
 
 ---
 
