@@ -31,7 +31,9 @@ Steps:
 3. bundle  
 4. cd model/global_2050_model
 5. bundle exec rake 
-6. cd ../..
+6. cd ../../public/gc-anim
+7. wget -nH --cut-dirs=1 --no-parent -r http://d2ow8032j7094s.cloudfront.net/20150123/index.html # This downloads 1.5 GB of images 
+8. cd ../..
 7. rackup # This starts the server
 
 The bundle step should install all the dependencies. If it fails it may ask you to check a particular 'gem' installs manually. Doing that normally fixes the problem and the step can be repeated.
