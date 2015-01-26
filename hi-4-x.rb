@@ -1,4 +1,4 @@
-require_relative '../model/global_2050_model'
+require_relative './model/global_2050_model'
 require 'sinatra'
 require 'json/pure'
 
