@@ -42,5 +42,7 @@ def change_last_modified_date
   end
 end
 
-translate_excel_into_c
-change_last_modified_date
+if $0 == __FILE__
+  translate_excel_into_c
+  change_last_modified_date
+end
