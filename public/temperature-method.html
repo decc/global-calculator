@@ -3,13 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<title>Global Calculator | temperature estimation </title>
+<title>Global Calculator | How is the temperature change estimated?</title>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translate.js"></script>
 
 
 <link rel="stylesheet" href="levers/css/levers.css" type="text/css" />
-
-
-
 
 
 <script>
@@ -22,6 +23,80 @@
   ga('send', 'pageview');
 </script>
 
+<script>
+
+function getLanguageIDFromUrl () {
+  try {
+    var href= window.location.href.split("?lid=");
+    if (href[1] == null) return "en";
+    var languageID = href[1];
+    if (isValidLanguageID (languageID)) return languageID;
+    else                        	return "en";
+  }
+  catch (e) {
+    // alert ("oops" + e);
+    return "en";
+  }
+}
+
+var languageID = "en";
+
+function getFormattedString (str) {
+
+  while (str.indexOf ("[[CO2]]") >= 0)
+     str = str.replace("[[CO2]]", "CO<sub>2</sub>");
+  while (str.indexOf ("[[CH4]]") >= 0)
+     str = str.replace("[[CH4]]", "CH<sub>4</sub>");
+  while (str.indexOf ("[[N2O]]") >= 0)
+     str = str.replace("[[N2O]]", "N<sub>2</sub>O");
+  while (str.indexOf ("[[SO2]]") >= 0)
+     str = str.replace("[[SO2]]", "SO<sub>2</sub>");
+
+  return str;
+}
+
+$(document).ready(function() {
+
+   languageID = getLanguageIDFromUrl();
+
+    $('.translate').each(function(index, element) {
+               new_html = translate($(this).html());
+               $(this).html(new_html);
+    });
+
+  document.title = translate("The Global Calculator") + " | " + translate("How is the temperature change estimated?");
+
+
+   var str = getFormattedString (translate ("The temperature change in 2100 is estimated by combining the effects of four greenhouse gases: carbon dioxide ([[CO2]]), methane ([[CH4]]), nitrous oxide ([[N2O]]) and sulphur dioxide ([[SO2]])."));
+
+  document.getElementById("temperature-change").innerHTML = str + "<br><br>";
+
+  str = getFormattedString (translate ("[[CO2]] stays in the atmosphere for a long time, so it is the cumulative amount of [[CO2]] in the atmosphere that is important, not the rate of emission. The effect of [[CO2]] is estimated by referring to the IPCC's climate model results, summarised in Figure SPM-10 of the Working Group I Summary for Policymakers (right). The grey shaded area gives an estimate of the range of temperature change resulting from each level of cumulative [[CO2]] emissions."));
+
+  document.getElementById("co2").innerHTML = str;
+
+  str = getFormattedString (translate ("The effect of [[CH4]], [[N2O]] and [[SO2]] are each estimated using the Global Temperature Potentials (GTPs) of these gases, because they have shorter atmospheric lifetimes than [[CO2]]. The Global Calculator tracks emissions of each gas on a 5-yearly basis, and the GTP gives an estimate of the net effect of the emissions at each time point. These are summed to give a total temperature contribution in 2100."));
+
+  document.getElementById("other-gases").innerHTML = str;
+
+  str = getFormattedString (translate ("The total amount of warming is estimated by adding together the effects of [[CO2]], [[CH4]], [[N2O]] and [[SO2]]. This is a simplification. In practice, the effects are unlikely to be fully linear, and of course there are other greenhouse gases and important earth system processes which will also affect the temperature."))
+  + " <b>" + getFormattedString (translate ("Therefore, the output from the Global Calculator should only be considered a rough estimate.")) + "</b>&nbsp;" 
+  + getFormattedString (translate ("A full climate model simulation of your pathway would give more detailed information, but this would require a lot of computer power to run. Because no climate model is perfect, the uncertainty range is then extended to take into account the possible effect of other physical processes which are not yet included in climate models. This uses a method similar to the one used in the most recent IPCC report."));
+
+  document.getElementById("total").innerHTML = str;
+
+
+  str = getFormattedString (translate ("If your pathway goes beyond the cumulative [[CO2]] emissions shown in the IPCC diagram above, then you are going beyond the levels that have been assessed in detail by the IPCC using climate models. There are two reasons why the IPCC stops at this level:")) + "<ol><li>" 
+  + getFormattedString (translate ("Most simulations of the global economy do not reach such high levels of emissions, and they are considered to be unrealistic. If you have produced a very high emissions pathway, consider whether there may be cost or resource limitations not included by the Global Calculator.")) + "<li>"
+  + getFormattedString (translate ("Climate models are tested against observations of current and past climates, so we have confidence in the results when there are small changes. However for very large or very rapid climate change, it is likely that other processes and feedbacks will become important which are not currently well understood or well studied, because we have not yet experienced them. Therefore there is larger uncertainty about possible changes at these levels of emissions, and greater risk of unpredictable changes.")) + "</ol>";
+
+  document.getElementById("why-not").innerHTML = str;
+
+
+});
+
+</script>
+
 </head>
 
 <body>
@@ -30,19 +105,19 @@
 
 
 <tr>
-<td colspan="3" align="right"><small>The Global Calculator - temperature estimation</small>
+<td colspan="3" align="right"><small><span class="translate">The Global Calculator - temperature estimation</span></small>
 
 <tr>
 <td colspan="3">
 <hr size="1" color="lightgray" noshade="noshade">
 
-<h1>How is the temperature change estimated?</h1>
+<h1 class="translate">How is the temperature change estimated?</h1>
 
 <hr size="1" color="lightgray" noshade="noshade">
 
 
 <tr>
-<td colspan="3" valign="top">
+<td colspan="3" valign="top" id="temperature-change">
 
 The temperature change in 2100 is estimated by combining the effects of four greenhouse gases: carbon dioxide (CO<sub>2</sub>), methane (CH<sub>4</sub>), nitrous oxide (N<sub>2</sub>O) and sulphur dioxide (SO<sub>2</sub>).
 <br><br>
@@ -51,10 +126,10 @@ The temperature change in 2100 is estimated by combining the effects of four gre
 <table border=0>
 <tr>
 <td valign="top">
-<h2>Carbon dioxide</h2>
-
+<h2 class="translate">Carbon dioxide</h2>
+<span id="co2">
 CO<sub>2</sub> stays in the atmosphere for a long time, so it is the cumulative amount of CO<sub>2</sub> in the atmosphere that is important, not the rate of emission.  The effect of CO<sub>2</sub> is estimated by referring to the IPCC's climate model results, summarised in Figure SPM-10 of the Working Group I Summary for Policymakers (right). The grey shaded area gives an estimate of the range of temperature change resulting from each level of cumulative CO<sub>2</sub> emissions.
-
+</span>
 <td>
 <img src="imgs/ipcc-graph.jpg" width="600px">
 </table>
@@ -63,26 +138,31 @@ CO<sub>2</sub> stays in the atmosphere for a long time, so it is the cumulative 
 <td colspan="3" valign="top">
 
 
-<h2>Other gases</h2>
+<h2 class="translate">Other gases</h2>
+<span id="other-gases">
 The effect of CH<sub>4</sub>, N<sub>2</sub>O and SO<sub>2</sub> are each estimated using the Global Temperature Potentials (GTPs) of these gases, because they have shorter atmospheric lifetimes than CO<sub>2</sub>.  The Global Calculator tracks emissions of each gas on a 5-yearly basis, and the GTP gives an estimate of the net effect of the emissions at each time point.  These are summed to give a total temperature contribution in 2100.
+</span>
 
 
-<h2>Total</h2>
+<h2 class="translate">Total</h2>
+<span id="total">
 The total amount of warming is estimated by adding together the effects of CO<sub>2</sub>, CH<sub>4</sub>, N<sub>2</sub>O and SO<sub>2</sub>.  This is a simplification.  In practice, the effects are unlikely to be fully linear, and of course there are other greenhouse gases and important earth system processes which will also affect the temperature.  Therefore, <b>the output from the Global Calculator should only be considered a rough estimate.</b>  A full climate model simulation of your pathway would give more detailed information, but this would require a lot of computer power to run.
 Because no climate model is perfect, the uncertainty range is then extended to take into account the possible effect of other physical processes which are not yet included in climate models.  This uses a method similar to the one used in the most recent IPCC report.
+</span>
 
-
-<h2>Why doesn't it give a result for high emissions pathways?</h2>
+<h2 class="translate">Why doesn't it give a result for high emissions pathways?</h2>
+<span id="why-not">
 If your pathway goes beyond the cumulative CO<sub>2</sub> emissions shown in the IPCC diagram above, then you are going beyond the levels that have been assessed in detail by the IPCC using climate models.  There are two reasons why the IPCC stops at this level:
 <ol>
 <li>Most simulations of the global economy do not reach such high levels of emissions, and they are considered to be unrealistic.  If you have produced a very high emissions pathway, consider whether there may be cost or resource limitations not included by the Global Calculator.
 <li>Climate models are tested against observations of current and past climates, so we have confidence in the results when there are small changes.  However for very large or very rapid climate change, it is likely that other processes and feedbacks will become important which are not currently well understood or well studied, because we have not yet experienced them.  Therefore there is larger uncertainty about possible changes at these levels of emissions, and greater risk of unpredictable changes.
 </ol>
-
+</span>
 <hr size="1" color="lightgray" noshade="noshade">
 
+<span class="translate">
 A fuller description of how the Global Calculator estimates temperature change, and the role of the "confidence in models" lever, can be found in the detailed documentation.
-
+</span>
 <hr size="1" color="lightgray" noshade="noshade">
 
 </table>

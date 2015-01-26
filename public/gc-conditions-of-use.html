@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<title>Global Calculator | conditions of use</title>
+<title>The Global Calculator | conditions of use</title>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translate.js"></script>
 
 
 <link rel="stylesheet" href="levers/css/levers.css" type="text/css" />
@@ -22,6 +26,70 @@
   ga('send', 'pageview');
 </script>
 
+
+
+<script>
+
+function getLanguageIDFromUrl () {
+  try {
+    var href= window.location.href.split("?lid=");
+    if (href[1] == null) return "en";
+    var languageID = href[1];
+    if (isValidLanguageID (languageID)) return languageID;
+    else                        	return "en";
+  }
+  catch (e) {
+    // alert ("oops" + e);
+    return "en";
+  }
+}
+
+var languageID = "en";
+
+function getFormattedString (str) {
+
+  while (str.indexOf ("[[CO2]]") >= 0)
+     str = str.replace("[[CO2]]", "CO<sub>2</sub>");
+  while (str.indexOf ("[[CH4]]") >= 0)
+     str = str.replace("[[CH4]]", "CH<sub>4</sub>");
+  while (str.indexOf ("[[N2O]]") >= 0)
+     str = str.replace("[[N2O]]", "N<sub>2</sub>O");
+  while (str.indexOf ("[[SO2]]") >= 0)
+     str = str.replace("[[SO2]]", "SO<sub>2</sub>");
+
+  return str;
+}
+
+$(document).ready(function() {
+
+   languageID = getLanguageIDFromUrl();
+
+    $('.translate').each(function(index, element) {
+               new_html = translate($(this).html());
+               $(this).html(new_html);
+    });
+
+  document.title = translate("The Global Calculator") + " | " + translate("conditions of use");
+
+  document.getElementById("p1").innerHTML = translate("The Global Calculator is an online tool developed by the UK Department of Energy and Climate Change (DECC), Climate-KIC, World Resources Institute, Chinese Energy R&D International, the International Energy Agency (IEA), Ernst & Young, Climact, Imperial College, London School of Economics, Climate Media Factory, Potsdam Institute for Climate Impact Research, Rothamsted Research, the Walker Institute, National Oceanography Centre and the Natural Environment Research Council. It models the world's energy, land and food systems to 2050 and allows users to make choices in these systems and explore the associated impacts of climate change on different regions of the world. The tool includes a Global Calculator spreadsheet, web tool and supporting documentation.");
+
+  var str = translate("Data used in the Global Calculator comes from a range of sources, as documented in the spreadsheet. In particular, the IEA supplied most of the energy supply, demand and emissions data for 1975 to 2011. The IEA also provided the example pathways in the tool (\"IEA 2DS (approx.)\", \"IEA 4DS (approx.)\", \"IEA 6DS (approx.)\"); these are approximations of the pathways published in the Energy Technology Perspectives 2014 ([[HYPERLINK-1]]) report, and are inevitably not a perfect match to the original pathways because they were specified in another model. Other significant data sources used in the Global Calculator include the Food and Agriculture Organisation (for land use and food data) and University College London TIAM model (for costs data). All pre-existing data used in the Global Calculator remains the intellectual property of the original providers.");
+
+  str = str.replace("[[HYPERLINK-1]]", "<a href='http://www.iea.org/etp2014' target='_blank'>www.iea.org/etp2014</a>");
+  document.getElementById("p2").innerHTML = str
+
+  str = translate("The Global Calculator spreadsheet and supporting documentation is made available under (and subject to the terms of) the Open Government Licence ([[HYPERLINK-2]]). The web tool is published under (and subject to the terms of) the Creative Commons Licence (attribution, non-commercial, see: [[HYPERLINK-3]]).");
+
+  str = str.replace("[[HYPERLINK-2]]", "<a href='http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/' target='_blank'>www.nationalarchives.gov.uk/doc/open-government-licence/version/2/</a>");
+  str = str.replace("[[HYPERLINK-3]]", "<a href='http://creativecommons.org/licenses/by-nc/4.0/legalcode' target='_blank'>http://creativecommons.org/licenses/by-nc/4.0/legalcode</a>");
+  document.getElementById("p3").innerHTML = str
+
+
+
+});
+
+</script>
+
 </head>
 
 <body>
@@ -30,27 +98,32 @@
 
 
 <tr>
-<td colspan="3" align="right"><small>The Global Calculator - conditions of use</small>
+<td colspan="3" align="right"><small><span class='translate'>The Global Calculator</span> - <span class='translate'>conditions of use</span></small>
 
 <tr>
 <td colspan="3">
 <hr size="1" color="lightgray" noshade="noshade">
 
-<h1>Conditions of use</h1>
+<h1 class='translate'>Conditions of use</h1>
 
 <hr size="1" color="lightgray" noshade="noshade">
 
-
-The Global Calculator is an online tool developed by the UK Department of Energy and Climate Change (DECC), Climate-KIC, World Resources Institute, Chinese Energy R&D International, the International Energy Agency (IEA), Ernst & Young, Climact, Imperial College, London School of Economics, Climate Media Factory, Potsdam Institute for Climate Impact Research, Rothamsted Research, the Walker Institute, National Oceanography Centre and the Natural Environment Research Council. It models the world's energy, land and food systems to 2050 and allows users to make choices in these systems and explore the associated impacts of climate change on different regions of the world. The tool includes a Global Calculator spreadsheet, web tool and supporting documentation.
+<span id="p1">The Global Calculator is an online tool developed by the UK Department of Energy and Climate Change (DECC), Climate-KIC, World Resources Institute, Chinese Energy R&D International, the International Energy Agency (IEA), Ernst & Young, Climact, Imperial College, London School of Economics, Climate Media Factory, Potsdam Institute for Climate Impact Research, Rothamsted Research, the Walker Institute, National Oceanography Centre and the Natural Environment Research Council. It models the world's energy, land and food systems to 2050 and allows users to make choices in these systems and explore the associated impacts of climate change on different regions of the world. The tool includes a Global Calculator spreadsheet, web tool and supporting documentation.</span>
 <br><br>
-Data used in the Global Calculator comes from a range of sources, as documented in the spreadsheet. In particular, the IEA supplied most of the energy supply, demand and emissions data for 1975 to 2011. The IEA also provided the example pathways in the tool ("IEA 2DS (approx.)", "IEA 4DS (approx.)", "IEA 6DS (approx.)"); these are approximations of the pathways published in the Energy Technology Perspectives 2014 (www.iea.org/etp2014) report, and are inevitably not a perfect match to the original pathways because they were specified in another model. Other significant data sources used in the Global Calculator include the Food and Agriculture Organisation (for land use and food data) and University College London TIAM model (for costs data). All pre-existing data used in the Global Calculator remains the intellectual property of the original providers.
+<span id="p2">Data used in the Global Calculator comes from a range of sources, as documented in the spreadsheet. In particular, the IEA supplied most of the energy supply, demand and emissions data for 1975 to 2011. The IEA also provided the example pathways in the tool ("IEA 2DS (approx.)", "IEA 4DS (approx.)", "IEA 6DS (approx.)"); these are approximations of the pathways published in the Energy Technology Perspectives 2014 ([[HYPERLINK-1]]) report, and are inevitably not a perfect match to the original pathways because they were specified in another model. Other significant data sources used in the Global Calculator include the Food and Agriculture Organisation (for land use and food data) and University College London TIAM model (for costs data). All pre-existing data used in the Global Calculator remains the intellectual property of the original providers.</span>
 <br><br>
+<span id="p3">
 The Global Calculator spreadsheet and supporting documentation is made available under (and subject to the terms of) the Open Government Licence (www.nationalarchives.gov.uk/doc/open-government-licence/version/2/). The web tool is published under (and subject to the terms of) the Creative Commons Licence (attribution, non-commercial, see: http://creativecommons.org/licenses/by-nc/4.0/legalcode).
+</span>
 <br><br>
+<span class='translate'>
 As set out in those licences, DECC, IEA and the Climate-KIC consortium provide no express or implied warranties concerning the tool and its contents and, accordingly, those parties accept no liability arising from use of the tool or its contents. 
+</span>
 <br><br>
 <b>
+<span class='translate'>
 By using the Global Calculator, I am agreeing to be bound by these terms and conditions.
+</span>
 </b>
 <hr size="1" color="lightgray" noshade="noshade">
 

@@ -5,6 +5,9 @@
 
 <title>Global Calculator | how are the map animations produced?</title>
 
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translate.js"></script>
 
 <link rel="stylesheet" href="levers/css/levers.css" type="text/css" />
 
@@ -22,6 +25,56 @@
   ga('send', 'pageview');
 </script>
 
+
+
+<script>
+
+function getLanguageIDFromUrl () {
+  try {
+    var href= window.location.href.split("?lid=");
+    if (href[1] == null) return "en";
+    var languageID = href[1];
+    if (isValidLanguageID (languageID)) return languageID;
+    else                        	return "en";
+  }
+  catch (e) {
+    // alert ("oops" + e);
+    return "en";
+  }
+}
+
+var languageID = "en";
+
+function getFormattedString (str) {
+
+  while (str.indexOf ("[[CO2]]") >= 0)
+     str = str.replace("[[CO2]]", "CO<sub>2</sub>");
+  while (str.indexOf ("[[CH4]]") >= 0)
+     str = str.replace("[[CH4]]", "CH<sub>4</sub>");
+  while (str.indexOf ("[[N2O]]") >= 0)
+     str = str.replace("[[N2O]]", "N<sub>2</sub>O");
+  while (str.indexOf ("[[SO2]]") >= 0)
+     str = str.replace("[[SO2]]", "SO<sub>2</sub>");
+
+  return str;
+}
+
+$(document).ready(function() {
+
+   languageID = getLanguageIDFromUrl();
+
+    $('.translate').each(function(index, element) {
+               new_html = translate($(this).html());
+               $(this).html(new_html);
+    });
+
+  document.title = translate("The Global Calculator") + " | " + translate("How are the map animations produced?");
+
+
+});
+
+</script>
+
 </head>
 
 <body>
@@ -30,46 +83,51 @@
 
 
 <tr>
-<td colspan="2" align="right"><small>The Global Calculator - How are the map animations produced?</small>
+<td colspan="2" align="right"><small><span class="translate">The Global Calculator</span> - <span class="translate">How are the map animations produced?</span></small>
 
 <tr>
 <td colspan="2">
 <hr size="1" color="lightgray" noshade="noshade">
 
-<h1>How are the map animations produced?</h1>
+<h1 class="translate">How are the map animations produced?</h1>
 
 <hr size="1" color="lightgray" noshade="noshade">
 
 <tr>
 <td colspan="2">
 
-<h2>What do the animations show?</h2>
-
+<h2 class="translate">What do the animations show?</h2>
+<span class="translate">
 The animations for temperature, precipitation, and ocean acidification each show a set of alternative possible outcomes in 2100, all of which are consistent with your Global Calculator pathway.  The animations do not show a change over time.  Each of the frames of the animation is an internally self-consistent possible future, according to a single climate model.  By looking at the animation, you can get an idea of what kinds of predictions are common to all models.  For example, all models show that when the global average temperature increases, more of this change is felt over the land than over the ocean, and this means we have high confidence in that prediction.  You can also get an idea of what the models disagree on.  For example, the changes in rainfall over the tropics are very varied between climate models.  This means we have less confidence in the details of those predictions.
+</span>
+<h2 class="translate">How are the map images selected?</h2>
 
-<h2>How are the map images selected?</h2>
-
-
-First, a range of possible temperature change in 2100 is estimated from your pathway (method described here).  There are two reasons why this is a range rather than a single value.  One reason is that the Global Calculator is a very simplified tool, and we have to make approximations.  A second reason is that climate forecasting is not perfectly accurate: there are many different climate models which make slightly different predictions, resulting in a range of possible outcomes.  This range is shown in the thermometer graphic.
-
+<span class="translate">
+First, a range of possible temperature change in 2100 is estimated from your pathway</span> (<a class="translate" href="">method described here</a>).  <span class="translate">There are two reasons why this is a range rather than a single value.  One reason is that the Global Calculator is a very simplified tool, and we have to make approximations.  A second reason is that climate forecasting is not perfectly accurate: there are many different climate models which make slightly different predictions, resulting in a range of possible outcomes.  This range is shown in the 'thermometer' graphic.
+</span>
 <br><br>
+<span class="translate">
 Next, a set of map images are chosen which each have the change in global average temperature within your temperature range.  These are selected from the IPCC database and use different models.  The model used is noted next to the map.  The images are placed in a random order within the animation.  This method is used for temperature, precipitation, and ocean acidification maps: they are all selected with reference to the global average temperature change of your pathway.
+</span>
+<h2 class="translate">How are the map images produced?</h2>
 
-<h2>How are the map images produced?</h2>
-
-
-Each single map shows the change in 20-year average temperature (precipitation, acidity) for a particular model, above the models own pre-industrial (1861-1880) baseline temperature (precipitation, acidity) pattern.  This is generated by plotting each 20-year average on a coarse grid.  
-
+<span class="translate">
+Each single map shows the change in 20-year average temperature (precipitation, acidity) for a particular model, above the model's own pre-industrial (1861-1880) baseline temperature (precipitation, acidity) pattern.  This is generated by plotting each 20-year average on a coarse grid.  
+</span>
 <br><br>
+<span class="translate">
 The images that are selected are not all model outputs at 2100.  This is because the standard IPCC scenarios do not cover the full range of possible temperature change in 2100.  Instead, all maps of the intended temperature change (eg 2 degrees) are listed, and then the one which is closest to 2100 is chosen (eg, a 2100-2119 period).  In most cases the maps shown are for the 2090-2109 period.  However, especially for very high and very low pathways, in some cases the maps are for different time periods.
-
+</span>
 <br><br>
+<span class="translate">
 The map projection used is a Mollweide equal-area projection.
-
+</span>
 <hr size="1" color="lightgray" noshade="noshade">
-For more detail of exactly which IPCC models and scenarios are shown in the animation, please click <a href="">here</a>.
+<span class="translate">
+For more detail of exactly which IPCC models and scenarios are shown in the animation, please click</span> <a class="translate" href="">here</a>.
 <br>
-A fuller description of how the maps are generated, including a list of the climate models used, can be found in the <a href="">detailed documentation</a>.
+<span class="translate">
+A fuller description of how the maps are generated, including a list of the climate models used, can be found in the</span> <a class="translate" href="">detailed documentation</a>.
 
 <hr size="1" color="lightgray" noshade="noshade">
 

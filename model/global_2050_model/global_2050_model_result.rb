@@ -118,9 +118,8 @@ class Global2050ModelResult < Global2050ModelUtilities
 =begin
 =end
 
-    # pathway_v22[:lever_graph_data]   	= get_lever_graph_data()
+    pathway_v22[:lever_graph_data]   	= get_lever_graph_data()
     # pathway_v22[:cfps]          	= getCFPs()
-
     # pathway_v22[:lever_descriptions]  =  get_lever_descriptions()
     # pathway_v22[:one_pager_desc] 	= get_lever_onepagers()
     end
@@ -1362,57 +1361,252 @@ class Global2050ModelResult < Global2050ModelUtilities
   # -----------------------------------------------------------------------------------------
   def get_lever_graph_data ()
     x = {} 
-    x["g_1pager_passenger_distance_automobilecity"] 	= r("g_1pager_passenger_distance_automobilecity")
-    x["g_1pager_passenger_distance_boomingcity"] 	= r("g_1pager_passenger_distance_boomingcity")
-    x["g_1pager_passenger_distance_transitcity"] 	= r("g_1pager_passenger_distance_transitcity")
 
-    x["g_1pager_freight_distance_domestic"]		= r("g_1pager_freight_distance_domestic");
-    x["g_1pager_freight_distance_international"]	= r("g_1pager_freight_distance_international");
+    x["g_1pager_population"] 		= r ("g_1pager_population");
+    x["g_1pager_urbanisation"] 		= r ("g_1pager_urbanisation");
+
+    x["g_1pager_passenger_distance_urban_average"] 		= r("g_1pager_passenger_distance_urban_average")
+    x["g_1pager_passenger_distance_rural_average"] 		= r("g_1pager_passenger_distance_rural_average")
+    x["g_1pager_passenger_distance_international_average"] 	= r("g_1pager_passenger_distance_international_average")
+    x["g_1pager_passenger_distance_automobilecity"] 		= r("g_1pager_passenger_distance_automobilecity")
+    x["g_1pager_passenger_distance_boomingcity"] 		= r("g_1pager_passenger_distance_boomingcity")
+    x["g_1pager_passenger_distance_transitcity"] 		= r("g_1pager_passenger_distance_transitcity")
+
+    x["g_1pager_freight_distance_total_international_and_domestic"]	= r("g_1pager_freight_distance_total_international_and_domestic");
+    x["g_1pager_freight_distance_domestic"]				= r("g_1pager_freight_distance_domestic");
+    x["g_1pager_freight_distance_international"]			= r("g_1pager_freight_distance_international");
+    x["g_1pager_freight_distance_tonne_per_person"]			= r("g_1pager_freight_distance_tonne_per_person");
+
+    x["webtool_1pager_passenger_percent_distance_travelled_urban"]	= r("webtool_1pager_passenger_percent_distance_travelled_urban");
+    x["webtool_1pager_passenger_percent_distance_travelled_rural"]	= r("webtool_1pager_passenger_percent_distance_travelled_rural");
+    x["webtool_1pager_passenger_percent_distance_travelled_nonplane"]	= r("webtool_1pager_passenger_percent_distance_travelled_nonplane");
+    x["g_1pager_freight_proportion_mode_domestic"]			= r("g_1pager_freight_proportion_mode_domestic");
+
+
+    x["g_1pager_occupancies_urbanpassengercar"]			= r("g_1pager_occupancies_urbanpassengercar");
+    x["g_1pager_occupancies_ruralpassengercar"]			= r("g_1pager_occupancies_ruralpassengercar");
+    x["g_1pager_loadfactor_freight_domestic_light_truck"]	= r("g_1pager_loadfactor_freight_domestic_light_truck");
+    x["g_1pager_loadfactor_freight_international_ship"]		= r("g_1pager_loadfactor_freight_international_ship");
+
+
+    x["g_1pager_transport_ownership_km_per_average_car_ice"]		= r("g_1pager_transport_ownership_km_per_average_car_ice");
+    x["g_1pager_transport_ownership_km_per_average_car_ice_rural"]	= r("g_1pager_transport_ownership_km_per_average_car_ice_rural");
+    x["g_1pager_transport_ownership_all"]				= r("g_1pager_transport_ownership_all");
+
+####
+
+    x["g_1pager_freight_efficiency_domestic_light_truck_ice_liquid"] 	= r("g_1pager_freight_efficiency_domestic_light_truck_ice_liquid");
+    x["g_1pager_freight_efficiency_international_plane"]		= r("g_1pager_freight_efficiency_international_plane");
+    x["g_1pager_passenger_efficiencies_car_ice"]			= r("g_1pager_passenger_efficiencies_car_ice");
+    x["g_1pager_passenger_efficiencies_car_electric"]			= r("g_1pager_passenger_efficiencies_car_electric");
+
+
+    x["g_1pager_tech_shares_urban_passenger_bus"] 		= r("g_1pager_tech_shares_urban_passenger_bus");
+    x["g_1pager_tech_shares_urban_passenger_car"] 		= r("g_1pager_tech_shares_urban_passenger_car");
+    x["g_1pager_tech_shares_urban_passenger_plane_longhaul"] 	= r("g_1pager_tech_shares_urban_passenger_plane_longhaul");
+    x["g_1pager_tech_shares_urban_passenger_train"] 		= r("g_1pager_tech_shares_urban_passenger_train");
+    x["g_1pager_car_passenger_urban_total_h2_and_electric"]	= r("g_1pager_car_passenger_urban_total_h2_and_electric");
+    x["g_1pager_tech_shares_urban_passenger_train"]		= r("g_1pager_tech_shares_urban_passenger_train");
+    x["g_1pager_tech_shares_urban_light_freight_lowcarbon"]	= r("g_1pager_tech_shares_urban_light_freight_lowcarbon");
+
+    x["g_1pager_building_size_rural"]		= r("g_1pager_building_size_rural");
+    x["g_1pager_building_size_urban"]		= r("g_1pager_building_size_urban");
+    x["g_1pager_building_size_residential"]	= r("g_1pager_building_size_residential");
+
+
+    x["g_1pager_house_temperature_cooling_urban"]	= r("g_1pager_house_temperature_cooling_urban");
+    x["g_1pager_house_temperature_heating_urban"]	= r("g_1pager_house_temperature_heating_urban");
+    x["g_1pager_house_temperature_cooling_rural"]	= r("g_1pager_house_temperature_cooling_rural");
+    x["g_1pager_house_temperature_heating_rural"]	= r("g_1pager_house_temperature_heating_rural");
+    x["g_1pager_hotwater_demand_rural"]			= r("g_1pager_hotwater_demand_rural");
+    x["g_1pager_hotwater_demand_urban"]			= r("g_1pager_hotwater_demand_urban");
+
+    x["g_1pager_appliances_ownership_urban_refrigerators_owned"]	= r("g_1pager_appliances_ownership_urban_refrigerators_owned");
+    x["g_1pager_appliances_ownership_urban"]				= r("g_1pager_appliances_ownership_urban");
+    x["g_1pager_lighting_demand_urban"]					= r("g_1pager_lighting_demand_urban");
+    x["g_1pager_cooking_demand_urban_kwh_per_hhd"]			= r("g_1pager_cooking_demand_urban_kwh_per_hhd");
+    x["g_1pager_lighting_demand_urban"]					= r("g_1pager_lighting_demand_urban");
+
+    x["g_1pager_house_insulation_rural"] 	= r("g_1pager_house_insulation_rural");
+    x["g_1pager_house_insulation_urban"] 	= r("g_1pager_house_insulation_urban");
+    x["g_1pager_house_insulation_non_res"]	= r("g_1pager_house_insulation_non_res");
+
+    x["g_1pager_heating_technology_urban_percent_solar_or_heatpump"]	= r("g_1pager_heating_technology_urban_percent_solar_or_heatpump");
+    x["g_1pager_cooling_technology_urban"]	= r("g_1pager_cooling_technology_urban");
+    x["g_1pager_hot_water_technology_urban"]	= r("g_1pager_hot_water_technology_urban");
+    x["g_1pager_cooking_technology_urban"]	= r("g_1pager_cooking_technology_urban");
+    x["g_1pager_lighting_technology_urban"]	= r("g_1pager_lighting_technology_urban");
+    x["g_1pager_heating_technology_urban"]	= r("g_1pager_heating_technology_urban");
+
+    x["g_1pager_appliances_efficiency_urban_tv"]		= r("g_1pager_appliances_efficiency_urban_tv");
+    x["g_1pager_appliances_efficiency_urban_refrigerator"]	= r("g_1pager_appliances_efficiency_urban_refrigerator");
+
+    # Product lifespan & demand
+
+    x["g_1pager_g30_lifespan_urbancarice"]	= r("g_1pager_g30_lifespan_urbancarice");
+    x["g_1pager_g30_lifespan_urbantv"]		= r("g_1pager_g30_lifespan_urbantv");
+
+    # Design, material switch & recycling
+
+    x["g_1pager_g30_demandperproductdesign"]		= r("g_1pager_g30_demandperproductdesign");
+    x["g_1pager_g30_demandperproductrecyclingtotal"]	= r("g_1pager_g30_demandperproductrecyclingtotal");
+    x["g_1pager_g30_materialswitchtoaluminium"]		= r("g_1pager_g30_materialswitchtoaluminium");
+    x["g_1pager_g30_materialswitchtoplastics"]		= r("g_1pager_g30_materialswitchtoplastics");
+    x["g_1pager_g30_materialswitchtotimber"]		= r("g_1pager_g30_materialswitchtotimber");
+
+
+    x["webtool_1pager_steel_alum_co2intensity"]	= r("webtool_1pager_steel_alum_co2intensity");
+    x["g_1pager_g30_steeltechnologies"]		= r("g_1pager_g30_steeltechnologies");
+    x["g_1pager_g30_fuel_switches_steel"]	= r("g_1pager_g30_fuel_switches_steel");
+    x["g_1pager_g30_energyefficiency"]		= r("g_1pager_g30_energyefficiency");
+
+
+    x["webtool_1pager_chemicals_co2intensity"]	= r("webtool_1pager_chemicals_co2intensity");
+    x["g_1pager_g30_fuel_switches_chemicals"]	= r("g_1pager_g30_fuel_switches_chemicals");
+
+
+    x["webtool_1pager_paper_co2intensity"]	= r("webtool_1pager_paper_co2intensity");
+
+    x["webtool_1pager_cement_co2intensity"]	= r("webtool_1pager_cement_co2intensity");
+
+
+
+    x["g_1pager_g30_processimprovementsasee_cement"]	= r("g_1pager_g30_processimprovementsasee_cement");
+    x["g_1pager_g30_processimprovementsasee_highvaluechemicals"]	= r("g_1pager_g30_processimprovementsasee_highvaluechemicals");
+    x["g_1pager_g30_processimprovementsasee_pulp"]	= r("g_1pager_g30_processimprovementsasee_pulp");
+    x["g_1pager_g30_processimprovementsasee_steel"]	= r("g_1pager_g30_processimprovementsasee_steel");
+
+
+
+
+    x["g_1pager_ccs_industry_summary"] 		= r("g_1pager_ccs_industry_summary");
+
+    x["g_1pager_hydrocarbon_plants_proportion_solid_fueled"]	= r("g_1pager_hydrocarbon_plants_proportion_solid_fueled");
+    x["g_1pager_hydrocarbon_plants_proportion_gas_fueled"]	= r("g_1pager_hydrocarbon_plants_proportion_gas_fueled");
+    x["g_1pager_hydrocarbon_plants_proportion_liquid_fueled"]	= r("g_1pager_hydrocarbon_plants_proportion_liquid_fueled");
+    x["g_1pager_hydrocarbon_proportion_slg"] 			= r("g_1pager_hydrocarbon_proportion_slg");
+
+
+
+    x["g_1pager_solid_split_percent_ultra_and_supercritical"]	= r("g_1pager_solid_split_percent_ultra_and_supercritical");
+    x["g_1pager_gas_split"]	= r("g_1pager_gas_split");
+    x["g_1pager_liquid_split"]	= r("g_1pager_liquid_split");
+
+    x["g_1pager_capacity_ccs"] 				= r("g_1pager_capacity_ccs");
+    x["webtool_1pager_total_energy_produced_ccs_total"]	= r("webtool_1pager_total_energy_produced_ccs_total");
+
+    x["g_1pager_capacity_nuclear"] 			= r("g_1pager_capacity_nuclear");
+    x["g_1pager_power_watts_per_capita"]		= r("g_1pager_power_watts_per_capita");
+    x["webtool_1pager_total_energy_produced_nuclear"]	= r("webtool_1pager_total_energy_produced_nuclear");
+
+    x["g_1pager_capacity_wind_combined_offshore_and_onshore"]	= r("g_1pager_capacity_wind_combined_offshore_and_onshore");
+    x["g_1pager_capacity_offshore_wind"] 			= r("g_1pager_capacity_offshore_wind");
+    x["g_1pager_capacity_onshore_wind"] 			= r("g_1pager_capacity_onshore_wind");
+    x["webtool_1pager_total_energy_produced_wind_total"]	= r("webtool_1pager_total_energy_produced_wind_total");
+
+    x["g_1pager_capacity_hydroelectric"]		 	= r("g_1pager_capacity_hydroelectric");
+    x["webtool_1pager_total_energy_produced_hydro"]		= r("webtool_1pager_total_energy_produced_hydro");
+
+    x["g_1pager_capacity_marine_combined_tidal_and_wave"]	= r("g_1pager_capacity_marine_combined_tidal_and_wave");
+    x["webtool_1pager_total_energy_produced_total_marine"]	= r("webtool_1pager_total_energy_produced_total_marine");
+
+    x["g_1pager_capacity_solar_combined_pv_and_concentrated"]	= r("g_1pager_capacity_solar_combined_pv_and_concentrated");
+    x["webtool_1pager_total_energy_produced_total_solar"]	= r("webtool_1pager_total_energy_produced_total_solar");
+
+
+    x["g_1pager_capacity_geothermal"] 				= r("g_1pager_capacity_geothermal");
+    x["webtool_1pager_total_energy_produced_geothermal"]	= r("webtool_1pager_total_energy_produced_geothermal");
+
+    x["g_1pager_capacity_storage"] 	= r ("g_1pager_capacity_storage");
+
+    x["g_1pager_calories"] 		= r ("g_1pager_calories");
+
+    x["g_1pager_meat_consumption"] 	= r ("g_1pager_meat_consumption");
+
+    x["g_1pager_meat_type_total_ruminant"]	= r("g_1pager_meat_type_total_ruminant");
+    x["g_1pager_meat_type_total_nonruminant"]	= r("g_1pager_meat_type_total_nonruminant");
+
+
+    x["g_1pager_percent_increase_crop_yields2"]	= r("g_1pager_percent_increase_crop_yields2");
+    x["g_1pager_crop_yieldswm2"]		= r("g_1pager_crop_yieldswm2");
+
+    x["g_1pager_land_synergies"] 		= r ("g_1pager_land_synergies");
+
+    x["g_1pager_animals_non_intensive_cowsperha"]	= r("g_1pager_animals_non_intensive_cowsperha");
+    x["g_1pager_animals_non_intensive_sheepperha"]	= r("g_1pager_animals_non_intensive_sheepperha");
+    x["g_1pager_feed_conversion_nonintensive_cows"]	= r("g_1pager_feed_conversion_nonintensive_cows");
+    x["g_1pager_feed_conversion_nonintensive_sheep_and_goats"]	= r("g_1pager_feed_conversion_nonintensive_sheep_and_goats");
+
+
+
+
+    x["g_1pager_feed_conversion_all"]				= r("g_1pager_feed_conversion_all");
+    x["g_1pager_animals_intensification_cows"]			= r("g_1pager_animals_intensification_cows");
+    x["g_1pager_animals_intensification_sheep_and_goats"]	= r("g_1pager_animals_intensification_sheep_and_goats");
+
+
+    x["g_1pager_bioenergy_wm2"]			= r("g_1pager_bioenergy_wm2");
+    x["g_1pager_bioenergy_yield_dryt"]		= r("g_1pager_bioenergy_yield_dryt");
+
+    x["g_1pager_bioenergy_proportion_liquid"]	= r("g_1pager_bioenergy_proportion_liquid");
+    x["g_1pager_bioenergy_yield"] 		= r("g_1pager_bioenergy_yield");
+    x["g_1pager_bioenergy_proportion_solid"]	= r("g_1pager_bioenergy_proportion_solid");
+
+
+    x["g_1pager_landuse_all"] 			= r ("g_1pager_landuse_all");
+
+    x["g_1pager_ggr_biochar"]			= r("g_1pager_ggr_biochar");
+    x["g_1pager_ggr_direct_air_capture"]	= r("g_1pager_ggr_direct_air_capture");
+    x["g_1pager_ggr_ocean_fertilisation"]	= r("g_1pager_ggr_ocean_fertilisation");
+    x["g_1pager_ggr_weathering_ocean"]		= r("g_1pager_ggr_weathering_ocean");
+    x["g_1pager_ggr_weathering_terrestial"]	= r("g_1pager_ggr_weathering_terrestial");
+
+    x["g_1pager_percent_post_farm_waste_crops"]	= r("g_1pager_percent_post_farm_waste_crops");
+    x["g_1pager_percent_on_farm_waste"] 	= r ("g_1pager_percent_on_farm_waste");
+    x["g_1pager_food_waste_post_farm"] 		= r ("g_1pager_food_waste_post_farm"); 
+    x["g_1pager_percent_post_farm_waste"] 	= r ("g_1pager_percent_post_farm_waste");
+
+    x["g_1pager_post2050_emissions"] 		= r ("g_1pager_post2050_emissions");
+
+
+
+
+
+
+
+=begin
+    x[""]	= r("");
+    x[""]	= r("");
+    x[""]	= r("");
+    x[""]	= r("");
+    x[""]	= r("");
+
+    # x[""]	= r("");
 
     x["g_1pager_modeshares_automobilecity"]		= r("g_1pager_modeshares_automobilecity");
     x["g_1pager_modeshares_boomingcity"]		= r("g_1pager_modeshares_boomingcity");
     x["g_1pager_modeshares_transitcity"]		= r("g_1pager_modeshares_transitcity");
 
-    x["g_1pager_occupancies_urbanpassengercar"]			= r("g_1pager_occupancies_urbanpassengercar");
-    x["g_1pager_loadfactor_freight_domestic_light_truck"]	= r("g_1pager_loadfactor_freight_domestic_light_truck");
-    x["g_1pager_loadfactor_freight_international_ship"]		= r("g_1pager_loadfactor_freight_international_ship");
+    x["g_1pager_freight_efficiencies_domestic"] 			= r ("g_1pager_freight_efficiencies_domestic");
+
 
     x["g_1pager_hotwater_demand_rural"]			= r("g_1pager_hotwater_demand_rural");
     x["g_1pager_hotwater_demand_urban"]			= r("g_1pager_hotwater_demand_urban");
-    x["g_1pager_house_temperature_cooling_rural"]	= r("g_1pager_house_temperature_cooling_rural");
-    x["g_1pager_house_temperature_cooling_urban"]	= r("g_1pager_house_temperature_cooling_urban");
-    x["g_1pager_house_temperature_heating_rural"]	= r("g_1pager_house_temperature_heating_rural");
-    x["g_1pager_house_temperature_heating_urban"]	= r("g_1pager_house_temperature_heating_urban");
+
 
     x["g_1pager_appliances_ownership_urban"]	= r("g_1pager_appliances_ownership_urban");
     x["g_1pager_cooking_demand_urban"]		= r("g_1pager_cooking_demand_urban");
-    x["g_1pager_lighting_demand_urban"]		= r("g_1pager_lighting_demand_urban");
 
-    x["g_1pager_g30_lifespan_urbancarice"]	= r("g_1pager_g30_lifespan_urbancarice");
-    x["g_1pager_g30_lifespan_urbantv"]		= r("g_1pager_g30_lifespan_urbantv");
 
-    x["g_1pager_building_size_rural"]	= r("g_1pager_building_size_rural");
-    x["g_1pager_building_size_urban"]	= r("g_1pager_building_size_urban");
 
-    x["g_1pager_calories"] 		= r ("g_1pager_calories");
-    x["g_1pager_meat_consumption"] 	= r ("g_1pager_meat_consumption");
 
-    x["g_1pager_tech_shares_urban_passenger_bus"] 		= r ("g_1pager_tech_shares_urban_passenger_bus");
-    x["g_1pager_tech_shares_urban_passenger_car"] 		= r ("g_1pager_tech_shares_urban_passenger_car");
-    x["g_1pager_tech_shares_urban_passenger_plane_longhaul"] 	= r ("g_1pager_tech_shares_urban_passenger_plane_longhaul");
-    x["g_1pager_tech_shares_urban_passenger_train"] 		= r ("g_1pager_tech_shares_urban_passenger_train");
 
-    x["g_1pager_freight_efficiencies_domestic"] 			= r ("g_1pager_freight_efficiencies_domestic");
-    x["g_1pager_freight_efficiency_domestic_light_truck_ice_liquid"] 	= r ("g_1pager_freight_efficiency_domestic_light_truck_ice_liquid");
 
     x["g_1pager_lighting_technology_urban"] 	= r ("g_1pager_lighting_technology_urban");
     x["g_1pager_cooking_technology_urban"] 	= r ("g_1pager_cooking_technology_urban");
 
     x["g_1pager_appliances_efficiency_urban"] 	= r ("g_1pager_appliances_efficiency_urban");
-    x["g_1pager_house_insulation_rural"] 	= r ("g_1pager_house_insulation_rural");
-    x["g_1pager_house_insulation_urban"] 	= r ("g_1pager_house_insulation_urban");
 
-    x["g_1pager_g30_demandperproductdesign"] 			= r ("g_1pager_g30_demandperproductdesign");
     x["g_1pager_g30_demandperproductdesign_cement"] 		= r ("g_1pager_g30_demandperproductdesign_cement");
     x["g_1pager_g30_demandperproductdesign_steel"] 		= r ("g_1pager_g30_demandperproductdesign_steel");
     x["g_1pager_g30_demandperproductrecycling"] 		= r ("g_1pager_g30_demandperproductrecycling");
@@ -1430,23 +1624,16 @@ class Global2050ModelResult < Global2050ModelUtilities
     x["g_1pager_g30_processimprovementsasee_cement"] 	= r ("g_1pager_g30_processimprovementsasee_cement"); # ??
 
     x["g_1pager_ccs_industry_steel_oxygen"] 	= r ("g_1pager_ccs_industry_steel_oxygen");
-    x["g_1pager_ccs_industry_summary"] 		= r ("g_1pager_ccs_industry_summary");
 
-    x["g_1pager_capacity_ccs"] 			= r ("g_1pager_capacity_ccs");
 
-    x["g_1pager_hydrocarbon_proportion_slg"] 	= r ("g_1pager_hydrocarbon_proportion_slg");
     x["g_1pager_oil_prices"] 			= r ("g_1pager_oil_prices");
 
     x["g_1pager_solid_split"] 	= r ("g_1pager_solid_split");
     x["g_1pager_liquid_split"] 	= r ("g_1pager_liquid_split");
     x["g_1pager_gas_split"] 	= r ("g_1pager_gas_split");
 
-    x["g_1pager_capacity_nuclear"] 		= r ("g_1pager_capacity_nuclear");
 
-    x["g_1pager_capacity_offshore_wind"] 	= r ("g_1pager_capacity_offshore_wind");
-    x["g_1pager_capacity_onshore_wind"] 	= r ("g_1pager_capacity_onshore_wind");
 
-    x["g_1pager_capacity_hydroelectric"] 	= r ("g_1pager_capacity_hydroelectric");
 
     x["g_1pager_capacity_marine_tidal"] 	= r ("g_1pager_capacity_marine_tidal");
     x["g_1pager_capacity_marine_wave"] 		= r ("g_1pager_capacity_marine_wave");
@@ -1454,27 +1641,19 @@ class Global2050ModelResult < Global2050ModelUtilities
     x["g_1pager_capacity_concentrated_solar"] 	= r ("g_1pager_capacity_concentrated_solar");
     x["g_1pager_capacity_solar_pv"] 		= r ("g_1pager_capacity_solar_pv");
 
-    x["g_1pager_capacity_geothermal"] 	= r ("g_1pager_capacity_geothermal");
 
-    x["g_1pager_capacity_storage"] 	= r ("g_1pager_capacity_storage");
     x["g_1pager_peak"] 			= r ("g_1pager_peak");
 
     x["g_1pager_crop_yields"] 		= r ("g_1pager_crop_yields");
-    x["g_1pager_land_synergies"] 	= r ("g_1pager_land_synergies");
 
     x["g_1pager_animals_intensification_cows"] 		= r ("g_1pager_animals_intensification_cows");
     x["g_1pager_animals_non_intensive_yields_cows"] 	= r ("g_1pager_animals_non_intensive_yields_cows");
     x["g_1pager_feed_conversion_cows"] 			= r ("g_1pager_feed_conversion_cows");
     x["g_1pager_feed_conversion_milk"] 			= r ("g_1pager_feed_conversion_milk");
 
-    x["g_1pager_bioenergy_yield"] 		= r ("g_1pager_bioenergy_yield");
 
-    x["g_1pager_percent_on_farm_waste"] 	= r ("g_1pager_percent_on_farm_waste");
-    x["g_1pager_percent_post_farm_waste"] 	= r ("g_1pager_percent_post_farm_waste");
     x["g_1pager_food_waste_on_farm"] 		= r ("g_1pager_food_waste_on_farm");
-    x["g_1pager_food_waste_post_farm"] 		= r ("g_1pager_food_waste_post_farm"); # ?? 
 
-    x["g_1pager_landuse_all"] 		= r ("g_1pager_landuse_all");
     x["g_1pager_landuse_forest"] 	= r ("g_1pager_landuse_forest");
 
 
@@ -1488,14 +1667,11 @@ class Global2050ModelResult < Global2050ModelUtilities
     x["g_1pager_g30_materialswitchtotimber"]		= r ("g_1pager_g30_materialswitchtotimber");
 
 
-    x["g_1pager_post2050_emissions"] 	= r ("g_1pager_post2050_emissions");
-    x["g_1pager_population"] 		= r ("g_1pager_population");
-    x["g_1pager_urbanisation"] 		= r ("g_1pager_urbanisation");
 
     x["g_1pager_passenger_distance_automobilecity test"] 	= r("g_1pager_passenger_distance_automobilecity")
     x["xxx g_1pager_population"] 	= r("g_1pager_population")
 
-
+=end
 
     return x
   end  
@@ -1747,7 +1923,7 @@ class Global2050ModelResult < Global2050ModelUtilities
 
 #=begin
 
-    (0..10).each do |col|
+    (0..23).each do |col|
       x["W"] [ y[0][col] ] = []
 
       (1..59).each do |row|
@@ -1757,7 +1933,7 @@ class Global2050ModelResult < Global2050ModelUtilities
     end
 #=end
 
-   # x["YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"] = y    
+ #   x["YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"] = y    
 
    return x
 

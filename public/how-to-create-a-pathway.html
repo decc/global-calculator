@@ -6,10 +6,12 @@
 <title>Global Calculator | guidance for creating a pathway</title>
 
 
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translate.js"></script>
+
+
 <link rel="stylesheet" href="levers/css/levers.css" type="text/css" />
-
-
-
 
 
 <script>
@@ -22,6 +24,58 @@
   ga('send', 'pageview');
 </script>
 
+<script>
+
+function getLanguageIDFromUrl () {
+  try {
+    var href= window.location.href.split("?lid=");
+    if (href[1] == null) return "en";
+    var languageID = href[1];
+    if (isValidLanguageID (languageID)) return languageID;
+    else                        	return "en";
+  }
+  catch (e) {
+    // alert ("oops" + e);
+    return "en";
+  }
+}
+
+var languageID = "en";
+
+$(document).ready(function() {
+
+   languageID = getLanguageIDFromUrl();
+
+    $('.translate').each(function(index, element) {
+               new_html = translate($(this).html());
+               $(this).html(new_html);
+    });
+
+
+   document.getElementById("pw-info-img-1").src = "imgs/pw-info/pw-info-1-" + languageID + ".gif";
+   document.getElementById("pw-info-img-2").src = "imgs/pw-info/pw-info-2-" + languageID + ".gif";
+   document.getElementById("pw-info-img-3").src = "imgs/pw-info/pw-info-3-" + languageID + ".gif";
+
+   document.getElementById("p1").innerHTML = 
+       "<ol>" 
+     + "<li><b>" + translate("Set the levers.") + "</b> " 
+     + translate("Click on the boxes to set each lever.  Each lever has four boxes, as described below. Some users take an example pathway as a starting point and change the lever choices from there.")
+     + "<li><b>" + translate("Check cumulative emissions.") + "</b> " 
+     + translate("If you want to create a pathway consistent with international commitments to limit global mean temperature increase to 2C, then keep cumulative emissions below the line for a 50% chance of achieving this.")
+    + "<li><b>" + translate("Check warnings.") + "</b> " 
+    + translate("Potential problems with your pathway are highlighted in red in the warnings panel.  Hover over the icons to view suggested solutions.")
+    + "</ol>"
+    + translate("Also see") + " <a href=''>" + translate("'how to' video") + "</a> " + translate("(2 mins) and more detailed how to guide.");
+
+
+  document.title = translate("The Global Calculator") + " | " + translate("Guidance for creating a pathway");
+
+
+});
+
+</script>
+
+
 </head>
 
 <body>
@@ -30,36 +84,36 @@
 
 
 <tr>
-<td colspan="2" align="right"><small>The Global Calculator - Guidance for creating a pathway</small>
+<td colspan="2" align="right"><small><span class="translate">The Global Calculator</span> - <span class="translate">Guidance for creating a pathway</span></small>
 
 <tr>
 <td colspan="2">
 <hr size="1" color="lightgray" noshade="noshade">
 
-<h1>Guidance for creating a pathway</h1>
+<h1 class="translate">Guidance for creating a pathway</h1>
 
 <hr size="1" color="lightgray" noshade="noshade">
 
 <tr>
-<td colspan="2">
+<td colspan="2" id="p1">
 
 <ol>
-<li><b>Set the levers.</b>  Click on the boxes to set each lever.  Each lever has four boxes, defined as described below. Some users take an example pathway as a starting point and improve the lever choices from there.
-<li><b>Check cumulative emissions.</b>  If you want to create a pathway consistent with international commitments to limit global mean temperature increase to 2C, then keep cumulative emissions below the line for a 50% chance of achieving this.
-<li><b>Check warnings.</b>  Potential problems with your pathway are highlighted in red in the warnings panel.  Hover over the icons to view suggested solutions.
+<li><b><span class="translate">Set the levers.</span></b>  <span class="translate">Click on the boxes to set each lever.  Each lever has four boxes, as described below. Some users take an example pathway as a starting point and change the lever choices from there.</span>
+<li><b><span class="translate">Check cumulative emissions.</span></b>  <span class="translate">If you want to create a pathway consistent with international commitments to limit global mean temperature increase to 2C, then keep cumulative emissions below the line for a 50% chance of achieving this.</span>
+<li><b><span class="translate">Check warnings.</span></b>  <span class="translate">Potential problems with your pathway are highlighted in red in the warnings panel.  Hover over the icons to view suggested solutions.</span>
 </ol>
 
-Also see "how to" video (2 mins) and more detailed how to guide.
+<span class="translate">Also see</span> <a href="" class="translate">'how to' video</a> <span class="translate">(2 mins) and more detailed how to guide.</span>
 
 <tr>
 <td colspan="2" align="center">
-<img src="imgs/pw-info/pw-info-1.gif">
+<img id="pw-info-img-1" src="imgs/pw-info/pw-info-1-en.gif">
 
 <tr>
 <td align="center">
-<img align="center" valign="top" src="imgs/pw-info/pw-info-2.gif">
+<img id="pw-info-img-2" align="center" valign="top" src="imgs/pw-info/pw-info-2-en.gif">
 <td align="center">
-<img align="center" valign="top" src="imgs/pw-info/pw-info-3.gif">
+<img id="pw-info-img-3" align="center" valign="top" src="imgs/pw-info/pw-info-3-en.gif">
 
 <tr>
 <td colspan="2">
