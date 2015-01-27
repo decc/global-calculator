@@ -1928,10 +1928,10 @@ function displayLeverStatus () {
   for (var i=0; i<NUM_LEVERS; i++)
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
-  var urlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  var urlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
   document.getElementById("gc-link").innerHTML  = "<font color='orange'><a href=\"" + urlStr + "\">" + urlStr + "</a></font>";
 
-  var langUrlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
+  var langUrlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
 
   updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);

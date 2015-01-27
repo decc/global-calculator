@@ -1714,10 +1714,10 @@ function displayLeverStatus () {
   for (var i=0; i<NUM_LEVERS; i++)
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
-  var urlStr = "http://tool.globalcalculator.org/globcalc-v22-05-01-2015.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  var urlStr = "/globcalc-v22-05-01-2015.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
   document.getElementById("gc-link").innerHTML  = "<font color='orange'><a href=\"" + urlStr + "\">" + urlStr + "</a></font>";
 
-  var langUrlStr = "http://tool.globalcalculator.org/globcalc-v22-05-01-2015.html?levers=" + paramInfo  + "/" + pageID + "/";
+  var langUrlStr = "/globcalc-v22-05-01-2015.html?levers=" + paramInfo  + "/" + pageID + "/";
 
   updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);

@@ -1789,7 +1789,7 @@ function displayLeverStatus () {
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
 
-  var urlStr = "http://tool.globalcalculator.org/embargoed.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  var urlStr = "/embargoed.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
   document.getElementById("gc-link").innerHTML  = "<font color='orange'><a href=\"" + urlStr + "\">" + urlStr + "</a></font>";
 
 
