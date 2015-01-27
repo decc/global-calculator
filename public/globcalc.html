@@ -4,7 +4,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>The Global Calculator | Prototype 23 | spreadsheet v.3.99.0  </title>
+<title>The Global Calculator | spreadsheet v.3.99.0  </title>
 
 <link rel="stylesheet" type="text/css" href="css/tooltips.css">
 <link rel="stylesheet" type="text/css" href="css/gc-black-v21.css" title="black rules">
@@ -641,7 +641,7 @@ function updateTempMapAnimation () {
     if (t2.indexOf ("0") == 0) t2 = t2.substring(1, 2);
 
 
-    var folder = (showMoreAnimationInfos) ? "tas_withnotes" : "tas_nonotes";
+    var folder = (showMoreAnimationInfos) ? "tas_notes" : "tas_nonotes";
 
     var id  = folder + "/Frames_" + t1 + "-" + t2 + ".csv.gif";
 
@@ -683,7 +683,7 @@ function updatePrecipMapAnimation () {
     if (t2.indexOf ("0") == 0) t2 = t2.substring(1, 2);
 
 
-    var folder = (showMoreAnimationInfos) ? "pr_withnotes" : "pr_nonotes";
+    var folder = (showMoreAnimationInfos) ? "pr_notes" : "pr_nonotes";
 
     var id  = folder + "/Frames_" + t1 + "-" + t2 + ".csv.gif";
 
@@ -741,16 +741,16 @@ function updateOAMapAnimation () {
     if (! detectIE()) {
       setTimeout (function () {
         if (imgID == "NO MATCH")
-          document.getElementById("map-container").src 	 = "gc-map-animation.html?id=no-map.gif";
+          document.getElementById("map-container").src = "gc-map-animation.html?id=no-oa-map.gif";
         else
           document.getElementById("map-container").src = "gc-map-animation.html?id=" + "ocean-acid/" + imgID;
       }, 20);
     }
     else {
       if (imgID == "NO MATCH")
-          document.getElementById("map-container").src 	 = "gc-map-animation.html?id=no-map.gif";
-     else
-       document.getElementById("map-container").src = "gc-map-animation.html?id=" + "ocean-acid/" + imgID;
+        document.getElementById("map-container").src = "gc-map-animation.html?id=no-oa-map.gif";
+      else
+        document.getElementById("map-container").src = "gc-map-animation.html?id=" + "ocean-acid/" + imgID;
     } 
 
 
@@ -1436,23 +1436,27 @@ function initUI () {
    document.getElementById("rcp-26-2").title = translate("Species richness and fisheries catch potential are projected to increase, on average, at mid and high latitudes and decrease at tropical latitudes") + translate("(WG2 SPM p17)");
 
 
-   document.getElementById("less-map-info-link").title = translate("map animations will hide information on RCP and timeframe");
-   document.getElementById("more-map-info-link").title = translate("map animations will show on each frame also information on RCP and timeframe");
+   document.getElementById("less-map-info-link").title = translate("temperature and precipitation maps only: ") + translate("map animations will hide information on RCP and timeframe");
+   document.getElementById("more-map-info-link").title = translate("temperature and precipitation maps only: ") + translate("map animations will show on each frame also information on RCP and timeframe");
+
+   document.getElementById("bas-phys-info-link").title = translate("see documentation");
+
+
 
    for (var i=1; i<=15; i++)
      document.getElementById("ml-open-close-link-" + i).title = translate("Click to show / hide the sub-levers");
 
 
 
-  document.getElementById("language-link-ar").title = translate("switch language to Arabic") + " " + translate("(coming soon)");
-  document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " " + translate("(coming soon)");
+  document.getElementById("language-link-ar").title = translate("switch language to Arabic") + " (" + translate("coming soon") + ")";
+  document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-ch").title = translate("switch language to Chinese");
   // document.getElementById("language-link-en").title = translate("switch language to English");
-  document.getElementById("language-link-fr").title = translate("switch language to French") + " " + translate("(coming soon)");
-  document.getElementById("language-link-hi").title = translate("switch language to Hindi") + " " + translate("(coming soon)");
-  document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " " + translate("(coming soon)");
-  document.getElementById("language-link-ru").title = translate("switch language to Russian") + " " + translate("(coming soon)");
-  document.getElementById("language-link-sp").title = translate("switch language to South American Spanish") + " " + translate("(coming soon)");
+  document.getElementById("language-link-fr").title = translate("switch language to French") + " (" + translate("coming soon") + ")";
+  document.getElementById("language-link-hi").title = translate("switch language to Hindi") + " (" + translate("coming soon") + ")";
+  document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " (" + translate("coming soon") + ")";
+  document.getElementById("language-link-ru").title = translate("switch language to Russian") + " (" + translate("coming soon") + ")";
+  document.getElementById("language-link-sp").title = translate("switch language to South American Spanish") + " (" + translate("coming soon") + ")";
 
 
 
@@ -1928,10 +1932,10 @@ function displayLeverStatus () {
   for (var i=0; i<NUM_LEVERS; i++)
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
-  var urlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
-  document.getElementById("gc-link").innerHTML  = "<font color='orange'><a href=\"" + urlStr + "\">" + urlStr + "</a></font>";
+  var urlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  document.getElementById("gc-link").innerHTML  = "<b><u><font color='orange'><a href='" + urlStr + "'>" + urlStr + "</a></font></u></b>";
 
-  var langUrlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
+  var langUrlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
 
   updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);
@@ -4117,7 +4121,7 @@ legend {    color: #ddd; }
          title="compare your pathway with other pathways">Compare</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a class='translate' id="mp-nav-share" href="" onclick="showMultipanelTab('multipanel-share'); return false" 
          title="how to share your pathway with others and with the Global Calculator Excel version">Share</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a class='translate' id="mp-nav-help" href="http://www.globalcalculator.org/how-to/" target="_blank" 
+        <a class='translate' id="mp-nav-help" href="http://www.globalcalculator.org/using-calculator" target="_blank" 
          title="show help on using the Global Calculator (opens in a new tab / window)">Help</a>
 
       <!-- end language selection + home, compare, share link section --------------------------------------------------- -->
@@ -4625,7 +4629,7 @@ legend {    color: #ddd; }
                 <td style="padding-left:8px; padding-right:8px"  align="left">
                 <hr color="gray" noshade="" size="1">
                 <span class="translate">These are "back of the envelope" calculations which don't involve the use of any climate models, just the basic physics of energy and heat transfer</span>
-                  <a target="_blank" href="http://www.globalcalculator.org/methodology/#Climate" title="see documentation"><img src="imgs/info-icon-6.gif" border="0"></a>.
+                  <a id="bas-phys-info-link" target="_blank" href="http://www.globalcalculator.org/sites/default/files/GC%20spreadsheet%20user%20guide.pdf" title="see documentation"><img src="imgs/info-icon-6.gif" border="0"></a>.
                 <span class="translate">To do this calculation, we've assumed that the fraction of emitted CO2 which goes into the atmosphere remains constant at about 0.44, but climate models suggest that this fraction is likely to increase for high-emission pathways.  Change the atmospheric fraction lever to see how this influences your results.</span>
               </table>
             </div>
@@ -5007,7 +5011,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
     <div class="tabContent" id="multipanel-share">
       <div>
         <table border=0>
-          <tr><td nowrap><b class='translate'>Sharing this pathway with others</b>
+          <tr><td nowrap><font color="orange"><b class='translate'>Sharing this pathway with others</b></font>
           <br><br>
           <span class='translate'>If you want to save or share your pathway, bookmark this page, or take note of this url:</span>*
           <br><br>
@@ -5017,13 +5021,12 @@ Climate change has already had a clear impact on some extreme weather events.  B
           <span class='translate'>To share, just send someone the url.</span>
           <br><br>
           * <span class='translate'>On various modern browsers, this url is the same as the one you will see in the address bar as you use the calculator. On older browsers, such as Internet Explorer 9, it will not be.</span>
-          <tr><td height=40px">
+          <tr><td height=30px">
           <hr color="gray" noshade="" size="1">
           <tr><td height=20px">
-          <tr><td nowrap><b class='translate'>Sharing this pathway with the excel version of the Global Calculator</b>
+          <tr><td nowrap><font color="orange"><b class='translate'>Sharing this pathway with the excel version of the Global Calculator</b></font>
           <br><br>
-          <span class='translate'>You may want to explore your pathway in more detail, taking a look at all the assumptions behind our modelling, by downloading the </span>&nbsp;
-          <span class='translate'>underlying Global Calculator Excel spreadsheet</span>.
+          <span class='translate'>You may want to explore your pathway in more detail, taking a look at all the assumptions behind our modelling, by downloading the </span><b><u><a class="translate" target="_blank" href="https://www.gov.uk/government/publications/the-global-calculator">underlying Global Calculator Excel spreadsheet</a></b></u>.
           <br><br>
           <span class='translate'>If you do, then you can recreate the pathway you have chosen in this tool by copying the numbers from the box below and pasting them in cells E7 to E66 on the 'User inputs' sheet of the workbook.</span>
           <tr><td height=10px">
@@ -7022,9 +7025,21 @@ Climate change has already had a clear impact on some extreme weather events.  B
     <tr>
     <td align="left">
 
+<!--
+<font color="orange">Please note:</font>
+<br>
+Map animations for ocean acidification
+<br>are only available for
+<br>cumulative CO2 emissions <font color="orange">up to 7400Gt !</font>
+<p>
+-->
+
     <span class='translate'>By using the Global Calculator you are agreeing to be bound to its</span> <b><u><a id="conditions-of-use-link" class='translate' target="_blank" href="gc-conditions-of-use.html">conditions of use</a></u></b>.
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <span class='translate'>Based on spreadsheet</span> v.3.99.0
+     <b><u><a target="_blank" href="https://www.gov.uk/government/publications/the-global-calculator">v.3.99.0</a></u></b>.
+
+
     <td align="right">
 <!--
     <a href="" title= "functionality under construction" onclick=" testIt(); return false">OPEN</a>
@@ -7096,7 +7111,7 @@ The default pathway you will see is "business as usual" if the world did nothing
 <span class="translate">
 For more information and tips, see
 </span>
- <u><a class="translate" href="http://www.globalcalculator.org/how-to/" target="_blank">how to use tool.</a></u>
+ <u><a class="translate" href="http://www.globalcalculator.org/using-calculator" target="_blank">how to use tool.</a></u>
 </span>
 <br>
 
