@@ -2683,7 +2683,7 @@ function drawRcpImg () {
   var jg = new jsGraphics(document.getElementById("container_cc_impacts_details"));
 
   
-  jg.setColor("#ffffff");
+  jg.setColor("rgba(0, 0, 0, 0.1)");
   jg.fillRect(0, 0, 580, 310);
 
 
@@ -2691,27 +2691,30 @@ function drawRcpImg () {
   // draw frame
   // ---------------------------------------------------------------------------------------
   jg.setColor("#bdbdbd");
-  jg.drawRect(0, 0, 580, 310);
-  jg.drawRect(1, 1, 580, 310);
+  // jg.drawRect(0, 0, 580, 310);
+  //jg.drawRect(1, 1, 580, 310);
 
 
-  jg.setColor("#636363");
-  jg.setFont("arial,helvetica,sans-serif", "10px", Font.BOLD);
+    jg.setColor("#999");
+    jg.setFont("arial,helvetica,sans-serif", "12px", Font.BOLD);
+    jg.drawString('Increasing CO2 emissions and impacts',  	110, 13);
 
-    var yOffset = 0;
+    jg.setFont("arial,helvetica,sans-serif", "10px", Font.BOLD);
+    jg.drawString('Hover over the icons below to see examples of potential impacts', 110, 33);
 
-    jg.drawString('RCP8.5 (6180Gt)',  	18, 96);
-    jg.drawString('RCP6.0 (3885Gt)',  	18, 155);
-    jg.drawString('RCP2.6 (990Gt)',  	18, 210);
+
+    jg.drawString('RCP8.5 (8215Gt)',  	18, 96);
+    jg.drawString('RCP6.0 (5920Gt)',  	18, 155);
+    jg.drawString('RCP2.6 (3025Gt)',  	18, 210);
 	
     for (var i=0; i<8; i++)
-      jg.drawImage("./imgs/bubble.gif", 110+i*40, 85, 31, 34);
+      jg.drawImage("./imgs/icons/zoom-orange.gif", 110+i*40, 85, 32, 32);
 
     for (var i=0; i<4; i++)
-      jg.drawImage("./imgs/bubble.gif", 110+i*40, 155-11, 31, 34);
+      jg.drawImage("./imgs/icons/zoom-orange.gif", 110+i*40, 155-11, 32, 32);
 
     for (var i=0; i<2; i++)
-      jg.drawImage("./imgs/bubble.gif", 110+i*40, 210-11, 31, 34);
+      jg.drawImage("./imgs/icons/zoom-orange.gif", 110+i*40, 210-11, 32, 32);
 
     jg.setColor("#636363");
     jg.setFont("arial,helvetica,sans-serif", "10px", Font.BOLD);

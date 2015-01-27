@@ -139,22 +139,110 @@ function init (leverID) {
   }
 
 
+    if (leverID >=43 && leverID<= 47 || leverID > 51) {
+        document.title = translate("The Global Calculator");
+        document.getElementById('title').innerHTML = "<h1>Sorry - there is no one pager for this id</h1>";
+        document.getElementById('lever-controls').innerHTML = "";
+        document.getElementById('context').innerHTML = "";
+        document.getElementById('context-header').innerHTML = "";
+        document.getElementById('things-to-consider').innerHTML = "";
+        document.getElementById('things-to-consider-header').innerHTML = "";
+        document.getElementById('level-1').innerHTML  = "";
+        document.getElementById('level-1-header').innerHTML = "";
+        document.getElementById('level-2').innerHTML =  "";
+        document.getElementById('level-2-header').innerHTML = "";
+        document.getElementById('level-3').innerHTML = "";
+        document.getElementById('level-3-header').innerHTML = "";
+        document.getElementById('level-4').innerHTML = "";
+        document.getElementById('level-4-header').innerHTML = "";
+        document.getElementById('references').innerHTML ="";
+        document.getElementById('references-header').innerHTML ="";
 
+        document.getElementById('main-graph').innerHTML ="";
 
-
-      document.title = translate("The Global Calculator") + " | " + translate("Lever") + " " + translate(tts[1]);
-      document.getElementById('title').innerHTML = "<h1>" + translate(tts[1]) + "</h1>";
-      document.getElementById('lever-controls').innerHTML = translate(tts[2]);
-      if (tts[3] != null) document.getElementById('context').innerHTML = translate(tts[3]).replace(/\r/g, "<br>"); 
-      document.getElementById('things-to-consider').innerHTML = translate(things_to_consider).replace(/\r/g, "<br>"); 
-      document.getElementById('level-1').innerHTML = translate(tts[5]);
-      document.getElementById('level-2').innerHTML = translate(tts[6]);
-      document.getElementById('level-3').innerHTML = translate(tts[7]);
-      document.getElementById('level-4').innerHTML = translate(tts[8]);
-      if (tts[9] != null) document.getElementById('references').innerHTML = translate(tts[9]).replace(/\r/g, "<br>"); 
-
-      createGraphs(leverID);
+        var tbl = document.getElementById('main-lever-graph-table'); // table reference
+        var lastRow = tbl.rows.length - 1;             // set the last row index
+        for (var i = lastRow; i >= 0; i--) {
+           tbl.deleteRow(i);
+        }
+        deleteRows();
     }
+    // Atmospheric CO2 fraction
+    else if (leverID == 50) {
+        document.title = translate("The Global Calculator") + " | " + translate("Lever") + " " + translate(tts[1]);
+        document.getElementById('title').innerHTML = "<h1>Sorry - there is no one pager for lever '" +  " " + translate(tts[1]) + "'</h1>";
+        document.getElementById('lever-controls').innerHTML = "";
+        document.getElementById('context').innerHTML = "";
+        document.getElementById('context-header').innerHTML = "";
+        document.getElementById('things-to-consider').innerHTML = "";
+        document.getElementById('things-to-consider-header').innerHTML = "";
+        document.getElementById('level-1').innerHTML  = "";
+        document.getElementById('level-1-header').innerHTML = "";
+        document.getElementById('level-2').innerHTML =  "";
+        document.getElementById('level-2-header').innerHTML = "";
+        document.getElementById('level-3').innerHTML = "";
+        document.getElementById('level-3-header').innerHTML = "";
+        document.getElementById('level-4').innerHTML = "";
+        document.getElementById('level-4-header').innerHTML = "";
+        document.getElementById('references').innerHTML ="";
+        document.getElementById('references-header').innerHTML ="";
+
+        document.getElementById('main-graph').innerHTML ="";
+
+        var tbl = document.getElementById('main-lever-graph-table'); // table reference
+        var lastRow = tbl.rows.length - 1;             // set the last row index
+        for (var i = lastRow; i >= 0; i--) {
+           tbl.deleteRow(i);
+        }
+        deleteRows();
+    }
+    // Confidence in climate models
+    else if (leverID == 51) {
+        document.title = translate("The Global Calculator") + " | " + translate("Lever") + " " + translate(tts[1]);
+        document.getElementById('title').innerHTML = "<h1>" + translate(tts[1]) + "</h1>";
+        document.getElementById('lever-controls').innerHTML = translate(tts[2]);
+        document.getElementById('context').innerHTML = "";
+        document.getElementById('context-header').innerHTML = "";
+        document.getElementById('things-to-consider').innerHTML = "";
+        document.getElementById('things-to-consider-header').innerHTML = "";
+        document.getElementById('level-1').innerHTML = translate(tts[5]);
+        document.getElementById('level-2').innerHTML = translate(tts[6]);
+        document.getElementById('level-3').innerHTML = "";
+        document.getElementById('level-3-header').innerHTML = "";
+        document.getElementById('level-4').innerHTML = "";
+        document.getElementById('level-4-header').innerHTML = "";
+        document.getElementById('references').innerHTML ="";
+        document.getElementById('references-header').innerHTML ="";
+
+        document.getElementById('main-graph').innerHTML ="";
+
+        var tbl = document.getElementById('main-lever-graph-table'); // table reference
+        var lastRow = tbl.rows.length - 1;             // set the last row index
+        for (var i = lastRow; i >= 0; i--) {
+           tbl.deleteRow(i);
+        }
+        deleteRows();
+    }
+
+
+    else {
+        document.title = translate("The Global Calculator") + " | " + translate("Lever") + " " + translate(tts[1]);
+        document.getElementById('title').innerHTML = "<h1>" + translate(tts[1]) + "</h1>";
+        document.getElementById('lever-controls').innerHTML = translate(tts[2]);
+        if (tts[3] != null) document.getElementById('context').innerHTML = translate(tts[3]).replace(/\r/g, "<br>"); 
+        document.getElementById('things-to-consider').innerHTML = translate(things_to_consider).replace(/\r/g, "<br>"); 
+        document.getElementById('level-1').innerHTML = translate(tts[5]);
+        document.getElementById('level-2').innerHTML = translate(tts[6]);
+        document.getElementById('level-3').innerHTML = translate(tts[7]);
+        document.getElementById('level-4').innerHTML = translate(tts[8]);
+        if (tts[9] != null) document.getElementById('references').innerHTML = translate(tts[9]).replace(/\r/g, "<br>"); 
+        else {
+          document.getElementById('references').innerHTML ="";
+          document.getElementById('references-header').innerHTML ="";
+       }
+       createGraphs(leverID);
+    }
+  }
 }
 /*
 function getIdFromUrl () {
@@ -220,9 +308,11 @@ function createContainer (divIDs) {
   if (divIDs.length > 2)
     for (var i=0; i<divIDs.length; i++)
       document.getElementById(divIDs[i]).setAttribute("style", "width: 350px; height:350px");
-  else
+  else if (divIDs.length == 2)
     for (var i=0; i<divIDs.length; i++)
-      document.getElementById(divIDs[i]).setAttribute("style", "width: 450px; height:450px");
+      document.getElementById(divIDs[i]).setAttribute("style", "width: 500px; height:400px");
+  else
+    document.getElementById(divIDs[0]).setAttribute("style", "width: 700px; height:400px");
 
 }
 function appendRow(divIDs) {
@@ -380,7 +470,7 @@ function createGraphs (leverID) {
   // ----------------------------------------------------------------------------------------
   else if (leverID == 6) {
 
-    initLineGraph ('main-graph', 'Average urban car occupancy', 'passengers per vehicle',      0, 2.5, 0.25, leverGraphData["g_1pager_occupancies_urbanpassengercar"], 1);
+    initLineGraph ('main-graph', 'Average urban car occupancy (passengers per vehicle)', 'passengers per vehicle',      0, 2.5, 0.25, leverGraphData["g_1pager_occupancies_urbanpassengercar"], 1);
 
     var tdata = [];
     tdata[0] = getDataRow ("Average urban car occupancy (passengers per vehicle)", 
@@ -393,7 +483,7 @@ function createGraphs (leverID) {
 
 
     createContainer(['container_1','container_2', 'container_3']);
-    initLineGraph ('container_1', 'Average rural car occupancy', 'passengers per vehicle',      0, 2.5, 0.25, leverGraphData["g_1pager_occupancies_ruralpassengercar"], 1);
+    initLineGraph ('container_1', 'Average rural car occupancy (passengers per vehicle)', 'passengers per vehicle',      0, 2.5, 0.25, leverGraphData["g_1pager_occupancies_ruralpassengercar"], 1);
     initLineGraph ('container_2', 'Load factor for freight - domestic light truck', 'tonnes per vehicle', 0, 0.35, 0.05, leverGraphData["g_1pager_loadfactor_freight_domestic_light_truck"], 1);
     initLineGraph ('container_3', 'Load factor for freight - international ship', 'tonnes per vehicle',   0, 25000, 2500, leverGraphData["g_1pager_loadfactor_freight_international_ship"], 1);
   }
@@ -411,14 +501,14 @@ function createGraphs (leverID) {
     var d3 = leverGraphData["g_1pager_transport_ownership_km_per_average_car_ice_rural"];
 
     var tdata = [
-      ["Distance travelled by urban average car with internal combustion engine(km/year)", 
+      [translate("Distance travelled by urban average car with internal combustion engine (km/year)"), 
        roundValue0(d1[2][9]), roundValue0(d1[2][17]), roundValue0(d1[3][17]), roundValue0(d1[4][17]), roundValue0(d1[5][17])],
-      ["% increase in urban distance per car (from 2011 levels)", 
-       'baseline', roundValue0( (d2[2][6]-1)*100), roundValue0( (d2[3][6]-1)*100), roundValue0( (d2[4][6]-1)*100), roundValue0( (d2[5][6]-1))*100],
-      ["Distance travelled by rural average car with internal combustion engine (km/year)", 
+      [translate("% increase in urban distance per car (from 2011 levels)"), 
+       translate('baseline'), roundValue0( (d2[2][6]-1)*100), roundValue0( (d2[3][6]-1)*100), roundValue0( (d2[4][6]-1)*100), roundValue0( (d2[5][6]-1))*100],
+      [translate("Distance travelled by rural average car with internal combustion engine (km/year)"), 
        roundValue0(d3[2][9]), roundValue0(d3[2][17]), roundValue0(d3[3][17]), roundValue0(d3[4][17]), roundValue0(d3[5][17])],
-      ["% increase in rural distance per car (from 2011 levels)", 
-       'baseline', roundValue0( (d2[2][12]-1)*100), roundValue0( (d2[3][12]-1)*100), roundValue0( (d2[4][12]-1)*100), roundValue0( (d2[5][12]-1))*100]
+      [translate("% increase in rural distance per car (from 2011 levels)"), 
+       translate('baseline'), roundValue0( (d2[2][12]-1)*100), roundValue0( (d2[3][12]-1)*100), roundValue0( (d2[4][12]-1)*100), roundValue0( (d2[5][12]-1))*100]
     ];
     addTableRows (tdata);
 
@@ -498,7 +588,8 @@ function createGraphs (leverID) {
 
 
     deleteRows();
-    appendRow(['container_1','container_2', 'container_3']);
+    appendRow(['container_1','container_2']);
+    appendRow(['container_3']);
 
     initStackedColumnChart ('container_1', 'Urban buses: % of each type',     
                             '%', 0, 100, 10, leverGraphData["g_1pager_tech_shares_urban_passenger_bus"], 100);
@@ -614,6 +705,7 @@ function createGraphs (leverID) {
 
 
     createContainer(['container_1']);
+    document.getElementById('container_1').setAttribute("style", "width: 700px; height:400px");
     initStackedColumnChart ('container_1', 'Number of each appliance owned by urban households', 
                             'Number of appliances', 0, 12, 1, leverGraphData["g_1pager_appliances_ownership_urban"], 1);
 
@@ -630,7 +722,7 @@ function createGraphs (leverID) {
 */
 
 
-    initLineGraph ('main-graph', 'Rate of heat loss from urban homes', 
+    initLineGraph ('main-graph', 'Rate of heat loss for urban homes GW/(M ha*℃)', 
                    '(GW / M ha ⁰C)', 0, 20, 2, leverGraphData["g_1pager_house_insulation_urban"], 1);
 
     var tdata = [];
@@ -645,7 +737,7 @@ function createGraphs (leverID) {
 
 
     createContainer(['container_1']);
-    initLineGraph ('container_1', 'Rate of heat loss from rural homes', 
+    initLineGraph ('container_1', 'Rate of heat loss for rural homes GW/(M ha*℃)', 
                    '(GW / M ha ⁰C)', 0, 20, 2, leverGraphData["g_1pager_house_insulation_rural"], 1);
   }
   // ----------------------------------------------------------------------------------------
@@ -663,7 +755,7 @@ function createGraphs (leverID) {
 
 */
 
-    initLineGraph ('main-graph', '% of urban space heating technologies that are low-carbon (solar and heat pumps)', 
+	    initLineGraph ('main-graph', '% of urban space heating technologies that are low-carbon (solar and heat pumps)', 
                    '%', 0, 70, 10, leverGraphData["g_1pager_heating_technology_urban_percent_solar_or_heatpump"], 100);
 
 
@@ -684,7 +776,18 @@ function createGraphs (leverID) {
     document.getElementById('table-footnote').innerHTML = translate("For urban residential buildings");
 
 
-    createContainer(['container_1', 'container_2', 'container_3']);
+//    createContainer(['container_1', 'container_2', 'container_3']);
+
+    deleteRows();
+    appendRow(['container_1']);
+    appendRow(['container_2']);
+    appendRow(['container_3']);  
+
+    document.getElementById('container_1').setAttribute("style", "width: 700px; height:400px");
+    document.getElementById('container_2').setAttribute("style", "width: 700px; height:400px");
+    document.getElementById('container_3').setAttribute("style", "width: 700px; height:400px");
+
+
     initStackedColumnChart ('container_1', 'Technologies used for urban heating', 
                             'Contribution from each technology (%)', 0, 100, 10, leverGraphData["g_1pager_heating_technology_urban"], 100);
     initStackedColumnChart ('container_2', 'Technologies used for urban cooling', 
@@ -729,8 +832,6 @@ function createGraphs (leverID) {
 /*
     x["g_1pager_g30_lifespan_urbancarice"]	= r("g_1pager_g30_lifespan_urbancarice");
     x["g_1pager_g30_lifespan_urbantv"]		= r("g_1pager_g30_lifespan_urbantv");
-
-
 */
 
     initLineGraph ('main-graph', 'Global average lifespan of urban 4-wheeled car with internal combustion engine', 
@@ -745,7 +846,7 @@ function createGraphs (leverID) {
     addTableRows (tdata);
 
 
-    createContainer(['container_1','container_2']);
+    createContainer(['container_1']);
     initLineGraph ('container_1', 'Global average lifespan of urban TVs', 
                    'years', 0, 18, 2, leverGraphData["g_1pager_g30_lifespan_urbantv"], 1);
   }
@@ -1544,12 +1645,12 @@ function createGraphs (leverID) {
     var d4 = leverGraphData["g_1pager_landuse_all"];
 
     var tdata = [
-      ["% of surplus land allocated to forest", 
-       'baseline', roundValue0(d4[2][1]*100), roundValue0(d4[3][1]*100), roundValue0(d4[4][1]*100), roundValue0(d4[5][1]*100)],
-      ["% of surplus land allocated to grassland", 
-       'baseline', roundValue0(d4[2][3]*100), roundValue0(d4[3][3]*100), roundValue0(d4[4][3]*100), roundValue0(d4[5][3]*100)],
-      ["% of surplus land allocated to bioenergy crops", 
-       'baseline', roundValue0(d4[2][2]*100), roundValue0(d4[3][2]*100), roundValue0(d4[4][2]*100), roundValue0(d4[5][2]*100)]
+      [translate ("% of surplus land allocated to forest"), 
+       translate ('baseline'), roundValue0(d4[2][1]*100), roundValue0(d4[3][1]*100), roundValue0(d4[4][1]*100), roundValue0(d4[5][1]*100)],
+      [translate ("% of surplus land allocated to grassland"), 
+       translate ('baseline'), roundValue0(d4[2][3]*100), roundValue0(d4[3][3]*100), roundValue0(d4[4][3]*100), roundValue0(d4[5][3]*100)],
+      [translate ("% of surplus land allocated to bioenergy crops"), 
+       translate ('baseline'), roundValue0(d4[2][2]*100), roundValue0(d4[3][2]*100), roundValue0(d4[4][2]*100), roundValue0(d4[5][2]*100)]
     ];
     addTableRows (tdata);
 
@@ -1754,7 +1855,7 @@ function getDataRow (label, rowIDs, colIDs, data, scaleFactor, roundPrecision) {
   <td rowspan="2" width="30px">  
   <td align="center" valign="center" width="400" height="300">
 
-  <table border=1 id = "main-table" align="center" style="border-collapse: collapse;    border: 1px solid #98bf21;"}
+  <table border=1 id = "main-table" align="center" style="border-collapse: collapse;    border: 1px solid #98bf21;">
   <tr>
   <td>  
   <td align="center" valign="center"><b>2011</b>
@@ -1789,13 +1890,13 @@ function getDataRow (label, rowIDs, colIDs, data, scaleFactor, roundPrecision) {
 <td colspan="3">
 <hr size="1" color="lightgray" noshade="noshade">
 
-<h2 class='translate'>Context</h2>
+<h2 id="context-header" class='translate'>Context</h2>
 <div id="context">...</div>
 <br><br>
 <tr>
 <td colspan="3">
 
-<h2 class='translate'>Things to consider</h2>
+<h2 id="things-to-consider-header" class='translate'>Things to consider</h2>
 <div id="things-to-consider">...</div>
 
 <tr>
@@ -1816,12 +1917,12 @@ function getDataRow (label, rowIDs, colIDs, data, scaleFactor, roundPrecision) {
 <tr>
 <td width=400 valign="top">
 
-<h2 class='translate'>Level 1</h2>
+<h2 id="level-1-header" class='translate'>Level 1</h2>
 <div id="level-1">...</div>
 
 <br><br>
 
-<h2 class='translate'>Level 2</h2>
+<h2 id="level-2-header" class='translate'>Level 2</h2>
 <div id="level-2">...</div>
 
 
@@ -1829,12 +1930,12 @@ function getDataRow (label, rowIDs, colIDs, data, scaleFactor, roundPrecision) {
 
 <td width=400 valign="top">
 
-<h2 class='translate'>Level 3</h2>
+<h2 id="level-3-header" class='translate'>Level 3</h2>
 <div id="level-3">...</div>
 
 <br><br>
 
-<h2 class='translate'>Level 4</h2>
+<h2 id="level-4-header" class='translate'>Level 4</h2>
 <div id="level-4">...</div>
 
 
@@ -1843,7 +1944,7 @@ function getDataRow (label, rowIDs, colIDs, data, scaleFactor, roundPrecision) {
 <tr>
 <td colspan="3" valign="top">
 
-<h2 class='translate'>References</h2>
+<h2 id="references-header" class='translate'>References</h2>
 <div id="references">...</div>
 <tr>
 <td colspan="3">

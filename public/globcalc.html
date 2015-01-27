@@ -625,6 +625,7 @@ function updateTempMapAnimation () {
 
   if ( minTemp == "Extreme warming – beyond the level assessed by the IPCC" || maxTemp == "Extreme warming – beyond the level assessed by the IPCC") {
     document.getElementById("map-container").src = "gc-map-animation.html?id=temp_message_over8000GtCO2.png";
+    animInfoPopupUrl = "no-anim-info.html";
   }
   else {
     minTemp = roundValue (minTemp);
@@ -652,6 +653,10 @@ function updateTempMapAnimation () {
     else {
       document.getElementById("map-container").src = "gc-map-animation.html?id=" + id;
     } 
+
+    animInfoPopupUrl = "/anim-infos/anim-info-" + t1 + "-" + t2 + ".html";
+
+
   }
 }
 
@@ -662,6 +667,7 @@ function updatePrecipMapAnimation () {
 
   if ( minTemp == "Extreme warming – beyond the level assessed by the IPCC" || maxTemp == "Extreme warming – beyond the level assessed by the IPCC") {
     document.getElementById("map-container").src = "gc-map-animation.html?id=temp_message_over8000GtCO2.png";
+    animInfoPopupUrl = "no-anim-info.html";
   }
   else {
     minTemp = roundValue (minTemp);
@@ -689,6 +695,7 @@ function updatePrecipMapAnimation () {
     else {
       document.getElementById("map-container").src = "gc-map-animation.html?id=" + id;
     } 
+    animInfoPopupUrl = "/anim-infos/anim-info-" + t1 + "-" + t2 + ".html";
   }
 }
 function getImgIdForOA (cumEmiss) {
@@ -719,6 +726,9 @@ function updateOAMapAnimation () {
 
   var minTemp = ds["dashboard"]["temperature change Low"][1];
   var maxTemp = ds["dashboard"]["temperature change High"][1]
+
+   animInfoPopupUrl = "no-oa-anim-info.html";
+
 
   if ( minTemp == "Extreme warming – beyond the level assessed by the IPCC" || maxTemp == "Extreme warming – beyond the level assessed by the IPCC") {
     document.getElementById("map-container").src = "gc-map-animation.html?id=temp_message_over8000GtCO2.png";
@@ -801,6 +811,21 @@ function switchOpenCloseIcon (id) {
   }
 }
 
+
+  var animInfoPopup;
+  var animInfoPopupUrl;
+
+  function hideAnimInfoPopup () {
+    animInfoPopup.close()
+    return false;
+  }
+
+  function popupAnimInfo () {
+//    alert (animInfoPopupUrl);
+    animInfoPopup = window.open(animInfoPopupUrl, "animInfoPopup", "width=900,height=600,resizable=yes, scrollbars=yes");
+    animInfoPopup.focus();
+    return false;
+  }
 
 
   var sankeyPopup;
@@ -1308,6 +1333,7 @@ function initUI () {
    for (var i=1; i<=6; i++)
      translateTitleAttribute('mn-' + i);
 
+
    translateTitleAttribute ("mp-nav-home");
    translateTitleAttribute ("mp-nav-compare");
    translateTitleAttribute ("mp-nav-share");
@@ -1390,14 +1416,38 @@ function initUI () {
 
 
 
+
+   document.getElementById("rcp-85-1").title = translate("September Arctic sea ice extent reduced by 94% by 2100") + translate("(WG1 SPM p22)");
+   document.getElementById("rcp-85-2").title = translate("Sea level rise of 45-82cm over the 21st century, with the possibility of extra tens of centimetres if the West Antarctic Ice Sheet collapses. Sea level will continue to rise beyond 2100 by around 7 metres over the next millennium, due to the near-complete loss of the Greenland Ice Sheet") + translate("(WG1 SPM p23 and 27)");
+   document.getElementById("rcp-85-3").title = translate("Some low-lying developing countries and small island states are expected to face very high impacts that, in some cases, could have associated damage and adaptation costs of several percentage points of GDP") + translate("(WG2 SPM p16)");
+   document.getElementById("rcp-85-4").title = translate("Many species will be unable to track suitable climates due to the high rate of climate change during the 21st century, posing an extinction risk") + translate("(WG2 SPM p15)");
+   document.getElementById("rcp-85-5").title = translate("Global temperature increases, combined with increasing food demand, pose large risks to food security globally and regionally. Risks to food security are generally greater in low-latitude areas") + translate("(WG2 SPM p18)");
+   document.getElementById("rcp-85-6").title = translate("By 2100, the combination of high temperature and humidity in some areas for parts of the year is projected to compromise normal human activities, including growing food or working outdoors") + translate("(WG2 SPM p20)");
+   document.getElementById("rcp-85-7").title = translate("Extra release of methane due to thawing permafrost: poorly understood but may add 200-900GtCO2 to the atmosphere, making all impacts worse ") + translate("(WG1 SPM p25)");
+   document.getElementById("rcp-85-8").title = translate("Forest dieback due to increased temperature and drought may cause additional release of CO2, adding an unknown amount of additional CO2 to the atmosphere, making all impacts worse") + translate("(WG2 SPM p15)");
+
+
+   document.getElementById("rcp-60-1").title = translate("Sea level rise of 33-63cm over the 21st century, continuing to rise beyond 2100") + translate("(WG1 SPM p23)");
+   document.getElementById("rcp-60-2").title = translate("High risk of abrupt and irreversible regional-scale change in the composition, structure, and function of terrestrial and freshwater ecosystems, including wetlands") + translate("(WG2 SPM p15)");
+   document.getElementById("rcp-60-3").title = translate("Many species will be unable to track suitable climates due to the rate of climate change during the 21st century, posing an extinction risk") + translate("(WG2 SPM p15)");
+   document.getElementById("rcp-60-4").title = translate("Ocean acidification poses substantial risks to marine ecosystems, especially polar ecosystems and coral reefs") + translate("(WG2 SPM p17)");
+
+   document.getElementById("rcp-26-1").title = translate("September Arctic sea ice extent reduced by 43% by 2100") + translate("(WG1 SPM p22)");
+   document.getElementById("rcp-26-2").title = translate("Species richness and fisheries catch potential are projected to increase, on average, at mid and high latitudes and decrease at tropical latitudes") + translate("(WG2 SPM p17)");
+
+
    document.getElementById("less-map-info-link").title = translate("map animations will hide information on RCP and timeframe");
    document.getElementById("more-map-info-link").title = translate("map animations will show on each frame also information on RCP and timeframe");
+
+   for (var i=1; i<=15; i++)
+     document.getElementById("ml-open-close-link-" + i).title = translate("Click to show / hide the sub-levers");
+
 
 
   document.getElementById("language-link-ar").title = translate("switch language to Arabic") + " " + translate("(coming soon)");
   document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " " + translate("(coming soon)");
-  document.getElementById("language-link-ch").title = translate("switch language to Chinese");
-  document.getElementById("language-link-en").title = translate("switch language to English");
+  // document.getElementById("language-link-ch").title = translate("switch language to Chinese");
+  // document.getElementById("language-link-en").title = translate("switch language to English");
   document.getElementById("language-link-fr").title = translate("switch language to French") + " " + translate("(coming soon)");
   document.getElementById("language-link-hi").title = translate("switch language to Hindi") + " " + translate("(coming soon)");
   document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " " + translate("(coming soon)");
@@ -1878,10 +1928,10 @@ function displayLeverStatus () {
   for (var i=0; i<NUM_LEVERS; i++)
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
-  var urlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  var urlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
   document.getElementById("gc-link").innerHTML  = "<font color='orange'><a href=\"" + urlStr + "\">" + urlStr + "</a></font>";
 
-  var langUrlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
+  var langUrlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
 
   updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);
@@ -2938,7 +2988,10 @@ function updateResultDisplay () {
     // alert ("no data available");
     return;
   }
-  if (sankeyPopup != null) hideSankeyPopup();
+  if (sankeyPopup   != null) hideSankeyPopup();
+  if (animInfoPopup != null) hideAnimInfoPopup ();
+
+
 
   if (hasLandUseWarning()) {
     // alert ("hasLandUseWarning() = "  + hasLandUseWarning());
@@ -4045,8 +4098,9 @@ legend {    color: #ddd; }
 
         <a class='translate unselectedNavItem' id="language-link-ar" href="" onclick="return false;" title="switch language to Arabic (coming soon)">Ar</a>&nbsp;|&nbsp;
         <a class='translate unselectedNavItem' id="language-link-ba" href="" onclick="return false;" title="switch language to Bahasa (coming soon)">Ba</a>&nbsp;|&nbsp;
-        <a class='translate unselectedNavItem' id="language-link-ch" href="" title="switch language to Chinese">Ch</a>&nbsp;|&nbsp;
-        <a class='translate unselectedNavItem' id="language-link-en" href="" title="switch language to English">En</a>&nbsp;|&nbsp;
+        <a unselectedNavItem' id="language-link-ch" href="" title="转换到中文">中文</a>&nbsp;|&nbsp;
+        <a unselectedNavItem' id="language-link-en" href="" title="switch language to English">En</a>&nbsp;|&nbsp;
+
         <a class='translate unselectedNavItem' id="language-link-fr" href="" onclick="return false;" title="switch language to French (coming soon)">Fr</a>&nbsp;|&nbsp;
         <a class='translate unselectedNavItem' id="language-link-hi" href="" onclick="return false;" title="switch language to Hindi (coming soon)">Hi</a>&nbsp;|&nbsp;
         <a class='translate unselectedNavItem' id="language-link-po" href="" onclick="return false;"title="switch language to Portuguese (coming soon)">Po</a>&nbsp;|&nbsp;
@@ -4596,30 +4650,56 @@ legend {    color: #ddd; }
               <table border=0>
                 <tr><td>
                   <div id="container_cc_impacts_details" style="position:relative; width: 460px; height: 310px;" usemap= "#mymap">
-                    <img name="rcp" src="imgs/rcp-img.gif" usemap= "#mymap-en" border="0">
+<!--
+                    <img name="rcp" src="imgs/rcp-img-2.gif" usemap= "#mymap-en" border="0">
+-->
                     <map name="mymap-en">
 
-                        <area shape="rect" coords="110, 85, 141, 119" href="http://www.ipcc.ch/report/ar5/wg1/" target="_blank" title="September Arctic sea ice extent reduced by 94% by 2100 &#013; (WG1 SPM p22)">
-                        <area shape="rect" coords="150, 85, 181, 119" href="http://www.ipcc.ch/report/ar5/wg1/" target="_blank" title="Sea level rise of 45-82cm over the 21st century, with the possibility of extra tens of centimetres if the West Antarctic Ice Sheet collapses. Sea level will continue to rise beyond 2100 by around 7 metres over the next millennium, due to the near-complete loss of the Greenland Ice Sheet &#013; (WG1 SPM p23 and 27)">
-                        <area shape="rect" coords="190, 85, 221, 119" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Some low-lying developing countries and small island states are expected to face very high impacts that, in some cases, could have associated damage and adaptation costs of several percentage points of GDP &#013; (WG2 SPM p16)">
-                        <area shape="rect" coords="230, 85, 261, 119" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Many species will be unable to track suitable climates due to the high rate of climate change during the 21st century, posing an extinction risk &#013; (WG2 SPM p15)">
-                        <area shape="rect" coords="270, 85, 301, 119" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Global temperature increases, combined with increasing food demand, pose large risks to food security globally and regionally. Risks to food security are generally greater in low-latitude areas &#013; (WG2 SPM p18)">
-                        <area shape="rect" coords="310, 85, 341, 119" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="By 2100, the combination of high temperature and humidity in some areas for parts of the year is projected to compromise normal human activities, including growing food or working outdoors &#013;(WG2 SPM p20)">
-                        <area shape="rect" coords="350, 85, 381, 119" href="http://www.ipcc.ch/report/ar5/wg1/" target="_blank" title="Extra release of methane due to thawing permafrost: poorly understood but may add 200-900GtCO2 to the atmosphere, making all impacts worse &#013; (WG1 SPM p25)">
-                        <area shape="rect" coords="390, 85, 421, 119" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Forest dieback due to increased temperature and drought may cause additional release of CO2, adding an unknown amount of additional CO2 to the atmosphere, making all impacts worse &#013; (WG2 SPM p15)">
+                        <area id="rcp-85-1" shape="rect" coords="110, 85, 142, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SPM_FINAL.pdf" target="_blank" 
+                         title="September Arctic sea ice extent reduced by 94% by 2100 &#013; (WG1 SPM p22)">
+                        <area id="rcp-85-2" shape="rect" coords="150, 85, 182, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SPM_FINAL.pdf" target="_blank" 
+                         title="Sea level rise of 45-82cm over the 21st century, with the possibility of extra tens of centimetres if the West Antarctic Ice Sheet collapses. Sea level will continue to rise beyond 2100 by around 7 metres over the next millennium, due to the near-complete loss of the Greenland Ice Sheet &#013; (WG1 SPM p23 and 27)">
+                        <area id="rcp-85-3" shape="rect" coords="190, 85, 222, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="Some low-lying developing countries and small island states are expected to face very high impacts that, in some cases, could have associated damage and adaptation costs of several percentage points of GDP &#013; (WG2 SPM p16)">
+                        <area id="rcp-85-4" shape="rect" coords="230, 85, 262, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="Many species will be unable to track suitable climates due to the high rate of climate change during the 21st century, posing an extinction risk &#013; (WG2 SPM p15)">
+                        <area id="rcp-85-5" shape="rect" coords="270, 85, 302, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="Global temperature increases, combined with increasing food demand, pose large risks to food security globally and regionally. Risks to food security are generally greater in low-latitude areas &#013; (WG2 SPM p18)">
+                        <area id="rcp-85-6" shape="rect" coords="310, 85, 342, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="By 2100, the combination of high temperature and humidity in some areas for parts of the year is projected to compromise normal human activities, including growing food or working outdoors &#013;(WG2 SPM p20)">
+                        <area id="rcp-85-7" shape="rect" coords="350, 85, 381, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SPM_FINAL.pdf" target="_blank" 
+                         title="Extra release of methane due to thawing permafrost: poorly understood but may add 200-900GtCO2 to the atmosphere, making all impacts worse &#013; (WG1 SPM p25)">
+                        <area id="rcp-85-8" shape="rect" coords="390, 85, 422, 117" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="Forest dieback due to increased temperature and drought may cause additional release of CO2, adding an unknown amount of additional CO2 to the atmosphere, making all impacts worse &#013; (WG2 SPM p15)">
 
 
+                        <area id="rcp-60-1" shape="rect" coords="110, 144, 142, 176" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SPM_FINAL.pdf" target="_blank" 
+                         title="Sea level rise of 33-63cm over the 21st century, continuing to rise beyond 2100 &#013; (WG1 SPM p23)">
+                        <area id="rcp-60-2" shape="rect" coords="150, 144, 182, 176" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="High risk of abrupt and irreversible regional-scale change in the composition, structure, and function of terrestrial and freshwater ecosystems, including wetlands &#013; (WG2 SPM p15)">
+                        <area id="rcp-60-3" shape="rect" coords="190, 144, 222, 176" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="Many species will be unable to track suitable climates due to the rate of climate change during the 21st century, posing an extinction risk &#013; (WG2 SPM p15)">
+                        <area id="rcp-60-4" shape="rect" coords="230, 144, 262, 176" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" title="Ocean acidification poses substantial risks to marine ecosystems, especially polar ecosystems and coral reefs &#013; (WG2 SPM p17)">
 
 
-                        <area shape="rect" coords="110, 144, 141, 178" href="http://www.ipcc.ch/report/ar5/wg1/" target="_blank" title="Sea level rise of 33-63cm over the 21st century, continuing to rise beyond 2100 &#013; (WG1 SPM p23)">
-                        <area shape="rect" coords="150, 144, 181, 178" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="High risk of abrupt and irreversible regional-scale change in the composition, structure, and function of terrestrial and freshwater ecosystems, including wetlands &#013; (WG2 SPM p15)">
-                        <area shape="rect" coords="190, 144, 221, 178" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Many species will be unable to track suitable climates due to the rate of climate change during the 21st century, posing an extinction risk &#013; (WG2 SPM p15)">
-                        <area shape="rect" coords="230, 144, 261, 178" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Ocean acidification poses substantial risks to marine ecosystems, especially polar ecosystems and coral reefs &#013; (WG2 SPM p17)">
-
-
-                        <area shape="rect" coords="110, 199, 141, 233" href="http://www.ipcc.ch/report/ar5/wg1/" target="_blank" title="September Arctic sea ice extent reduced by 43% by 2100 &#013; (WG1 SPM p22)">
-                        <area shape="rect" coords="150, 199, 181, 233" href="http://www.ipcc.ch/report/ar5/wg2/" target="_blank" title="Species richness and fisheries catch potential are projected to increase, on average, at mid and high latitudes and decrease at tropical latitudes &#013; (WG2 SPM p17)">
-
+                        <area id="rcp-26-1" shape="rect" coords="110, 199, 142, 231" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SPM_FINAL.pdf" target="_blank" 
+                         title="September Arctic sea ice extent reduced by 43% by 2100 &#013; (WG1 SPM p22)">
+                        <area id="rcp-26-2" shape="rect" coords="150, 199, 182, 231" 
+                         href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg2/ar5_wgII_spm_en.pdf" target="_blank" 
+                         title="Species richness and fisheries catch potential are projected to increase, on average, at mid and high latitudes and decrease at tropical latitudes &#013; (WG2 SPM p17)">
 
 
 
@@ -4703,13 +4783,14 @@ Climate change has already had a clear impact on some extreme weather events.  B
 
                 <tr><td height=100%><br><br><br><br>
 <!--
-               <a href="javascript:void(0)" class="tooltip" id="animation-details-link">
+               <a target="_blank" href="" onclick="popupAnimInfo(); return false" class="tooltip" id="animation-details-link">
                 <img border=0 src = 'imgs/info-icon-6.gif'>
                 See animation details
                 <span> <img class="callout" src="imgs/tooltip/callout_black.gif" /><strong>What is shown on each frame?</strong><br /><br />
                 <div>Click for an overview on what model output is displayed on each frame of the current animation.</div></span>
               </a>
 -->
+
                 <tr><td height=100%><br><br><br><br>
 
 
@@ -6072,7 +6153,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                   <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-1-tt-4"></div></span></a></td>
 -->
                 <td width="25px" valign="center" align=right>
-                <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-1" 
+                <a id="ml-open-close-link-1" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-1" 
                   src="imgs/open.gif"></a>
               </table>
               </h3>
@@ -6125,7 +6206,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                   <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-2-tt-4"></div></span></a></td>
 -->
                 <td width="25px" valign="center" align=right>
-                <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-2" 
+                <a id="ml-open-close-link-2" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-2" 
                   src="imgs/open.gif"></a>
               </table>
               </h3>
@@ -6178,7 +6259,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                   <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-3-tt-4"></div></span></a></td>
 -->
                <td width="25px" valign="center" align=right>
-               <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-3" 
+               <a id="ml-open-close-link-3" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-3" 
                  src="imgs/open.gif"></a>
               </table>
               </h3>
@@ -6267,7 +6348,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-4-tt-4"></div></span></a></td>
 -->    
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-4" 
+                  <a id="ml-open-close-link-4" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-4" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6319,7 +6400,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-5-tt-4"></div></span></a></td>
 -->
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-5" 
+                  <a id="ml-open-close-link-5" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-5" 
                    src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6372,7 +6453,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-6-tt-4"></div></span></a></td>
 -->
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-6" 
+                  <a id="ml-open-close-link-6" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-6" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6425,7 +6506,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-7-tt-4"></div></span></a></td>
 -->
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-7" 
+                  <a id="ml-open-close-link-7" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-7" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6493,7 +6574,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-15-tt-4"></div></span></a></td>
 -->
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-15" 
+                  <a id="ml-open-close-link-15" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-15" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6545,7 +6626,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-8-tt-4"></div></span></a></td>
 -->
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-8" 
+                  <a id="ml-open-close-link-8" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-8" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6598,7 +6679,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-9-tt-4"></div></span></a></td>
 -->
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-9" 
+                  <a id="ml-open-close-link-9" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-9" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6650,7 +6731,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                     <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-10-tt-4"></div></span></a></td>
 -->    
                   <td width="25px" valign="center" align=right>
-                  <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-10" 
+                  <a id="ml-open-close-link-10" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-10" 
                     src="imgs/open.gif"></a>
                 </table>
                 </h3>
@@ -6728,7 +6809,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                   <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-11-tt-4"></div></span></a></td>
 -->
                 <td width="25px" valign="center" align=right>
-                <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-11" 
+                <a id="ml-open-close-link-11" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-11" 
                   src="imgs/open.gif"></a>
               </table>
               </h3>
@@ -6781,7 +6862,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
 -->
 
                 <td width="25px" valign="center" align=right>
-                <a href="" return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-12"
+                <a id="ml-open-close-link-12" href="" return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-12"
                   src="imgs/open.gif"></a>
               </table>
               </h3>
@@ -6851,7 +6932,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
 
                 <td class="mw"><div id="master-lever-13-4" style="position:relative;height:22px;width:20px"></div></td>
                 <td width="25px" valign="center" align=right>
-                <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-13" 
+                <a id="ml-open-close-link-13" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-13" 
                   src="imgs/open.gif"></a>
               </table>
               </h3>
@@ -6905,7 +6986,7 @@ Climate change has already had a clear impact on some extreme weather events.  B
                   <span><img class="callout" src="imgs/tooltip/callout_black.gif"><div id="master-lever-14-tt-4"></div></span></a></td>
 -->
                 <td width="25px" valign="center" align=right>
-                <a href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-14" 
+                <a id="ml-open-close-link-14" href="" onclick="return false" title="show / hide the sub-levers for this section"><img border="0" id="ml-open-close-icon-14" 
                   src="imgs/open.gif"></a>
               </table>
               </h3>

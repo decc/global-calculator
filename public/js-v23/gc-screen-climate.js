@@ -40,7 +40,7 @@ function handleClimate2ndLevelNavigation (activeId) {
   else if (activeId==2) {
     createNavTableHeader (tableID);
     createSubNavItemRow (tableID, 'climate-impacts-subnav', humanImpactsSubNavID,  1, translate ('Summary impacts'));
-    createSubNavItemRow (tableID, 'climate-impacts-subnav', humanImpactsSubNavID,  2, translate ('Detailed impacts'));
+  //  createSubNavItemRow (tableID, 'climate-impacts-subnav', humanImpactsSubNavID,  2, translate ('Detailed impacts'));
     createSubNavItemRow (tableID, 'climate-impacts-subnav', humanImpactsSubNavID,  3, translate ('Extreme weather'));
 
     document.getElementById(tableID).setAttribute("style", "width:180px");
@@ -131,8 +131,10 @@ function handleHumanImpactsSubnavigation (id) {
   humanImpactsSubNavID = id;
 
   for ( var i=1; i<=3; i++)
-    if (i==id) document.getElementById('climate-impacts-subnav-' + i).className = 'selectedNavItem';
-    else       document.getElementById('climate-impacts-subnav-' + i).className = 'unselectedNavItem';
+    if (i!=2) {
+      if (i==id) document.getElementById('climate-impacts-subnav-' + i).className = 'selectedNavItem';
+      else       document.getElementById('climate-impacts-subnav-' + i).className = 'unselectedNavItem';
+    }
 
   // ----------------------------------------------------------------- 
   // hide all climate related containers
@@ -162,7 +164,7 @@ function handleHumanImpactsSubnavigation (id) {
     document.getElementById("cc-temp-info").className = 'tabContent hide';
     contentDivs["climate-impacts-details"].className 	= 'tabContent';
 
-    //drawRcpImg ();
+    drawRcpImg ();
 
   }
   // ------------------------------------------------------------------ 

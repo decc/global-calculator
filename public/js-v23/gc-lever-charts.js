@@ -353,7 +353,7 @@ function createLineGraphHistoric (containerID, title, unitName, yMin, yMax, ytic
       name: translate('Level 3'),
       data: [ [2011, 0], [2015, 0], [2020, 0], [2025, 0], [2030, 0], [2035, 0], [2040, 0], [2045, 0], [2050, 0] ]
     }, {
-      name: translate('Historic'),
+      name: translate('Observed'),
       color: "orange",
       data: [ [1975, 0], [1980, 0], [1985, 0], [1990, 0], [1995, 0], [2000, 0], [2005, 0], [2010, 0], [2011, 0] ]
     }
