@@ -2,6 +2,20 @@ require_relative './model/global_2050_model'
 require 'sinatra'
 require 'json/pure'
 
+# If we are running in production mode, then we allow browsers
+# and caches to store items from here for an hour
+MAX_TIME_TO_ALLOW_CACHING = 60 * 60
+
+if settings.production?
+  # This normally doesn't work, because files served directly from public
+  # without hitting this server first
+  set :static_cache_control, [:public, :max_age => MAX_TIME_TO_ALLOW_CACHING]
+
+  after do
+    expires MAX_TIME_TO_ALLOW_CACHING, :public
+  end
+end
+
 # --------------------------------------------------------
 # cache the cfps for quick access v22
 # --------------------------------------------------------
@@ -42,6 +56,7 @@ end
 # send cfps from cache
 # --------------------------------------------------------
 get '/cfps_v22' do
+  last_modified Global2050Model.last_modified_date if settings.production? # Don't bother recalculating unless the model has changed
   Cache::cfps().to_json
 end
 
@@ -162,6 +177,8 @@ end
 # data plus setup server for prototype 22
 # --------------------------------------------------------
 get '/serve_plus_setup_v22/:parameterstring' do
+  last_modified Global2050Model.last_modified_date if settings.production?# Don't bother recalculating unless the model has changed
+
   #puts "---- start get -------------"
   s = params[:parameterstring]
 
@@ -185,6 +202,8 @@ end
 # data server for prototype 22
 # --------------------------------------------------------
 get '/serve_v22/:parameterstring' do
+  last_modified Global2050Model.last_modified_date if settings.production? # Don't bother recalculating unless the model has changed
+  
   #puts "---- start get -------------"
   s = params[:parameterstring]
 
