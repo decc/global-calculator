@@ -40,7 +40,7 @@ The bundle step should install all the dependencies. If it fails it may ask you 
 
 The bundle exec Rake step compiles the C version of the model. This can take tens of minutes, and requires plenty of memory.
 
-You should now be able to browse to http://0.0.0.0:9292 and see the local copy running.
+You should now be able to browse to http://127.0.0.1:9292 and see the local copy running.
 
 Altering the spreadsheet
 ------------------------
