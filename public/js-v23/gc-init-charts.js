@@ -151,12 +151,21 @@ function initGGRCharts () {
        chart.renderer.path(['M', x, y, 'L', x, 280])
          .attr({'stroke-width': 1, stroke: 'silver', dashstyle: 'dash' }).add();
 
+
+       chart.renderer.text(translate('observed'), chart.xAxis[0].toPixels(1990)+3, 60)
+         .css({ color: '#C0C0C0', fontSize: '9px'}).add();
+
+       chart.renderer.text(translate('projected'), chart.xAxis[0].toPixels(2015), 60)
+         .css({ color: '#C0C0C0', fontSize: '9px' }).add();
+
+
+/*
        chart.renderer.text(translate('observed'), x-45, 60)
          .css({ color: '#C0C0C0', fontSize: '9px'}).add();
 
        chart.renderer.text(translate('projected'), x+12, 60)
          .css({ color: '#C0C0C0', fontSize: '9px' }).add();
-
+*/
     });
 } // end initGGRCharts ()
 
@@ -2060,6 +2069,16 @@ function initEmissionChartDefault (container) {
          .attr({'stroke-width': 1, stroke: 'silver', dashstyle: 'dash'}).add();
 
 
+       ren.text(translate ('observed'), chart.xAxis[0].toPixels(1990)+3, 60)
+         .css({color: '#C0C0C0', fontSize: '9px'}).add();
+
+       
+
+       ren.text(translate ('projected'), chart.xAxis[0].toPixels(2015), 60)
+         .css({color: '#C0C0C0', fontSize: '9px'}).add();
+
+
+/*
        var x1 = chart.xAxis[0].toPixels(2010) - 45-4;
 
        ren.text(translate ('observed'), x1, 60)
@@ -2069,6 +2088,8 @@ function initEmissionChartDefault (container) {
 
        ren.text(translate ('projected'), x1, 60)
          .css({color: '#C0C0C0', fontSize: '9px'}).add();
+*/
+
     });
 }
 
@@ -2928,12 +2949,12 @@ function initClimateCharts () {
                       .add();
 */
 
-       var x1 = chart.xAxis[0].toPixels(2013) - 45;
+       var x1 = chart.xAxis[0].toPixels(1880);
 
        ren.text(translate('observed'), x1, 60)
          .css({color: '#C0C0C0', fontSize: '9px'}).add();
 
-       x1 = chart.xAxis[0].toPixels(2013) + 10;
+       x1 = chart.xAxis[0].toPixels(2023);
 
        ren.text(translate('projected'), x1, 60)
          .css({color: '#C0C0C0', fontSize: '9px'}).add();
@@ -3137,6 +3158,25 @@ function initElectricityCharts () {
                          })
                         .add();
 
+                     var x1 = chart.xAxis[0].toPixels(1980);
+
+                     ren.text(translate('observed'), x1, 60)
+                      .css({
+                        color: '#C0C0C0',
+                        fontSize: '9px'
+                      })
+                      .add();
+
+                     x1 = chart.xAxis[0].toPixels(2015);
+                     ren.text(translate('projected'), x1, 60)
+                      .css({
+                        color: '#C0C0C0',
+                        fontSize: '9px'
+                      })
+                      .add();
+
+
+/*
                      ren.text(translate('observed'), 135-3, 60)
                       .css({
                         color: '#C0C0C0',
@@ -3150,6 +3190,7 @@ function initElectricityCharts () {
                         fontSize: '9px'
                       })
                       .add();
+*/
     });
 
 } // end initElectricityCharts ()
@@ -6946,6 +6987,25 @@ function initEnergyFlowsCharts () {
                          })
                         .add();
 
+                     var x1 = chart.xAxis[0].toPixels(1990)+3;
+
+                     ren.text(translate ('observed'), x1, 60)
+                      .css({
+                        color: '#C0C0C0',
+                        fontSize: '9px'
+                      })
+                      .add();
+
+                     x1 = chart.xAxis[0].toPixels(2015);
+
+                     ren.text(translate ('projected'), x1, 60)
+                      .css({
+                        color: '#C0C0C0',
+                        fontSize: '9px'
+                      })
+                      .add();
+
+/*
                      ren.text(translate ('observed'), 109, 60)
                       .css({
                         color: '#C0C0C0',
@@ -6959,7 +7019,7 @@ function initEnergyFlowsCharts () {
                         fontSize: '9px'
                       })
                       .add();
-
+*/
 
     });
 
@@ -7113,6 +7173,24 @@ function initEnergyFlowsCharts () {
                          })
                         .add();
 
+                     var x1 = chart.xAxis[0].toPixels(1990)+3;
+
+                     ren.text(translate ('observed'), x1, 60)
+                      .css({
+                        color: '#C0C0C0',
+                        fontSize: '9px'
+                      })
+                      .add();
+
+                     x1 = chart.xAxis[0].toPixels(2015);
+                     ren.text(translate ('projected'), x1, 60)
+                      .css({
+                        color: '#C0C0C0',
+                        fontSize: '9px'
+                      })
+                      .add();
+
+/*
                      ren.text(translate ('observed'), 109, 60)
                       .css({
                         color: '#C0C0C0',
@@ -7126,7 +7204,7 @@ function initEnergyFlowsCharts () {
                         fontSize: '9px'
                       })
                       .add();
-
+*/
 
     });
 
@@ -8038,12 +8116,20 @@ function initLandCharts () {
        chart.renderer.path(['M', x, y, 'L', x, 280])
          .attr({'stroke-width': 1, stroke: 'silver', dashstyle: 'dash' }).add();
 
+
+       chart.renderer.text(translate('observed'), chart.xAxis[0].toPixels(1995), 45)
+         .css({ color: '#C0C0C0', fontSize: '9px'}).add();
+
+       chart.renderer.text(translate('projected'), chart.xAxis[0].toPixels(2015), 45)
+         .css({ color: '#C0C0C0', fontSize: '9px' }).add();
+
+/*
        chart.renderer.text(translate('observed'), x-45, 45)
          .css({ color: '#C0C0C0', fontSize: '9px'}).add();
 
        chart.renderer.text(translate('projected'), x+12, 45)
          .css({ color: '#C0C0C0', fontSize: '9px' }).add();
-
+*/
     });
 
 

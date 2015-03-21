@@ -223,7 +223,7 @@ function handleEnergySubnavigation (activeId) {
     createSankey();
     updateCo2BudgetDisplay(chart_screens_co2_budget);
 
-    document.getElementById('sankey-nav-detailed').innerHTML = "- <a href='' onclick='openSankey (); return false;' title = 'open detailed Sankey diagram of energy flows'>Open detailed Sankey</a>";
+    document.getElementById('sankey-nav-detailed').innerHTML = "- <a href='' onclick='openSankey (); return false;' title = '" + translate("open detailed Sankey diagram of energy flows") + "'>" + translate("Open detailed Sankey") + "</a>";
 
   }
 }

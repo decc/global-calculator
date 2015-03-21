@@ -119,7 +119,7 @@ class Global2050ModelResult < Global2050ModelUtilities
 =end
 
     pathway_v22[:lever_graph_data]   	= get_lever_graph_data()
-    # pathway_v22[:cfps]          	= getCFPs()
+    pathway_v22[:cfps]          	= getCFPs()
     # pathway_v22[:lever_descriptions]  =  get_lever_descriptions()
     # pathway_v22[:one_pager_desc] 	= get_lever_onepagers()
     end
@@ -156,7 +156,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # emissions sheet: cell values for 1990 to 2010
   # ----------------------------------------------------------------
   def get_data_cell_array_emissions_historic (row)
-   sheet = "out#puts_emissions"
+   sheet = "outputs_emissions"
    ['h', 'i', 'j', 'k', 'l'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -164,7 +164,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # emissions sheet: cell values for 2011 to 2100
   # ----------------------------------------------------------------
   def get_data_cell_array_emissions_projected (row)
-   sheet = "out#puts_emissions"
+   sheet = "outputs_emissions"
    ['p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'aa', 'ab', 'ac', 'ad', 'ae', 'af', 'ag', 'ah'  ].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -172,7 +172,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # emissions sheet: cell values for 2011 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_emissions_projected_2011_2050 (row)
-   sheet = "out#puts_emissions"
+   sheet = "outputs_emissions"
    ['p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -180,7 +180,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # emissions sheet: cell values for 1990 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_emissions_1990_2050 (row)
-   sheet = "out#puts_emissions"
+   sheet = "outputs_emissions"
    ['h', 'i', 'j', 'k', 'l', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -188,7 +188,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # emissions sheet: cell values for 1990 to 2100
   # ----------------------------------------------------------------
   def get_data_cell_array_emissions_1990_2100 (row)
-   sheet = "out#puts_emissions"
+   sheet = "outputs_emissions"
    ['h', 'i', 'j', 'k', 'l', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'aa', 'ab', 'ac', 'ad', 'ae', 'af', 'ag', 'ah'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -256,13 +256,13 @@ class Global2050ModelResult < Global2050ModelUtilities
     # GHG emissions total historic 1990-2010 
     # ----------------------------------------------------------------
     # x["GHG emissions historic " +  "(years)"] = get_data_cell_array_emissions_historic (45) # years  (for control)
-    # x["GHG emissions historic " +  r("out#puts_emissions_d54").to_s] = get_data_cell_array_emissions_historic (54) # values
+    # x["GHG emissions historic " +  r("outputs_emissions_d54").to_s] = get_data_cell_array_emissions_historic (54) # values
 
     # ----------------------------------------------------------------
     # GHG emissions total projected 2011-2100 
     # ----------------------------------------------------------------
     # x["GHG emissions projected " +  "(years)"] = get_data_cell_array_emissions_projected (45) # years (for control)
-    # x["GHG emissions projected " +  r("out#puts_emissions_d54").to_s] = get_data_cell_array_emissions_projected (54) # values
+    # x["GHG emissions projected " +  r("outputs_emissions_d54").to_s] = get_data_cell_array_emissions_projected (54) # values
 
 
     y = r("webtool_co2e_total_emissions")
@@ -346,7 +346,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # energy sheet: cell values for 1975 to 2010 and 2011 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_energy (row)
-   sheet = "out#puts_energy"
+   sheet = "outputs_energy"
    ['h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -480,21 +480,21 @@ class Global2050ModelResult < Global2050ModelUtilities
   # energy sheet: cell values for 1990 to 2010
   # ----------------------------------------------------------------
   def get_data_cell_array_energy_historic_1990_to_2010 (row)
-   sheet = "out#puts_energy"
+   sheet = "outputs_energy"
    ['k', 'l', 'm', 'n', 'o'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
   # ----------------------------------------------------------------
   # energy sheet: cell values for 1985 to 2010
   # ----------------------------------------------------------------
   def get_data_cell_array_energy_historic_1985_to_2010 (row)
-   sheet = "out#puts_energy"
+   sheet = "outputs_energy"
    ['j', 'k', 'l', 'm', 'n', 'o'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
   # ----------------------------------------------------------------
   # energy sheet: cell values for 2011 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_energy_projected_2011_2050 (row)
-   sheet = "out#puts_energy"
+   sheet = "outputs_energy"
    ['r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -502,7 +502,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # energy sheet: cell values for 2011 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_energy_1990_2050 (row)
-   sheet = "out#puts_energy"
+   sheet = "outputs_energy"
    ['k', 'l', 'm', 'n', 'o', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -853,8 +853,8 @@ class Global2050ModelResult < Global2050ModelUtilities
   # ----------------------------------------------------------------
   # misc sheet: cell values for 2011 to 2050
   # ----------------------------------------------------------------
-  def get_data_cell_array_out#puts_misc_2011_2050 (row)
-   sheet = "out#puts_misc"
+  def get_data_cell_array_outputs_misc_2011_2050 (row)
+   sheet = "outputs_misc"
    ['i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -979,7 +979,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # land use sheet: cell values for 2011 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_land_use_projected_2011_2050 (row)
-   sheet = "out#puts_land_use_technology"
+   sheet = "outputs_land_use_technology"
    ['q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -987,7 +987,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   # physical implications sheet: cell values for 2011 to 2050
   # ----------------------------------------------------------------
   def get_data_cell_array_physical_implications_projected_2011_2050 (row)
-   sheet = "out#puts_physical_implications"
+   sheet = "outputs_physical_implications"
    ['q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'].map { |c| r("#{sheet}_#{c}#{row}") }
   end
 
@@ -999,15 +999,15 @@ class Global2050ModelResult < Global2050ModelUtilities
 =begin
     x["land use projected"] = {}
     x["land use projected"]["(years)"]                                          = get_data_cell_array_physical_implications_projected_2011_2050 (56) # years (for control)
-    x["land use projected"][r("out#puts_physical_implications_c57").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (57) # 
-    x["land use projected"][r("out#puts_physical_implications_c58").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (58) # 
-    x["land use projected"][r("out#puts_physical_implications_c59").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (59) # 
-    x["land use projected"][r("out#puts_physical_implications_c60").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (60) # 
-    x["land use projected"][r("out#puts_physical_implications_c61").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (61) # 
-    x["land use projected"][r("out#puts_physical_implications_c62").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (62) # 
-    x["land use projected"][r("out#puts_physical_implications_c63").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (63) # 
-    x["land use projected"][r("out#puts_physical_implications_c64").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (64) # 
-    x["land use projected"][r("out#puts_physical_implications_c65").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (65) # 
+    x["land use projected"][r("outputs_physical_implications_c57").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (57) # 
+    x["land use projected"][r("outputs_physical_implications_c58").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (58) # 
+    x["land use projected"][r("outputs_physical_implications_c59").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (59) # 
+    x["land use projected"][r("outputs_physical_implications_c60").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (60) # 
+    x["land use projected"][r("outputs_physical_implications_c61").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (61) # 
+    x["land use projected"][r("outputs_physical_implications_c62").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (62) # 
+    x["land use projected"][r("outputs_physical_implications_c63").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (63) # 
+    x["land use projected"][r("outputs_physical_implications_c64").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (64) # 
+    x["land use projected"][r("outputs_physical_implications_c65").to_s.strip]  = get_data_cell_array_physical_implications_projected_2011_2050 (65) # 
 =end
 
     y = r("webtool_land_use")
@@ -1343,14 +1343,14 @@ class Global2050ModelResult < Global2050ModelUtilities
     # ----------------------------------------------------------------
     x["wind supply historic"] = {}
     x["wind supply historic"]["(years)"]                    = get_data_cell_array_energy_historic_1990_to_2010 (57) # years (for control)
-    x["wind supply historic"][r("out#puts_energy_d61").to_s.strip] = get_data_cell_array_energy_historic_1990_to_2010 (61) # values
+    x["wind supply historic"][r("outputs_energy_d61").to_s.strip] = get_data_cell_array_energy_historic_1990_to_2010 (61) # values
 
     # ----------------------------------------------------------------
     # wind supply projected 2011 - 2050 
     # ----------------------------------------------------------------
     x["wind supply projected"] = {}
     x["wind supply projected"]["(years)"]                    = get_data_cell_array_energy_projected_2011_2050 (57) # years (for control)
-    x["wind supply projected"][r("out#puts_energy_d61").to_s.strip] = get_data_cell_array_energy_projected_2011_2050 (61) # values
+    x["wind supply projected"][r("outputs_energy_d61").to_s.strip] = get_data_cell_array_energy_projected_2011_2050 (61) # values
 
     return x
   end  
@@ -1911,7 +1911,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   def getCFP (col)
     s = []
     (7..55).each do |row|
-      s  << r("user_in#puts_#{col}#{row}")
+      s  << r("user_inputs_#{col}#{row}")
     end
     return s;
   end
@@ -1923,7 +1923,11 @@ class Global2050ModelResult < Global2050ModelUtilities
 
 #=begin
 
-    (0..23).each do |col|
+    # --------------------------------------------------------------------------------
+    # ATTENTION: assumes the last entry in the named range is nil, so we ignore it
+    # --------------------------------------------------------------------------------
+    (0..y[0].length-2).each do |col|
+#    (0..23).each do |col|
       x["W"] [ y[0][col] ] = []
 
       (1..59).each do |row|
@@ -1933,7 +1937,9 @@ class Global2050ModelResult < Global2050ModelUtilities
     end
 #=end
 
- #   x["YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"] = y    
+#    x["YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY ARRAY"] = y    
+#    x["YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY ARRAY [0] LENGTH INFO"] = y[0].length    
+#    x["YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY ARRAY LENGTH INFO"] = y.length    
 
    return x
 
@@ -1943,7 +1949,7 @@ class Global2050ModelResult < Global2050ModelUtilities
   def get_lever_values_from_spreadsheet()
     s = [] 
     (7..62).each do |row|
-      s << r("user_in#puts_e#{row}")
+      s << r("user_inputs_e#{row}")
     end
     return s
   end
@@ -1953,7 +1959,7 @@ class Global2050ModelResult < Global2050ModelUtilities
 
     s = [] 
     (7..62).each do |row|
-      s << [r("user_in#puts_d#{row}"), r("user_in#puts_e#{row}")]
+      s << [r("user_inputs_d#{row}"), r("user_inputs_e#{row}")]
     end
     return s
 
@@ -1964,29 +1970,29 @@ end
 
 if __FILE__ == $0
 
-   #puts "\n\n\n\n\n\n---------------------"
-   #puts "******************************************************************************************************"
-   #puts "*"
-   #puts "*"
-   #puts "*  MW global_2050_model Global2050ModelResult V22 test start"
-   #puts "*"
-   #puts "*"
-   #puts "*  interfacing DECC C program from 19 Dec 2014 (spreadsheet v.3.92.22)"
-   #puts "*"
-   #puts "*"
-   #puts "******************************************************************************************************"
+   puts "\n\n\n\n\n\n---------------------"
+   puts "******************************************************************************************************"
+   puts "*"
+   puts "*"
+   puts "*  MW global_2050_model Global2050ModelResult V22 test start"
+   puts "*"
+   puts "*"
+   puts "*  interfacing DECC C program from 19 Dec 2014 (spreadsheet v.3.92.22)"
+   puts "*"
+   puts "*"
+   puts "******************************************************************************************************"
 
 
    g = Global2050ModelResult.new
 
 =begin
 
- #puts "extractWhatsInAtStart: "
+ puts "extractWhatsInAtStart: "
  a = []
  a = g.extractWhatsInAtStart
- #puts "---------------------"
- #puts a
- #puts "---------------------"
+ puts "---------------------"
+ puts a
+ puts "---------------------"
 =end
 
    a = []
@@ -1994,11 +2000,11 @@ if __FILE__ == $0
    a << g.calculate_pathway_v22("22njmeo11mglccc1bi1jg42m4hcjdceh444in22oDt11111hf2211111111"); # 51 + 1 + 7
 
                                                             
-   #puts "---------------------"
-   #puts a
-   #puts "---------------------"
-   #puts "\n\n MW global_2050_model-2.0 Global2050ModelResult V22 test end"
-   #puts "---------------------"
+   puts "---------------------"
+   puts a
+   puts "---------------------"
+   puts "\n\n MW global_2050_model-2.0 Global2050ModelResult V22 test end"
+   puts "---------------------"
 
 
 

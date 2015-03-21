@@ -19,6 +19,7 @@
 <script type="text/javascript" src="js-v23/gc-lever-setup.js"></script>
 
 <script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-muliple-1.js" charset="utf-8"></script>
 <script type="text/javascript" src="js-v23/gc-translate.js"></script>
 
 
@@ -135,13 +136,20 @@ function init (leverID) {
 
   else if (tts[1] == "Quantity of meat") {
     things_to_consider = 
-"Different countries and institutions have different recommendations around what constitutes a healthy diet.  For example, see:\r• The Harvard School of Public Health’s healthy eating plate http://www.hsph.harvard.edu/nutritionsource/healthy-eating-plate] \r• The World Health Organisation’s recommendation of 90g of meat per person per day http://whqlibdoc.who.int/trs/WHO_TRS_935_eng.pdf] \r• The India National Institute of Nutrition’s dietary recommendations http://ninindia.org/DietaryguidelinesforIndians-Finaldraft.pdf]\r\rMeat production is, on average, associated with significantly higher greenhouse gas emissions than the production of grains, fruit and vegetables per unit of energy output. It also requires more land, as meat production is much less land efficient than growing crops. For example, in 2011 an area the size of a football pitch would typically yield around 25,000 kcal per year of pasture fed beef, 1,450,000 kcal per year of poultry, or 5,410,000 kcal per year of crops (for example, grains). A shift to lower levels of meat consumption could therefore help to reduce the greenhouse gas footprint of our diets, as well as produce surplus land that could be used for other purposes, such as growing bioenergy crops and establishing new forests.\r\rIn 2011 the global average fish consumption was 27 kcal per day per person, representing 1.4% of total non-meat calories. In all cases, it was assumed that fish calories would represent 2.1% of our non-meat calories in 2050, according to market trends.\r\rThis lever controls effective kcal intake per person.  Users wishing to explore the impact of more or less food waste should use the “wastes and residues” lever.  Losses along the supply chain are currently approximately 19% in terms of meat energy content [Lipinski et al., 2013]."
+"Different countries and institutions have different recommendations around what constitutes a healthy diet.  For example, see:\r• The Harvard School of Public Health’s healthy eating plate http://www.hsph.harvard.edu/nutritionsource/healthy-eating-plate] \r• The World Health Organisation’s recommendation of 90g of meat per person per day http://whqlibdoc.who.int/trs/WHO_TRS_935_eng.pdf] \r• The India National Institute of Nutrition’s dietary recommendations http://ninindia.org/DietaryguidelinesforIndians-Finaldraft.pdf]\r\rMeat production is, on average, associated with significantly higher greenhouse gas emissions than the production of grains, fruit and vegetables per unit of energy output. It also requires more land, as meat production is much less land efficient than growing crops. For example, in 2011 an area the size of a football pitch would typically yield around 25,000 kcal per year of pasture fed beef, 1,450,000 kcal per year of poultry, or 5,410,000 kcal per year of crops (for example, grains). A shift to lower levels of meat consumption could therefore help to reduce the greenhouse gas footprint of our diets, as well as produce surplus land that could be used for other purposes, such as growing bioenergy crops and establishing new forests.\r\rIn 2011 the global average fish consumption was 27 kcal per day per person, representing 1.4% of total non-meat calories. In all cases, it was assumed that fish calories would represent 2.1% of our non-meat calories in 2050, according to market trends.\r\rThis lever controls effective kcal intake per person.  Users wishing to explore the impact of more or less food waste should use the “wastes and residues” lever.  Losses along the supply chain are currently approximately 19% in terms of meat energy content [Lipinski et al., 2013].";
   }
+
+  else if (tts[1] == "Solid or liquid") {
+    things_to_consider = 
+"There are advantages of using bioenergy in both solid and liquid forms, therefore it is currently not possible to state which is preferential. \r\rSolid biomass can be used in industry for process heat requirements, for example to produce high temperature steam, which is likely to be difficult to decarbonise using other technologies. It can also be used alongside carbon capture and storage (known as BECCS, which stands for biomass energy with carbon capture and storage); this could have the advantage of generating ‘negative emissions’, because the carbon dioxide absorbed from the atmosphere as the energy crops grows would get locked away under the Earth’s surface in this process.\rLiquid biofuels can be used to generate low carbon aviation and shipping fuels, and fuels for heavy goods vehicles. These applications are likely to be hard to decarbonise using other methods, therefore using biomass for this use has significant benefits.\r\rIf you choose a high proportion of liquid biofuels, and your pathway generates a lot of bioenergy, you may also want to choose low levels of transport electrification for the lever \"Electric and hydrogen\" otherwise you may end up with some unused bioenergy crops.";
+
+  }
+
 
 
     if (leverID >=43 && leverID<= 47 || leverID > 51) {
         document.title = translate("The Global Calculator");
-        document.getElementById('title').innerHTML = "<h1>Sorry - there is no one pager for this id</h1>";
+        document.getElementById('title').innerHTML = "<h1>" + translate ("Sorry - there is no one pager for this id") + "</h1>";
         document.getElementById('lever-controls').innerHTML = "";
         document.getElementById('context').innerHTML = "";
         document.getElementById('context-header').innerHTML = "";
@@ -169,8 +177,13 @@ function init (leverID) {
     }
     // Atmospheric CO2 fraction
     else if (leverID == 50) {
+
+        var info = translate ("Sorry - there is no one pager for lever [[XYZ]]");
+        info = info.replace ("[[XYZ]]", "'" + translate("Atmospheric CO2 fraction") + "'");
+
         document.title = translate("The Global Calculator") + " | " + translate("Lever") + " " + translate(tts[1]);
-        document.getElementById('title').innerHTML = "<h1>Sorry - there is no one pager for lever '" +  " " + translate(tts[1]) + "'</h1>";
+        // document.getElementById('title').innerHTML = "<h1>" + translate("Sorry - there is no one pager for lever") + " '" +  " " + translate(tts[1]) + "'</h1>";
+        document.getElementById('title').innerHTML = "<h1>" + info + "</h1>";                
         document.getElementById('lever-controls').innerHTML = "";
         document.getElementById('context').innerHTML = "";
         document.getElementById('context-header').innerHTML = "";
@@ -360,10 +373,11 @@ function createGraphs (leverID) {
 
     var d = leverGraphData["g_1pager_population"];
     var tdata = [
-      [translate("Total population of the world"), roundValue2(d[1][9]  / 1000000000) + " billion", 
-                                        roundValue1(d[2][17] / 1000000000) + " billion", 
-                                        roundValue1(d[3][17] / 1000000000) + " billion", 
-                                        roundValue1(d[4][17] / 1000000000) + " billion", translate("This lever only has three levels")]
+      [translate("Total population of the world"), roundValue2(d[1][9]  / 1000000000) + " " + translate("billion"), 
+                                        roundValue1(d[2][17] / 1000000000) + " " + translate("billion"), 
+                                        roundValue1(d[3][17] / 1000000000) + " " + translate("billion"), 
+                                        roundValue1(d[4][17] / 1000000000) + " " + translate("billion"), 
+                                        translate("This lever only has three levels")]
       ];
     addTableRows (tdata);
 
@@ -409,7 +423,7 @@ function createGraphs (leverID) {
     appendRow(['container_1','container_2', '']);
     appendRow(['container_3', 'container_4','container_5']);
     initLineGraph ('container_1', 'Average rural passenger distance', 'km per person per year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_rural_average"], 1);
-    initLineGraph ('container_2', 'International – average global passenger distance by flight or long-distance train',    'km per person per year', 0, 3000, 250, leverGraphData["g_1pager_passenger_distance_international_average"], 1);
+    initLineGraph ('container_2', 'International - average global passenger distance by flight or long-distance train',    'km per person per year', 0, 3000, 250, leverGraphData["g_1pager_passenger_distance_international_average"], 1);
     initLineGraph ('container_3', 'Passenger distance - Automobile city', 'km per person per year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_automobilecity"], 1);
     initLineGraph ('container_4', 'Passenger distance - Transit city',    'km per person per year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_transitcity"], 1);
     initLineGraph ('container_5', 'Passenger distance - Booming city',    'km per person per year', 0, 15000, 2500, leverGraphData["g_1pager_passenger_distance_boomingcity"], 1);

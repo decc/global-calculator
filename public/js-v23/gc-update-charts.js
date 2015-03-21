@@ -1476,19 +1476,31 @@ function updateCo2BudgetDisplay (chart) {
   if      (cumEmiss >=10000) cumEmX = cumEmX-12;
   else if (cumEmiss >= 1000) cumEmX = cumEmX-6;
 
-//  chart.renderer.text('Cumulative CO2', 29-8, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-//  chart.renderer.text('emissions to 2100', 25-8, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-//  chart.renderer.text(cumEmiss + ' GtCO2', cumEmX, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
 
-  if (languageID != "ch") {
-    chart.renderer.text(translate ('Cumulative CO2'), 29-8, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-    chart.renderer.text(translate ('emissions to 2100'), 25-8, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+  if (languageID == "ch") {
+    chart.renderer.text(translate ('Cumulative CO2'),    29-8+20, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('emissions to 2100'), 25-8+20, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(cumEmiss + ' ' + translate ('GtCO2'), cumEmX-10, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
+  }
+  else if (languageID == "sp") {
+    chart.renderer.text(translate ('Cumulative CO2'), 	 29-8-2, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('emissions to 2100'), 25-8-13, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(cumEmiss + ' ' + translate ('GtCO2'), cumEmX, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
+  }
+  else if (languageID == "fr") {
+    chart.renderer.text(translate ('Cumulative CO2'), 29-8-5, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('emissions to 2100'), 25-8-4, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(cumEmiss + ' ' + translate ('GtCO2'), cumEmX, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
+  }
+  else if (languageID == "ru") {
+    chart.renderer.text(translate ('Cumulative CO2'), 29-8-18, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('emissions to 2100'), 25-8-4, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
     chart.renderer.text(cumEmiss + ' ' + translate ('GtCO2'), cumEmX, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
   }
   else {
-    chart.renderer.text(translate ('Cumulative CO2'), 29-8+20, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-    chart.renderer.text(translate ('emissions to 2100'), 25-8+20, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-    chart.renderer.text(cumEmiss + ' ' + translate ('GtCO2'), cumEmX-10, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('Cumulative CO2'), 29-8, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('emissions to 2100'), 25-8, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(cumEmiss + ' ' + translate ('GtCO2'), cumEmX, 55).attr({ zIndex: 3}).css({ color: '#AAA', fontSize: '10px' }).add();
   }
 
 
@@ -1942,7 +1954,7 @@ function updateBasicPhysics () {
   document.getElementById("slr-due-to-thermal-expansion-2100").innerHTML = "<font color='orange'>" + ds["climate_change"]["slr_due_to_thermal_expansion_2100"] + " " + translate("m") + " " + "</font>";
 
   document.getElementById("slr-total-2100").innerHTML 	 = "<font color='orange'>" + 
-     ( ds["climate_change"]["slr_due_to_ice_melt_2100"] + ds["climate_change"]["slr_due_to_thermal_expansion_2100"]) + " " + translate("m") + "" + "</font>";
+     roundValue2 ( ds["climate_change"]["slr_due_to_ice_melt_2100"] + ds["climate_change"]["slr_due_to_thermal_expansion_2100"]) + " " + translate("m") + "" + "</font>";
 
  }
 
@@ -2125,11 +2137,11 @@ function updateThermometer (chart, messageID) {
   }
   else if (languageID == "po") {
     chart.renderer.text(translate ('Global mean temperature'), 5+2, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-    chart.renderer.text(translate ('change in 2100 (in°C)'),   5, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('change in 2100 (in°C)'),   5-1, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
   }
   else if (languageID == "fr") {
     chart.renderer.text(translate ('Global mean temperature'), 5+2, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
-    chart.renderer.text(translate ('change in 2100 (in°C)'),   5+6, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
+    chart.renderer.text(translate ('change in 2100 (in°C)'),   5+2, 39).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
   }
   else if (languageID == "ch") {
     chart.renderer.text(translate ('Global mean temperature'), 5+25, 23).attr({ zIndex: 3}).css({ color: '#FFF', fontSize: '10px' }).add();
@@ -2210,8 +2222,14 @@ function updateThermometer (chart, messageID) {
                '<span style="font-weight: normal; color: red">'    + translate ('emissions pathway') + '</span><br>' + 
                '<span style="font-weight: normal; color: orange">' + translate ('which could have') + '</span><br>' + 
                '<span style="font-weight: normal; color: red">'    + translate ('very dangerous im-') + '</span><br>' + 
+
+               '<span style="font-weight: normal; color: red">'    + translate ('pacts') + ' ' + 
+               '<span style="font-weight: normal; color: orange">' + translate ('on the climate.') +  '<br>  </span><br>' + 
+
+/*
                '<span style="font-weight: normal; color: red">'    + translate ('pacts') + ' </span><br>' + 
                '<span style="font-weight: normal; color: orange">' + translate ('on the climate.') +  '<br>  </span><br>' + 
+*/
                '<span style="font-weight: normal; color: orange">' + translate ('The top of the possi-') + '<br>' + 
                '<span style="font-weight: normal; color: orange">' + translate ('ble temperature range') + '<br>' + 
                '<span style="font-weight: normal; color: orange">' + translate ('exceeds 6C, and you') + '<br>' + 

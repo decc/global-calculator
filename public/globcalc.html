@@ -45,8 +45,8 @@
 <script type="text/javascript" src="js-v23/gc-screen-costs.js"></script>
 
 <script type="text/javascript" src="js-v23/gc-translation-tables.js" charset="utf-8"></script>
-
 <script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-muliple-1.js" charset="utf-8"></script>
 
 
 <!--
@@ -1391,7 +1391,7 @@ function initUI () {
               "<img border=0 src = 'imgs/info-icon-6.gif'> "
               + translate ("Choose an example pathway or create your own pathway by selecting effort level 1 to 4 for each lever.")
               + "<span class='translate'> <img class='callout' src='imgs/tooltip/callout_black.gif' /><strong>" 
-              + translate ("The Global Calculater levers") + "</strong><br /><br />"
+              + translate ("The Global Calculator") + ": " + translate ("Set the levers.") + "</strong><br /><br />"
               + "<div>" + translate ("Level 1 (minimal abatement)") + "<br>" + translate ("Level 2 (ambitious)") 
               + "<br>" + translate ("Level 3 (very ambitious)") + "<br>" + translate ("Level 4 (extremely ambitious)") 
               + "<br><br>" + translate ("For more details please click here.") + "</div></span>";
@@ -1436,8 +1436,12 @@ function initUI () {
    document.getElementById("rcp-26-2").title = translate("Species richness and fisheries catch potential are projected to increase, on average, at mid and high latitudes and decrease at tropical latitudes") + translate("(WG2 SPM p17)");
 
 
-   document.getElementById("less-map-info-link").title = translate("temperature and precipitation maps only: ") + translate("map animations will hide information on RCP and timeframe");
-   document.getElementById("more-map-info-link").title = translate("temperature and precipitation maps only: ") + translate("map animations will show on each frame also information on RCP and timeframe");
+//   document.getElementById("less-map-info-link").title = translate("temperature and precipitation maps only: ") + translate("map animations will hide information on RCP and timeframe");
+//   document.getElementById("more-map-info-link").title = translate("temperature and precipitation maps only: ") + translate("map animations will show on each frame also information on RCP and timeframe");
+
+   document.getElementById("less-map-info-link").title = translate("Temperature change maps") + " / " + translate("Precipitation change maps") + ": " + translate("map animations will hide information on RCP and timeframe");
+   document.getElementById("more-map-info-link").title = translate("Temperature change maps") + " / " + translate("Precipitation change maps") + ": " + translate("map animations will show on each frame also information on RCP and timeframe");
+
 
    document.getElementById("bas-phys-info-link").title = translate("see documentation");
 
@@ -1454,7 +1458,7 @@ function initUI () {
   // document.getElementById("language-link-en").title = translate("switch language to English");
   document.getElementById("language-link-fr").title = translate("switch language to French") + " (" + translate("coming soon") + ")";
   document.getElementById("language-link-hi").title = translate("switch language to Hindi") + " (" + translate("coming soon") + ")";
-  document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " (" + translate("coming soon") + ")";
+  // document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " (" + translate("coming soon") + ")";
   document.getElementById("language-link-ru").title = translate("switch language to Russian") + " (" + translate("coming soon") + ")";
   document.getElementById("language-link-sp").title = translate("switch language to South American Spanish") + " (" + translate("coming soon") + ")";
 
@@ -1741,6 +1745,7 @@ function getLanguageIDFromUrl () {
 //
 // -----------------------------------------------------------------
 function isValidParameterValue (pvalue) {
+
   for(var i=0; i<codeVals.length; i++)
     if (pvalue == codeVals[i]) return true;
   return false;
@@ -1752,9 +1757,27 @@ function isValidParameterValue (pvalue) {
 function getParameterArray (paramString) {
   var result = new Array(paramString.length);
   for(var i=0; i<paramString.length; i++) {
-    var c = paramString.charAt(i);
-    if (! isValidParameterValue (c)) c = '1';
-    result[i] = getLeverCodeAsNumber(c); // parseInt(c);
+
+    // -----------------------------------------------------------------
+    // the last 8 params need to be invariant 1 
+    // (this codes: "US", "Point", "Point", "Point", "Point", "Point", "Point", "Point")
+    // these values are not changed by any lever but still passed to the model,
+    // so make sure we do not get nonsense from the url:
+    // -----------------------------------------------------------------
+    if (i >= paramString.length-8) {
+      result[i] = '1';
+    }
+    else {
+      var c = paramString.charAt(i);
+      if (! isValidParameterValue (c)) c = '1';
+      result[i] = getLeverCodeAsNumber(c); // parseInt(c);
+    }
+/*
+      var c = paramString.charAt(i);
+      if (! isValidParameterValue (c)) c = '1';
+      result[i] = getLeverCodeAsNumber(c); // parseInt(c);
+*/
+
   }
   return result;
 }
@@ -1932,10 +1955,10 @@ function displayLeverStatus () {
   for (var i=0; i<NUM_LEVERS; i++)
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
-  var urlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  var urlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
   document.getElementById("gc-link").innerHTML  = "<b><u><font color='orange'><a href='" + urlStr + "'>" + urlStr + "</a></font></u></b>";
 
-  var langUrlStr = "http://tool.globalcalculator.org/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
+  var langUrlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
 
   updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);
@@ -4108,9 +4131,15 @@ legend {    color: #ddd; }
 
         <a class='translate unselectedNavItem' id="language-link-fr" href="" onclick="return false;" title="switch language to French (coming soon)">Fr</a>&nbsp;|&nbsp;
         <a class='translate unselectedNavItem' id="language-link-hi" href="" onclick="return false;" title="switch language to Hindi (coming soon)">Hi</a>&nbsp;|&nbsp;
-        <a class='translate unselectedNavItem' id="language-link-po" href="" onclick="return false;"title="switch language to Portuguese (coming soon)">Po</a>&nbsp;|&nbsp;
-        <a class='translate unselectedNavItem' id="language-link-ru" href="" onclick="return false;"onclick="return false;" title="switch language to Russian (coming soon)">Ru</a>&nbsp;|&nbsp;
-        <a class='translate unselectedNavItem' id="language-link-sp" href="" onclick="return false;"onclick="return false;" title="switch language to South American Spanish (coming soon)">Sp</a>
+
+        <a unselectedNavItem' id="language-link-po" href="" title="colocar o idioma português">Po</a>&nbsp;|&nbsp;
+
+
+<!--
+        <a class='translate unselectedNavItem' id="language-link-po" href="" onclick="return false; "title="switch language to Portuguese (coming soon)">Po</a>&nbsp;|&nbsp;
+-->
+        <a class='translate unselectedNavItem' id="language-link-ru" href="" onclick="return false;" onclick="return false;" title="switch language to Russian (coming soon)">Ru</a>&nbsp;|&nbsp;
+        <a class='translate unselectedNavItem' id="language-link-sp" href="" onclick="return false;" onclick="return false;" title="switch language to South American Spanish (coming soon)">Sp</a>
 
         <td width="35%" rowspan="3">
 
@@ -4222,10 +4251,10 @@ legend {    color: #ddd; }
         <table border=0 id='overview-thermometer-table'>
           <tr>
           <td>
-          <div id="container_dashboard_mean_temp" style="width: 130px; height: 280px"></div>
+          <div id="container_dashboard_mean_temp" style="width: 135px; height: 280px"></div>
           <tr>
           <td align="center" valign="center">
-          <div id="dashboard-temp-info" align="left" style="width: 130px">
+          <div id="dashboard-temp-info" align="left" style="width: 135px">
             <a target='_blank' href="temperature-method.html"  class="tooltip" id="temp-info-link">
               <img border=0 src = 'imgs/info-icon-6.gif'>
               How is the temperature change estimated?
@@ -4527,10 +4556,10 @@ legend {    color: #ddd; }
           <!-- --------------------------- start thermometer and info table : --------------------  -->
           <table>
             <tr><td colspan=2>
-            <div id="container_cc_1" style="width: 130px; height: 280px"></div>
+            <div id="container_cc_1" style="width: 135px; height: 280px"></div>
             <tr><td align="center" valign="center">
 
-          <div id="cc-temp-info" align="left" style="width: 130px">
+          <div id="cc-temp-info" align="left" style="width: 135px">
             <a target='_blank' href="temperature-method.html"  class="tooltip" id="cc-temp-info-link">
               <img border=0 src = 'imgs/info-icon-6.gif'>
               How is the temperature change estimated?
@@ -7043,7 +7072,7 @@ Map animations for ocean acidification
 
     <span class='translate'>By using the Global Calculator you are agreeing to be bound to its</span> <b><u><a id="conditions-of-use-link" class='translate' target="_blank" href="gc-conditions-of-use.html">conditions of use</a></u></b>.
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <span class='translate'>Based on spreadsheet</span> v.3.99.0
+    <span class='translate'>Based on spreadsheet</span>
      <b><u><a target="_blank" href="https://www.gov.uk/government/publications/the-global-calculator">v.3.99.0</a></u></b>.
 
 

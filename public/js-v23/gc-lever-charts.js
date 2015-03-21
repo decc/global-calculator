@@ -87,7 +87,7 @@ function createColumnChart (containerID, title, unitName, yMin, yMax, ytick) {
       text: translate(title)
     },
     exporting: { enabled: false },
-    xAxis: { categories: ['2011', '2050 Level 1', '2050 Level 2', '2050 Level 3', '2050 Level 4']  },
+    xAxis: { categories: [translate ('2011'), translate ('2050 Level 1'), translate ('2050 Level 2'), translate ('2050 Level 3'), translate ('2050 Level 4')]  },
     yAxis: {
       minPadding: 0.2,
       maxPadding: 0.2,
@@ -134,7 +134,7 @@ function createStackedColumnChart (containerID, title, unitName, yMin, yMax, yti
       text: translate(title)
     },
     exporting: { enabled: false },
-    xAxis: { categories: ['2011', '2050 Level 1', '2050 Level 2', '2050 Level 3', '2050 Level 4']  },
+    xAxis: { categories: [translate ('2011'), translate ('2050 Level 1'), translate ('2050 Level 2'), translate ('2050 Level 3'), translate ('2050 Level 4')]  },
     yAxis: {
       minPadding: 0.2,
       maxPadding: 0.2,

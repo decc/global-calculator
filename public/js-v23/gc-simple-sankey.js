@@ -38,7 +38,7 @@ function createSankey() {
     sankey.stack(2, ["Power plants"], "Solid");
     sankey.stack(3, ["Electricity grid", "Heat network"]);
     sankey.stack(4, ["Hydrogen"], "Electricity grid");
-    sankey.stack(5, ["Buildings", "Manufacturing", "Transport", "Other", "GGR", "Losses / own use"]);
+    sankey.stack(5, ["Buildings", "Manufacturing", "Transport", "Other", "GGR", "Losses / own use", "Global oversupply"]);
 
 
     // -------------------------------------------------------------
