@@ -1,3 +1,7 @@
+# 2015-04-17
+
+* Added Bahasa translation
+
 # 2015-03-21 
 
 * Added two new example pathways from the World Nuclear Association
