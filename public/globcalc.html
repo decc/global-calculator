@@ -1453,7 +1453,7 @@ function initUI () {
 
 
   document.getElementById("language-link-ar").title = translate("switch language to Arabic") + " (" + translate("coming soon") + ")";
-  document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " (" + translate("coming soon") + ")";
+  // document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-ch").title = translate("switch language to Chinese");
   // document.getElementById("language-link-en").title = translate("switch language to English");
   document.getElementById("language-link-fr").title = translate("switch language to French") + " (" + translate("coming soon") + ")";
@@ -4125,7 +4125,11 @@ legend {    color: #ddd; }
       <td rowspan="3" align="right" nowrap valign="bottom">
 
         <a class='translate unselectedNavItem' id="language-link-ar" href="" onclick="return false;" title="switch language to Arabic (coming soon)">Ar</a>&nbsp;|&nbsp;
+<!--
         <a class='translate unselectedNavItem' id="language-link-ba" href="" onclick="return false;" title="switch language to Bahasa (coming soon)">Ba</a>&nbsp;|&nbsp;
+-->
+
+        <a unselectedNavItem' id="language-link-ba" href="" title="alihkan ke Bahasa Indonesia">Ba</a>&nbsp;|&nbsp;
         <a unselectedNavItem' id="language-link-ch" href="" title="转换到中文">中文</a>&nbsp;|&nbsp;
         <a unselectedNavItem' id="language-link-en" href="" title="switch language to English">En</a>&nbsp;|&nbsp;
 
@@ -4251,7 +4255,7 @@ legend {    color: #ddd; }
         <table border=0 id='overview-thermometer-table'>
           <tr>
           <td>
-          <div id="container_dashboard_mean_temp" style="width: 135px; height: 280px"></div>
+          <div id="container_dashboard_mean_temp" style="width: 138px; height: 280px"></div>
           <tr>
           <td align="center" valign="center">
           <div id="dashboard-temp-info" align="left" style="width: 135px">
@@ -4556,7 +4560,7 @@ legend {    color: #ddd; }
           <!-- --------------------------- start thermometer and info table : --------------------  -->
           <table>
             <tr><td colspan=2>
-            <div id="container_cc_1" style="width: 135px; height: 280px"></div>
+            <div id="container_cc_1" style="width: 138px; height: 280px"></div>
             <tr><td align="center" valign="center">
 
           <div id="cc-temp-info" align="left" style="width: 135px">

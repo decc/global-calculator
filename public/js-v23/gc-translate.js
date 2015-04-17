@@ -10,8 +10,8 @@ function isValidLanguageID (languageID) {
   if (languageID == "en")	return true;
   if (languageID == "ch")	return true;
   if (languageID == "po")	return true;
-/*
   if (languageID == "ba")	return true;
+/*
   if (languageID == "fr")	return true;
   if (languageID == "ru")	return true;
   if (languageID == "sp")	return true;
