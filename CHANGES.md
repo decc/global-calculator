@@ -1,3 +1,7 @@
+# 2015-07-21
+
+* Added a Dockerfile
+
 # 2015-04-17
 
 * Added Bahasa translation
