@@ -122,7 +122,6 @@ $("#flex-accordion-x-15").togglepanels();
 // if this is activated, the lever boxes will be uncollapsed at startup time
 // Note: this will result in losing the smooth collapse / uncollapse animation
 // -------------------------------------------------------------------------------
-/*
 $("#flex-accordion-x-1").accordion({ collapsible: true });
 $("#flex-accordion-x-2").accordion({ collapsible: true });
 $("#flex-accordion-x-3").accordion({ collapsible: true });
@@ -138,9 +137,12 @@ $("#flex-accordion-x-12").accordion({ collapsible: true });
 $("#flex-accordion-x-13").accordion({ collapsible: true });
 $("#flex-accordion-x-14").accordion({ collapsible: true });
 $("#flex-accordion-x-15").accordion({ collapsible: true });
-*/
 
+
+
+// -------------------------------------------------------------------------------
 //capture the click on accordeon header except if on name or icon
+// -------------------------------------------------------------------------------
 $("#flex-accordion-x-1 h3 .mw").click(function()  {  return false; });
 $("#flex-accordion-x-2 h3 .mw").click(function()  {  return false; });
 $("#flex-accordion-x-3 h3 .mw").click(function()  {  return false; });
@@ -1974,10 +1976,10 @@ function displayLeverStatus () {
   for (var i=0; i<NUM_LEVERS; i++)
     paramInfo += getLeverCodeAlphanum(indices[i]);
 
-  var urlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
+  var urlStr = "/globcalc-uncollapsed.html?levers=" + paramInfo  + "/" + pageID + "/" + languageID;
   document.getElementById("gc-link").innerHTML  = "<b><u><font color='orange'><a href='" + urlStr + "'>" + urlStr + "</a></font></u></b>";
 
-  var langUrlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
+  var langUrlStr = "/globcalc-uncollapsed.html?levers=" + paramInfo  + "/" + pageID + "/";
 
   updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);
@@ -2012,7 +2014,7 @@ function displayLeverStatus () {
 
   var stateObj = { foo: "bar" };
   if (history['pushState'] != null) {
-    history.pushState(stateObj, "", "globcalc.html?levers=" + paramInfo + "/" + pageID  + "/" + languageID);
+    history.pushState(stateObj, "", "globcalc-uncollapsed.html?levers=" + paramInfo + "/" + pageID  + "/" + languageID);
   }
 
 }
