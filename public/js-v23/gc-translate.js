@@ -11,16 +11,17 @@ function isValidLanguageID (languageID) {
   if (languageID == "ch")	return true;
   if (languageID == "po")	return true;
   if (languageID == "ba")	return true;
-/*
-  if (languageID == "fr")	return true;
-  if (languageID == "ru")	return true;
+
+  // if (languageID == "fr")	return true;
+  // if (languageID == "ru")	return true;
   if (languageID == "sp")	return true;
-*/
+
   return false;
 }
 
 function myTrim(x) {
-    return x.replace(/^\s+|\s+$/gm,'');
+  if (x==null) return "";
+  return x.replace(/^\s+|\s+$/gm,'');
 }
 
 function translate (txt) {
