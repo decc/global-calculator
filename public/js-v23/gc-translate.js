@@ -12,9 +12,9 @@ function isValidLanguageID (languageID) {
   if (languageID == "po")	return true;
   if (languageID == "ba")	return true;
 
-  // if (languageID == "fr")	return true;
-  // if (languageID == "ru")	return true;
+  if (languageID == "fr")	return true;
   if (languageID == "sp")	return true;
+  //if (languageID == "ru")	return true;
 
   return false;
 }

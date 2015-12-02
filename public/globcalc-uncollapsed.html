@@ -139,10 +139,7 @@ $("#flex-accordion-x-14").accordion({ collapsible: true });
 $("#flex-accordion-x-15").accordion({ collapsible: true });
 
 
-
-// -------------------------------------------------------------------------------
 //capture the click on accordeon header except if on name or icon
-// -------------------------------------------------------------------------------
 $("#flex-accordion-x-1 h3 .mw").click(function()  {  return false; });
 $("#flex-accordion-x-2 h3 .mw").click(function()  {  return false; });
 $("#flex-accordion-x-3 h3 .mw").click(function()  {  return false; });
@@ -1477,7 +1474,7 @@ function initUI () {
   // document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-ch").title = translate("switch language to Chinese");
   // document.getElementById("language-link-en").title = translate("switch language to English");
-  document.getElementById("language-link-fr").title = translate("switch language to French") + " (" + translate("coming soon") + ")";
+  // document.getElementById("language-link-fr").title = translate("switch language to French") + " (" + translate("coming soon") + ")";
   document.getElementById("language-link-hi").title = translate("switch language to Hindi") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " (" + translate("coming soon") + ")";
   document.getElementById("language-link-ru").title = translate("switch language to Russian") + " (" + translate("coming soon") + ")";
@@ -4149,12 +4146,16 @@ legend {    color: #ddd; }
 <!--
         <a class='translate unselectedNavItem' id="language-link-ba" href="" onclick="return false;" title="switch language to Bahasa (coming soon)">Ba</a>&nbsp;|&nbsp;
 -->
-
         <a class='unselectedNavItem' id="language-link-ba" href="" title="alihkan ke Bahasa Indonesia">Ba</a>&nbsp;|&nbsp;
         <a class='unselectedNavItem' id="language-link-ch" href="" title="转换到中文">中文</a>&nbsp;|&nbsp;
         <a class='unselectedNavItem' id="language-link-en" href="" title="switch language to English">En</a>&nbsp;|&nbsp;
 
+<!--
         <a class='translate unselectedNavItem' id="language-link-fr" href="" onclick="return false;" title="switch language to French (coming soon)">Fr</a>&nbsp;|&nbsp;
+-->
+        <a class='unselectedNavItem' id="language-link-fr" href="" title="configurer la langue en français">Fr</a>&nbsp;|&nbsp;
+
+
         <a class='translate unselectedNavItem' id="language-link-hi" href="" onclick="return false;" title="switch language to Hindi (coming soon)">Hi</a>&nbsp;|&nbsp;
 
         <a class='unselectedNavItem' id="language-link-po" href="" title="colocar o idioma português">Po</a>&nbsp;|&nbsp;
