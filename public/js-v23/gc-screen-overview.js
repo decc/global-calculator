@@ -71,7 +71,7 @@ function handleOverview2ndLevelNavigation (activeId) {
 
     document.getElementById("dashboard-temp-info").innerHTML =
 /*
-            "<a target='_blank' href=\"http://site.globalcalculator.org/wp-content/uploads/2014/07/Temperature-range-calculation-methodology-and-discussion.pdf\" class=\"tooltip\">"
+            "<a target='_blank' href=\"http://www.globalcalculator.org/wp-content/uploads/2014/07/Temperature-range-calculation-methodology-and-discussion.pdf\" class=\"tooltip\">"
           + "<img border=0 src = 'imgs/info-icon-6.gif'> How is the temperature change estimated?"
           + "<span> <img class=\"callout\" src=\"imgs/tooltip/callout_black.gif\"/><strong>How does the Global Calculater estimate temperature change?</strong><br /><br />"
           + "<div>"
@@ -81,7 +81,7 @@ function handleOverview2ndLevelNavigation (activeId) {
           + "and SO2).  <br><br>For more details please click here.</div></span>";
 */
 
-            "<a target='_blank' href=\"http://site.globalcalculator.org/wp-content/uploads/2014/07/Temperature-range-calculation-methodology-and-discussion.pdf\" class=\"tooltip\">"
+            "<a target='_blank' href=\"http://www.globalcalculator.org/wp-content/uploads/2014/07/Temperature-range-calculation-methodology-and-discussion.pdf\" class=\"tooltip\">"
           + "<img border=0 src = 'imgs/info-icon-6.gif'> "
           + translate ("How is the temperature change estimated?")
           + "<span> <img class='callout' src='imgs/tooltip/callout_black.gif' /><strong>"

@@ -47,6 +47,8 @@
 <script type="text/javascript" src="js-v23/gc-translation-tables.js" charset="utf-8"></script>
 <script type="text/javascript" src="js-v23/gc-translation-tables-mandarin-1.js" charset="utf-8"></script>
 <script type="text/javascript" src="js-v23/gc-translation-tables-muliple-1.js" charset="utf-8"></script>
+<script type="text/javascript" src="js-v23/gc-translation-tables-japanese.js" charset="utf-8"></script>
+
 
 
 <!--
@@ -1259,7 +1261,7 @@ $(document).ready(function() {
     var x = document.pw_form.pw_selector;
     x.options.length=0
 
-    x.options[x.options.length] = new Option("--- " + translate("Example pathways") + "---", "--- " + translate("Example pathways") + "---", true, false);
+    x.options[x.options.length] = new Option("--- " + translate("Example pathways") + " ---", "--- " + translate("Example pathways") + " ---", true, false);
 
 
     for (var i=0; i<keys.length; i++) {
@@ -1470,7 +1472,7 @@ function initUI () {
      document.getElementById("ml-open-close-link-" + i).title = translate("Click to show / hide the sub-levers");
 
 
-
+/*
   document.getElementById("language-link-ar").title = translate("switch language to Arabic") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-ba").title = translate("switch language to Bahasa") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-ch").title = translate("switch language to Chinese");
@@ -1480,7 +1482,7 @@ function initUI () {
   // document.getElementById("language-link-po").title = translate("switch language to Portuguese") + " (" + translate("coming soon") + ")";
   document.getElementById("language-link-ru").title = translate("switch language to Russian") + " (" + translate("coming soon") + ")";
   // document.getElementById("language-link-sp").title = translate("switch language to South American Spanish") + " (" + translate("coming soon") + ")";
-
+*/
 
 
    initWarningSection("energy-security", 	"Energy security", 		"imgs/icons/energy-security-disabled.gif");
@@ -1979,14 +1981,15 @@ function displayLeverStatus () {
 
   var langUrlStr = "/globcalc.html?levers=" + paramInfo  + "/" + pageID + "/";
 
-  updateLanguageLink ("ar", "Ar", langUrlStr);
+  // updateLanguageLink ("ar", "Ar", langUrlStr);
   updateLanguageLink ("ba", "Ba", langUrlStr);
   updateLanguageLink ("ch", "Ch", langUrlStr);
   updateLanguageLink ("en", "En", langUrlStr);
   updateLanguageLink ("fr", "Fr", langUrlStr);
-  updateLanguageLink ("hi", "Hi", langUrlStr);
+  updateLanguageLink ("ja", "Ja", langUrlStr);
+  // updateLanguageLink ("hi", "Hi", langUrlStr);
   updateLanguageLink ("po", "Po", langUrlStr);
-  updateLanguageLink ("ru", "Ru", langUrlStr);
+  // updateLanguageLink ("ru", "Ru", langUrlStr);
   updateLanguageLink ("sp", "Sp", langUrlStr);
 
 
@@ -4143,28 +4146,33 @@ legend {    color: #ddd; }
       <!-- start language selection + home, compare, share link section --------------------------------------------------- -->
       <td rowspan="3" align="right" nowrap valign="bottom">
 
+<!--
         <a class='translate unselectedNavItem' id="language-link-ar" href="" onclick="return false;" title="switch language to Arabic (coming soon)">Ar</a>&nbsp;|&nbsp;
+-->
 <!--
         <a class='translate unselectedNavItem' id="language-link-ba" href="" onclick="return false;" title="switch language to Bahasa (coming soon)">Ba</a>&nbsp;|&nbsp;
 -->
+
         <a class='unselectedNavItem' id="language-link-ba" href="" title="alihkan ke Bahasa Indonesia">Ba</a>&nbsp;|&nbsp;
         <a class='unselectedNavItem' id="language-link-ch" href="" title="转换到中文">中文</a>&nbsp;|&nbsp;
         <a class='unselectedNavItem' id="language-link-en" href="" title="switch language to English">En</a>&nbsp;|&nbsp;
-
+        <a class='unselectedNavItem' id="language-link-fr" href="" title="configurer la langue en français">Fr</a>&nbsp;|&nbsp;
+        <a class='unselectedNavItem' id="language-link-ja" href="" title="日本語訳協力：公益財団法人地球環境戦略研究機関 (IGES)">Ja</a>&nbsp;|&nbsp;
 <!--
         <a class='translate unselectedNavItem' id="language-link-fr" href="" onclick="return false;" title="switch language to French (coming soon)">Fr</a>&nbsp;|&nbsp;
 -->
-        <a class='unselectedNavItem' id="language-link-fr" href="" title="configurer la langue en français">Fr</a>&nbsp;|&nbsp;
-
-
+<!--
         <a class='translate unselectedNavItem' id="language-link-hi" href="" onclick="return false;" title="switch language to Hindi (coming soon)">Hi</a>&nbsp;|&nbsp;
+-->
 
         <a class='unselectedNavItem' id="language-link-po" href="" title="colocar o idioma português">Po</a>&nbsp;|&nbsp;
 <!--
         <a class='translate unselectedNavItem' id="language-link-po" href="" onclick="return false; "title="switch language to Portuguese (coming soon)">Po</a>&nbsp;|&nbsp;
 -->
-        <a class='translate unselectedNavItem' id="language-link-ru" href="" onclick="return false;" onclick="return false;" title="switch language to Russian (coming soon)">Ru</a>&nbsp;|&nbsp;
 
+<!--
+        <a class='translate unselectedNavItem' id="language-link-ru" href="" onclick="return false;" onclick="return false;" title="switch language to Russian (coming soon)">Ru</a>&nbsp;|&nbsp;
+-->
         <a class='unselectedNavItem' id="language-link-sp" href="" title="cambiar idioma a español sudamericano">Sp</a>
 <!--
         <a class='translate unselectedNavItem' id="language-link-sp" href="" onclick="return false;" onclick="return false;" title="switch language to South American Spanish (coming soon)">Sp</a>

@@ -7,14 +7,16 @@
 
 
 function isValidLanguageID (languageID) {
-  if (languageID == "en")	return true;
-  if (languageID == "ch")	return true;
-  if (languageID == "po")	return true;
-  if (languageID == "ba")	return true;
+  if (languageID == "en")	return true;  // support English
+  if (languageID == "ch")	return true;  // support Mandarin
+  if (languageID == "po")	return true;  // support Portuguese
+  if (languageID == "ba")	return true;  // support Bahasa
 
-  if (languageID == "fr")	return true;
-  if (languageID == "sp")	return true;
-  //if (languageID == "ru")	return true;
+  if (languageID == "fr")	return true;  // support French
+  if (languageID == "sp")	return true;  // support Spanish
+  if (languageID == "ja")	return true;  // support Japanese
+
+    // if (languageID == "ru")	return true;  // support Russian
 
   return false;
 }
@@ -29,9 +31,14 @@ function translate (txt) {
 //  alert (txt);
   if (txt==null) return "";
   
-
+  // -------------------------------------------------------
+  // English
+  // -------------------------------------------------------
   if (languageID == "en") return txt;
 
+  // -------------------------------------------------------
+  // Mandarin
+  // -------------------------------------------------------
   if (languageID == "ch") {
     for ( var i=0; i<mandarin_translation_table_1.length; i++) 
       if (myTrim (mandarin_translation_table_1[i][0].toUpperCase()) == myTrim (txt.toUpperCase()) ) return myTrim (mandarin_translation_table_1[i][1]);
@@ -40,10 +47,27 @@ function translate (txt) {
       if (myTrim (mandarin_translation_table_2[i][0].toUpperCase()) == myTrim (txt.toUpperCase()) ) return myTrim (mandarin_translation_table_2[i][1]);
   }
 
-
+  // -------------------------------------------------------
+  // Japanese
+  // -------------------------------------------------------
+  if (languageID == "ja") {
+	  
+	for ( var i=0; i<japanese_translation_table.length; i++) 
+      if (myTrim (japanese_translation_table[i][0].toUpperCase()) == myTrim (txt.toUpperCase()) ) return myTrim (japanese_translation_table[i][1]);
+  }
+  
+  // -------------------------------------------------------
+  // other
+  // -------------------------------------------------------
   return translateFromMultiTable (txt);
 }
+function printTranslationTest () {	for ( var i=0; i<japanese_translation_table.length; i++) 
+	  console.log (i + ": -----------------------------------\n"
+              + myTrim (japanese_translation_table[i][0])
+			  + "\n"	
+			  + myTrim (japanese_translation_table[i][1]));
 
+}
 
 function translateFromMultiTable (txt) {
 
