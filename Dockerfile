@@ -18,7 +18,7 @@ CMD ["/sbin/my_init"]
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Make sure we are using Ruby 2.1
-RUN ruby-switch --set ruby2.1
+#RUN ruby-switch --set ruby2.1
 
 # Remove the default Nginx configuration
 RUN rm -f /etc/nginx/sites-enabled/default
