@@ -1,6 +1,8 @@
 # This is a Dockerfile. 
 # LET'S see if changes to this file trigger azure devops pipelines
 #
+# Adding another line to the file to trigger devops
+#
 # It is a quick way of getting a server running with this code.
 # See http://docker.io for more details.
 #
