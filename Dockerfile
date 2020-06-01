@@ -8,7 +8,7 @@
 #
 # Use phusion/passenger-full as base image.
 # See https://github.com/phusion/passenger-docker for more information
-FROM phusion/passenger-ruby21
+FROM phusion/passenger-ruby25
 MAINTAINER tom@counsell.org
 
 # Set correct environment variables.
