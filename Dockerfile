@@ -1,5 +1,8 @@
 # This is a Dockerfile. 
 #
+# TRIGGER LINES
+# GO1
+#
 # It is a quick way of getting a server running with this code.
 # See http://docker.io for more details.
 #
