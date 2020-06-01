@@ -1,11 +1,14 @@
 # This is a Dockerfile. 
 #
+# TRIGGER LINES
+# GO1
+#
 # It is a quick way of getting a server running with this code.
 # See http://docker.io for more details.
 #
 # Use phusion/passenger-full as base image.
 # See https://github.com/phusion/passenger-docker for more information
-FROM phusion/passenger-ruby21
+FROM phusion/passenger-ruby22
 MAINTAINER tom@counsell.org
 
 # Set correct environment variables.
